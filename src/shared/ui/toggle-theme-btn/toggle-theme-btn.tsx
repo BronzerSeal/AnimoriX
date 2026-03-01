@@ -8,17 +8,41 @@ import {
 } from "../dropdown-menu";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "../button";
+import {
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "../navigation-menu";
 
-const ToggleThemeBtn = () => {
+const ToggleThemeBtn = ({
+  variant = "button",
+}: {
+  variant?: "button" | "navigation";
+}) => {
   const { setTheme } = useTheme();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
+        {variant === "button" ? (
+          <Button variant="outline" size="icon">
+            <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        ) : (
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <div className="relative flex items-center justify-center">
+              <Sun
+                className="size-4 transition-all dark:scale-0 dark:-rotate-90 text-foreground"
+                strokeWidth={2.2}
+              />
+              <Moon
+                className="absolute size-4 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 text-foreground"
+                strokeWidth={2.2}
+              />
+            </div>
+            <span className="sr-only">Toggle theme</span>
+          </NavigationMenuLink>
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
