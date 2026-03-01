@@ -1,1 +1,1 @@
-export * from "./navigationMenu";
+export * from "./navigation-menu";
