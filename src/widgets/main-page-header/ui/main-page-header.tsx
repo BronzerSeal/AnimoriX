@@ -5,10 +5,9 @@ import {
   NavigationMenuList,
 } from "@/shared/ui/navigation-menu";
 import { Shuffle, UsersRound } from "lucide-react";
-import { HeaderAction } from "./header-action";
 import ToggleThemeBtn from "@/shared/ui/toggle-theme-btn";
-import TopicItem from "./topic-item";
-import MultiDropdownBtn from "./multi-dropdown-btn";
+import MultiDropdownBtn from "@/shared/ui/multi-dropdown-btn";
+import { HeaderAction, TopicItem } from "@/shared/ui/nav-actions";
 
 const MainPageHeader = () => {
   return (
@@ -16,9 +15,9 @@ const MainPageHeader = () => {
       <NavigationMenu viewport={false}>
         <NavigationMenuList>
           <div className="flex md:hidden">
-            <MultiDropdownBtn variant="navigation" />
+            <MultiDropdownBtn topics={navTopics} variant="navigation" />
           </div>
-          <HeaderAction href="/watch2gether">
+          <HeaderAction variant="text" href="/watch2gether">
             <UsersRound className="size-4 text-foreground" strokeWidth={2.2} />
           </HeaderAction>
           <HeaderAction href="/random">

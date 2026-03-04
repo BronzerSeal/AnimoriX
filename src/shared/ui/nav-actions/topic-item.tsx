@@ -9,7 +9,7 @@ import {
 import { ListItem } from "./list-item";
 import Link from "next/link";
 
-const TopicItem = ({ topic }: { topic: NavTopic }) => {
+export const TopicItem = ({ topic }: { topic: NavTopic }) => {
   const hasGenres = topic.type === "with-genres";
 
   return hasGenres ? (
@@ -45,5 +45,3 @@ const TopicItem = ({ topic }: { topic: NavTopic }) => {
     </NavigationMenuItem>
   );
 };
-
-export default TopicItem;

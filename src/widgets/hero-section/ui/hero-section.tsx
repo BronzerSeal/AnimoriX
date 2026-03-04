@@ -6,8 +6,10 @@ import {
   InputGroupInput,
 } from "@/shared/ui/input";
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <div
       style={{ backgroundImage: "url(/images/main-poster-bg.png)" }}
@@ -27,9 +29,9 @@ const HeroSection = () => {
         </InputGroup>
 
         <Button
-          className="w-60 h-15 mt-3 bg-amber-700 hover:bg-amber-700/90"
+          className="w-60 h-15 mt-3 bg-amber-600 hover:bg-amber-600/90"
           size={"lg"}
-          onClick={() => console.log("ds")}
+          onClick={() => router.push("/home")}
         >
           WATCH NOW
         </Button>

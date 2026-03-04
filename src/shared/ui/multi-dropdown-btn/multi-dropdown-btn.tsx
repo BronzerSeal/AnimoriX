@@ -1,4 +1,4 @@
-import { navTopics } from "@/shared/constants/navigation";
+import { NavTopic } from "@/shared/constants/navigation";
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenuTrigger,
@@ -21,8 +21,10 @@ import Link from "next/link";
 
 const MultiDropdownBtn = ({
   variant = "button",
+  topics,
 }: {
   variant?: "button" | "navigation";
+  topics: NavTopic[];
 }) => {
   return (
     <DropdownMenu>
@@ -41,7 +43,7 @@ const MultiDropdownBtn = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup>
-          {navTopics.map((topic) => {
+          {topics.map((topic) => {
             const hasDopTopics = topic.type === "with-genres";
 
             return hasDopTopics ? (
