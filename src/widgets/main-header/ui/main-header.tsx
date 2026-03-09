@@ -14,7 +14,7 @@ import LogoSection from "./logo-section";
 
 const MainHeader = () => {
   return (
-    <header className="px-2 py-2 z-50 flex justify-between items-center max-w-1250 bg-white dark:bg-[#0c1115] p-4 rounded-xl">
+    <header className="px-2 py-3 z-50 flex justify-between items-center max-w-1250 bg-white dark:bg-[#0c1115] p-4 rounded-xl">
       <LogoSection />
 
       <NavigationMenu

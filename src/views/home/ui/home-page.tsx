@@ -1,12 +1,16 @@
 import MainHeader from "@/widgets/main-header";
-import TopAnimesPagination from "@/widgets/top-animes-pagination";
+import TopAnimesHero from "@/widgets/top-animes-hero";
 
 const HomePage = () => {
   return (
-    <div className="max-w-1250 p-5">
-      <MainHeader />
-      <TopAnimesPagination />
-    </div>
+    <main className="w-full">
+      <div className="mx-auto w-full max-w-[1700px] px-5 pt-5">
+        <MainHeader />
+        <div className="mt-4">
+          <TopAnimesHero />
+        </div>
+      </div>
+    </main>
   );
 };
 
