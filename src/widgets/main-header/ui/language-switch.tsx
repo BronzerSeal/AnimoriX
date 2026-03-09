@@ -4,7 +4,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle";
 
 const LanguageSwitch = () => {
   return (
-    <ToggleGroup type="single" defaultValue="jp" className="bg-muted ">
+    <ToggleGroup type="single" defaultValue="en" className="bg-muted ">
       <ToggleGroupItem
         value="en"
         className=" px-3 data-[state=on]:bg-orange-500"
@@ -13,7 +13,7 @@ const LanguageSwitch = () => {
       </ToggleGroupItem>
 
       <ToggleGroupItem
-        value="jp"
+        value="ru"
         className=" px-3 data-[state=on]:bg-orange-500 data-[state=on]:text-white"
       >
         ru
