@@ -3,7 +3,11 @@
 import { SITE_URL } from "@/shared/config/site";
 import { shares } from "../consts/shares";
 
-const SocialMediaShareSection = () => {
+const SocialMediaShare = ({
+  variant = "text",
+}: {
+  variant?: "text" | "clear";
+}) => {
   return (
     <div className="flex gap-3">
       {shares.map(({ Button, icon: Icon, color, count }, i) => (
@@ -12,7 +16,7 @@ const SocialMediaShareSection = () => {
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-white transition ${color}`}
           >
             <Icon size={18} />
-            <span>{count}</span>
+            {variant === "text" && <span>{count}</span>}
           </div>
         </Button>
       ))}
@@ -20,4 +24,4 @@ const SocialMediaShareSection = () => {
   );
 };
 
-export default SocialMediaShareSection;
+export default SocialMediaShare;

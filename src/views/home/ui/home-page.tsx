@@ -1,4 +1,6 @@
+import JoinGithubBunner from "@/widgets/join-github-banner";
 import MainHeader from "@/widgets/main-header";
+import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
 
 const HomePage = () => {
@@ -10,6 +12,14 @@ const HomePage = () => {
         </div>
 
         <TopAnimesHero />
+        <main className=" flex flex-col">
+          <div className="absolute w-full px-5 -mt-5">
+            <ShareSite />
+          </div>
+          <div className="mt-25 px-5">
+            <JoinGithubBunner />
+          </div>
+        </main>
       </div>
     </main>
   );
