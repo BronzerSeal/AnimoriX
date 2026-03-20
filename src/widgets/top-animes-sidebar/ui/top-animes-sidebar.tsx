@@ -2,10 +2,15 @@
 import { mapAnimeToHero } from "@/entities/anime/model/anime.mapper";
 import { useTopAnimesWithBanners } from "@/entities/anime/queries/anime.queries";
 import SidebarItem from "./sidebar-item";
+import TopAnimesSidebarSkeleton from "./top-animes-sidebar-skeleton";
 
 const TopAnimesSidebar = () => {
   const { data, isLoading } = useTopAnimesWithBanners();
-  if (isLoading || !data?.data?.length) {
+  if (isLoading) {
+    return <TopAnimesSidebarSkeleton />;
+  }
+
+  if (!data?.data?.length) {
     return null;
   }
 

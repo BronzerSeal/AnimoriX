@@ -3,10 +3,15 @@
 import { mapAnimeToHero } from "@/entities/anime/model/anime.mapper";
 import TopAnimesHeroSlider from "./top-animes-hero-slider";
 import { useTopAnimesWithBanners } from "@/entities/anime/queries/anime.queries";
+import TopAnimesHeroSkeleton from "./top-animes-hero-skeleton";
 
 const TopAnimesHero = () => {
   const { data, isLoading } = useTopAnimesWithBanners();
-  if (isLoading || !data?.data?.length) {
+  if (isLoading) {
+    return <TopAnimesHeroSkeleton />;
+  }
+
+  if (!data?.data?.length) {
     return null;
   }
 
