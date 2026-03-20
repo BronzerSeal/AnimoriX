@@ -6,20 +6,13 @@ import {
 } from "../model/types";
 import axios from "axios";
 
-export async function getTopTenAnimes(): Promise<TopAnimeResponse | null> {
-  try {
-    const topAnimes = await animeApiHttp.get<TopAnimeResponse>(`top/anime`, {
-      params: {
-        limit: 10,
-        filter: "bypopularity",
-      },
-    });
-
-    return topAnimes;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+export async function getTopTenAnimes(): Promise<TopAnimeResponse> {
+  return await animeApiHttp.get<TopAnimeResponse>(`top/anime`, {
+    params: {
+      limit: 10,
+      filter: "bypopularity",
+    },
+  });
 }
 
 export async function getAnimeBannersByMalIds(
@@ -76,26 +69,23 @@ export async function getAnimeBannersByMalIds(
   }
 }
 
-export async function getTopTenAnimesWithBanners(): Promise<TopAnimeResponseWithBanner | null> {
-  try {
-    const topAnimes = await getTopTenAnimes();
+export async function getTopTenAnimesWithBanners(): Promise<TopAnimeResponseWithBanner> {
+  const topAnimes = await getTopTenAnimes();
 
-    if (!topAnimes?.data?.length) return null;
-
-    const malIds = topAnimes.data
-      .map((anime) => anime.mal_id)
-      .filter((id): id is number => id !== undefined);
-    const bannersMap = await getAnimeBannersByMalIds(malIds);
-
-    return {
-      ...topAnimes,
-      data: topAnimes.data.map((anime) => ({
-        ...anime,
-        bannerImage: anime.mal_id ? (bannersMap[anime.mal_id] ?? null) : null,
-      })),
-    };
-  } catch (error) {
-    console.error(error);
-    return null;
+  if (!topAnimes.data?.length) {
+    return { ...topAnimes, data: [] };
   }
+
+  const malIds = topAnimes.data
+    .map((anime) => anime.mal_id)
+    .filter((id): id is number => id !== undefined);
+  const bannersMap = await getAnimeBannersByMalIds(malIds);
+
+  return {
+    ...topAnimes,
+    data: topAnimes.data.map((anime) => ({
+      ...anime,
+      bannerImage: anime.mal_id ? (bannersMap[anime.mal_id] ?? null) : null,
+    })),
+  };
 }
