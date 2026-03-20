@@ -14,39 +14,62 @@ import LogoSection from "./logo-section";
 
 const MainHeader = () => {
   return (
-    <header className="px-2 py-3 z-50 flex justify-between items-center max-w-1250 bg-white dark:bg-[#0c1115] p-4 rounded-xl">
+    <header
+      className="
+    z-50 flex items-center justify-between rounded-xl
+    bg-white/20 dark:bg-black/20
+    sm:bg-white sm:dark:bg-[#0c1115]
+    p-4 px-3 py-3 sm:px-2
+    backdrop-blur-sm
+    transition-colors
+  "
+    >
       <LogoSection />
 
       <NavigationMenu
         viewport={false}
         className="flex justify-between items-center"
       >
-        <NavigationMenuList>
-          <SearchInputSection />
-
-          <HeaderAction href="/watch2gether">
-            <UsersRound className="size-4 text-foreground" strokeWidth={2.2} />
-          </HeaderAction>
-          <HeaderAction href="/random">
-            <Shuffle className="size-4 text-foreground" strokeWidth={2.2} />
-          </HeaderAction>
-          <div className="hidden xl:flex gap-1">
-            {navTopics.map((topic) => {
-              return <TopicItem topic={topic} key={topic.title} />;
-            })}
+        <NavigationMenuList className="gap-2 sm:gap-1">
+          <div className="flex items-center gap-2 sm:hidden">
+            <SearchInputSection />
+            <Avatar size="sm">
+              <AvatarImage src="#" />
+              <AvatarFallback>
+                <User className="text-foreground size-3.5" strokeWidth={1.6} />
+              </AvatarFallback>
+            </Avatar>
           </div>
-          <NavigationMenuItem>
-            <ToggleThemeBtn variant="navigation" />
-          </NavigationMenuItem>
 
-          <LanguageSwitch />
+          <div className="hidden sm:flex items-center">
+            <SearchInputSection />
 
-          <Avatar>
-            <AvatarImage src="#" />
-            <AvatarFallback>
-              <User className=" text-foreground" strokeWidth={2.2} />
-            </AvatarFallback>
-          </Avatar>
+            <HeaderAction href="/watch2gether">
+              <UsersRound
+                className="size-4 text-foreground"
+                strokeWidth={2.2}
+              />
+            </HeaderAction>
+            <HeaderAction href="/random">
+              <Shuffle className="size-4 text-foreground" strokeWidth={2.2} />
+            </HeaderAction>
+            <div className="hidden xl:flex gap-1">
+              {navTopics.map((topic) => {
+                return <TopicItem topic={topic} key={topic.title} />;
+              })}
+            </div>
+            <NavigationMenuItem>
+              <ToggleThemeBtn variant="navigation" />
+            </NavigationMenuItem>
+
+            <LanguageSwitch />
+            <Avatar size="sm" className=" ml-2">
+              <AvatarImage src="#" />
+              <AvatarFallback>
+                <User className="text-foreground" strokeWidth={1.5} />
+              </AvatarFallback>
+            </Avatar>
+          </div>
         </NavigationMenuList>
       </NavigationMenu>
     </header>
