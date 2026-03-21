@@ -1,4 +1,5 @@
 import JoinGithubBunner from "@/widgets/join-github-banner";
+import LatestEpisodesSection from "@/widgets/latest-episodes-section";
 import MainHeader from "@/widgets/main-header";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
@@ -20,6 +21,9 @@ const HomePage = () => {
             </div>
             <div className="mt-4 px-5 lg:mt-25">
               <JoinGithubBunner />
+            </div>
+            <div className="px-5 mt-3">
+              <LatestEpisodesSection />
             </div>
           </section>
           <section className="relative w-full px-5 pt-1 lg:px-0 lg:pr-8">

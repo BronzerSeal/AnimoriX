@@ -1,6 +1,6 @@
 "use client";
 
-import { mapAnimeToHero } from "@/entities/anime/model/anime.mapper";
+import { mapAnimeToHero } from "@/entities/anime/model/animeToHero.mapper";
 import TopAnimesHeroSlider from "./top-animes-hero-slider";
 import { useTopAnimesWithBanners } from "@/entities/anime/queries/anime.queries";
 import TopAnimesHeroSkeleton from "./top-animes-hero-skeleton";

@@ -16,7 +16,7 @@ const TopAnimesSidebarSkeleton = () => {
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-center">
                 <Skeleton className="h-4 w-4" />
-                <Skeleton className="mt-1 h-[2px] w-6 rounded-full" />
+                <Skeleton className="mt-1 h-0.5 w-6 rounded-full" />
               </div>
 
               <div className="flex-1 space-y-2">

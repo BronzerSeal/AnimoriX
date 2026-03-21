@@ -1,5 +1,5 @@
 "use client";
-import { mapAnimeToHero } from "@/entities/anime/model/anime.mapper";
+import { mapAnimeToHero } from "@/entities/anime/model/animeToHero.mapper";
 import { useTopAnimesWithBanners } from "@/entities/anime/queries/anime.queries";
 import SidebarItem from "./sidebar-item";
 import TopAnimesSidebarSkeleton from "./top-animes-sidebar-skeleton";
@@ -24,7 +24,7 @@ const TopAnimesSidebar = () => {
       </header>
       <div className="flex flex-col gap-3">
         {items.map((item, i) => (
-          <SidebarItem item={item} num={i} key={item.id} />
+          <SidebarItem item={item} num={i + 1} key={item.id} />
         ))}
       </div>
     </div>

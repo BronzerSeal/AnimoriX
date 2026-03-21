@@ -1,4 +1,4 @@
-import { HeroAnime } from "@/entities/anime";
+import { AnimeBadges, HeroAnime } from "@/entities/anime";
 import { useRouter } from "next/navigation";
 
 const SidebarItem = ({ item, num }: { item: HeroAnime; num: number }) => {
@@ -28,16 +28,11 @@ const SidebarItem = ({ item, num }: { item: HeroAnime; num: number }) => {
             {item.title}
           </h3>
 
-          <div className="flex items-center gap-2 mt-1">
-            <span className="text-[10px] font-bold text-orange-400 border border-orange-400 px-1 rounded">
-              {item.rating || "N/A"}
-            </span>
-            <span className="text-[10px] font-bold text-green-400 border border-green-400 px-1 rounded flex items-center gap-[2px]">
-              <span className="w-2 h-2 bg-green-400 rounded-full" />
-              {Math.round(item.score)}
-            </span>
-            <span className="text-[10px] text-gray-300">{item.type}</span>
-          </div>
+          <AnimeBadges
+            score={item.score}
+            rating={item.rating}
+            type={item.type}
+          />
         </div>
       </div>
     </div>
