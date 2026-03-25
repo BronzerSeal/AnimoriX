@@ -6,7 +6,6 @@ const animeHttp: AxiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
 });
 
 animeHttp.interceptors.response.use(

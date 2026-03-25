@@ -49,7 +49,7 @@ const TopAnimesHeroSlider = ({ items }: Props) => {
                   />
                   <HeroOverlays />
                   <div className="absolute inset-0 z-10 flex items-end md:items-center">
-                    <div className="w-full px-6 pb-10 md:px-10 md:pb-0 ">
+                    <div className="w-full px-6 pb-20 sm:pb-10 md:px-10 md:pb-0">
                       <div className="max-w-2xl space-y-5">
                         <h2 className="text-3xl font-bold leading-tight text-black dark:text-white md:text-5xl">
                           {anime.title}
@@ -57,7 +57,9 @@ const TopAnimesHeroSlider = ({ items }: Props) => {
 
                         <AnimeRatingGenre anime={anime} />
 
-                        <AnimeDescription anime={anime} />
+                        <div className="hidden sm:block">
+                          <AnimeDescription anime={anime} />
+                        </div>
 
                         <div className="flex items-center gap-3 pt-2">
                           <Button
