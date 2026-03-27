@@ -45,3 +45,7 @@ export type SeasonNowResponse =
   paths["/seasons/now"]["get"]["responses"][200]["content"]["application/json"];
 
 export type SeasonNowItem = NonNullable<SeasonNowResponse["data"]>[number];
+
+//anime-by-id
+export type FullAnimeByIdResponse =
+  paths["/anime/{id}/full"]["get"]["responses"][200]["content"]["application/json"];

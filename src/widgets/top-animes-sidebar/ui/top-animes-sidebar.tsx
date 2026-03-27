@@ -1,8 +1,8 @@
 "use client";
 import { mapAnimeToHero } from "@/entities/anime/model/animeToHero.mapper";
-import { useTopAnimesWithBanners } from "@/entities/anime/queries/anime.queries";
 import SidebarItem from "./sidebar-item";
 import TopAnimesSidebarSkeleton from "./top-animes-sidebar-skeleton";
+import { useTopAnimesWithBanners } from "@/entities/anime";
 
 const TopAnimesSidebar = () => {
   const { data, isLoading } = useTopAnimesWithBanners();

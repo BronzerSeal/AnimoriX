@@ -2,6 +2,9 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { getTopTenAnimes, getTopTenAnimesWithBanners } from "../api/anime.api";
 import { getSeasonNow } from "../api/season-now.api";
+import { getAnimeFullById } from "../api/anime-by-id";
+import { getAnimeEpisodes } from "../api/anime-episodes.api";
+import { getAnimeVideoById } from "../api/anime-video";
 
 export function useTopAnimes() {
   return useQuery({
@@ -23,5 +26,31 @@ export function useNowSeasons(page = 1) {
     queryFn: () => getSeasonNow(page),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useFullAnimeById(animeId: string) {
+  return useQuery({
+    queryKey: ["anime-by-id", animeId],
+    queryFn: () => getAnimeFullById(animeId),
+    select: (data) => data.data,
+  });
+}
+
+export function useAnimeEpisodes(animeTitle: string, enabled?: boolean) {
+  return useQuery({
+    queryKey: ["anime-episodes", animeTitle],
+    queryFn: () => getAnimeEpisodes(animeTitle),
+    select: (data) => data.data,
+    enabled,
+  });
+}
+
+export function useAnimeVideoById(animeId: string, enabled?: boolean) {
+  return useQuery({
+    queryKey: ["anime-video", animeId],
+    queryFn: () => getAnimeVideoById(animeId),
+    select: (data) => data.data,
+    enabled,
   });
 }
