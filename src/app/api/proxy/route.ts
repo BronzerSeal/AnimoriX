@@ -9,11 +9,20 @@ export async function GET(req: NextRequest) {
 
   const res = await fetch(url, {
     headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
       Referer: "https://animekai.to/",
       Origin: "https://animekai.to",
-      "User-Agent": "Mozilla/5.0",
+      Accept: "*/*",
+      "Accept-Language": "en-US,en;q=0.9",
+      Connection: "keep-alive",
     },
   });
+
+  if (!res.ok) {
+    const text = await res.text();
+    return new Response(text, { status: res.status });
+  }
 
   const contentType = res.headers.get("content-type") || "";
 
@@ -49,6 +58,7 @@ export async function GET(req: NextRequest) {
 
   // сегменты
   return new Response(res.body, {
+    status: res.status,
     headers: {
       "Content-Type": contentType,
       "Access-Control-Allow-Origin": "*",
