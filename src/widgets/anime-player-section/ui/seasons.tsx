@@ -1,6 +1,5 @@
 "use client";
 
-import { useAnimeSeasons } from "@/entities/anime/queries/anime.queries";
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +9,7 @@ import {
 } from "@/shared/ui/carousel";
 import Season from "./season";
 import SeasonsSkeleton from "./seasons-skeleton";
+import { useAnimeSeasons } from "@/entities/anime";
 
 const itemBasisClass =
   "basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-1/7";

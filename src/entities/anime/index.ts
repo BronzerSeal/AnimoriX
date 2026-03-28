@@ -9,4 +9,6 @@ export {
   useNowSeasons,
   useFullAnimeById,
   useAnimeEpisodes,
+  useAnimeVideoById,
+  useAnimeSeasons,
 } from "./queries/anime.queries";

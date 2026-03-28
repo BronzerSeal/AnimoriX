@@ -52,6 +52,7 @@ export function useAnimeVideoById(animeId: string, enabled?: boolean) {
     queryKey: ["anime-video", animeId],
     queryFn: () => getAnimeVideoById(animeId),
     select: (data) => data.data,
+    placeholderData: keepPreviousData,
     enabled,
   });
 }
