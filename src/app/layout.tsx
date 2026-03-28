@@ -29,8 +29,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-50 font-sans dark:bg-[#0b1215]`}
       >
-        <Providers>{children}</Providers>
-        <SiteFooter />
+        <div className="flex min-h-screen flex-col">
+          <Providers>
+            <main className="flex-1">{children}</main>
+          </Providers>
+
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );

@@ -5,10 +5,10 @@ export async function getAnimeVideoById(animeId: string) {
     return await axios.get(`/api/anime/stream?episodeId=${animeId}`);
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
-      console.error(
-        "Failed to fetch video:",
-        err.response?.data?.error || err.message,
-      );
+      // console.error(
+      //   "Failed to fetch video:",
+      //   err.response?.data?.error || err.message,
+      // );
       throw new Error(err.response?.data?.error || "Failed to fetch video");
     }
 

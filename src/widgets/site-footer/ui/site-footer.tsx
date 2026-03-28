@@ -4,7 +4,7 @@ import AllRightsReserved from "./all-rights-reserved";
 
 const SiteFooter = () => {
   return (
-    <footer className="mt-10 border-t border-white/10 bg-[#EEEEFF] dark:bg-[#11161a] text-black dark:text-white">
+    <footer className="mt-10 border-t border-black/10 dark:border-white/10 bg-[#EEEEFF] dark:bg-[#11161a] text-black dark:text-white">
       <div className="mx-auto flex w-full max-w-425 flex-col gap-8 px-5 py-8 lg:px-8">
         <section className="space-y-5">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
@@ -19,7 +19,7 @@ const SiteFooter = () => {
               <Link
                 key={letter}
                 href="#"
-                className="rounded-md border border-white/8 bg-zinc-900 px-2 py-1 text-[12px] font-bold text-zinc-100 transition hover:border-orange-400/40 hover:bg-zinc-800 hover:text-orange-300"
+                className="rounded-md border border-white/8 bg-white dark:bg-zinc-900 px-2 py-1 text-[12px] font-bold text-black dark:text-zinc-100 transition hover:border-orange-400/40 hover:bg-zinc-800 hover:text-orange-300"
               >
                 {letter}
               </Link>

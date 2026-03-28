@@ -58,7 +58,7 @@ const MainHeader = () => {
                 return <TopicItem topic={topic} key={topic.title} />;
               })}
             </div>
-            <NavigationMenuItem>
+            <NavigationMenuItem className="mr-1">
               <ToggleThemeBtn variant="navigation" />
             </NavigationMenuItem>
 

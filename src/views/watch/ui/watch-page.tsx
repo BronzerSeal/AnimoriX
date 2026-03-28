@@ -10,19 +10,14 @@ const WatchPage = () => {
   //какой эпизод сейчас сморим
   const [episodeNum, setEpisodeNum] = useState(0);
 
-  //детал инфа без видео/из кол-ва
-  const { data: animeData } = useFullAnimeById(animeId!);
-
-  //все эпизоды сезона + берем отсюда id
-  const { data: animeEpisodes } = useAnimeEpisodes(
-    animeData?.title || "",
-    !!animeData?.title,
+  //детал инфа без видео/их кол-ва
+  const { data: animeData, isLoading: isAnimeDataLoading } = useFullAnimeById(
+    animeId!,
   );
 
-  if (!animeData || !animeEpisodes) {
-    return null;
-  }
-  console.log(animeEpisodes);
+  //все эпизоды сезона + берем отсюда id
+  const { data: animeEpisodes, isLoading: isAnimeEpisodesLoading } =
+    useAnimeEpisodes(animeData?.title || "", !!animeData?.title);
 
   //инфа для поиска видео в плеере
   const getUrl = {
@@ -30,12 +25,16 @@ const WatchPage = () => {
     enabled: !!animeEpisodes?.episodes,
   };
 
+  const globalIsLoading = isAnimeDataLoading || isAnimeEpisodesLoading;
+
   return (
-    <div className="mt-25">
+    <div className="mt-25 flex justify-center px-2 w-full">
       <AnimePlayerSection
         getUrl={getUrl}
-        animeType={animeData.type!}
-        animeName={animeData.title!}
+        animeType={animeData?.type!}
+        animeName={animeData?.title!}
+        animeId={animeData?.mal_id!}
+        isLoading={globalIsLoading}
       />
     </div>
   );

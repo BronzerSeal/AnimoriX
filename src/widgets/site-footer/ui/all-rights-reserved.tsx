@@ -3,7 +3,7 @@ import { socialLinks, externalLinks } from "../consts/consts";
 
 const AllRightsReserved = () => {
   return (
-    <section className="flex flex-col gap-5 border-t border-white/10 pt-6 lg:flex-row lg:items-end lg:justify-between">
+    <section className="flex flex-col gap-5 border-t border-black/10 dark:border-white/10 pt-6 lg:flex-row lg:items-end lg:justify-between">
       <div className="space-y-2.5">
         <p className="text-[15px] font-semibold">
           Copyright <span className="text-orange-400">@AnimoriX</span>. All

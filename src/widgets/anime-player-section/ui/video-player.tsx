@@ -21,5 +21,12 @@ export default function VideoPlayer({ url }: { url: string }) {
     }
   }, [url]);
 
-  return <video ref={videoRef} controls className="w-full h-125" />;
+  return (
+    <video
+      ref={videoRef}
+      controls
+      className="w-full aspect-video"
+      // poster="https://your-image.jpg"
+    />
+  );
 }
