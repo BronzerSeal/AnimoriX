@@ -14,10 +14,12 @@ const AnimeEpisodesSection = ({
   episodes,
   selected,
   onSelectEpisode,
+  className,
 }: {
   episodes: Episode[];
   selected: number;
   onSelectEpisode: (episodeIndex: number) => void;
+  className?: string;
 }) => {
   if (!episodes) return null;
   const EPISODES_PER_PAGE = 100;
@@ -45,7 +47,9 @@ const AnimeEpisodesSection = ({
   });
 
   return (
-    <div className="flex w-full max-w-250 flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none">
+    <div
+      className={`flex w-full flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none ${className}`}
+    >
       <div className="mb-4 flex items-center justify-between gap-3">
         <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
           Episodes

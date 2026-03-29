@@ -50,6 +50,7 @@ export type SeasonNowItem = NonNullable<SeasonNowResponse["data"]>[number];
 export type FullAnimeByIdResponse =
   paths["/anime/{id}/full"]["get"]["responses"][200]["content"]["application/json"];
 
+export type FullAnimeByIdItem = NonNullable<FullAnimeByIdResponse["data"]>;
 //anime-seasons
 export type AnimeSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL" | null;
 

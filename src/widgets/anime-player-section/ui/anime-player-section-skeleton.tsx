@@ -3,7 +3,7 @@ import SeasonsSkeleton from "./seasons-skeleton";
 
 const AnimePlayerSectionSkeleton = () => {
   return (
-    <div className="flex w-full max-w-242.5 flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] py-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none">
+    <div className="flex w-full flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] py-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none">
       <div className="flex items-center gap-2 px-7 py-2">
         <Skeleton className="h-4 w-12 bg-slate-200 dark:bg-white/8" />
         <Skeleton className="h-4 w-3 bg-slate-200 dark:bg-white/8" />

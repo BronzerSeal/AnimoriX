@@ -35,6 +35,7 @@ const AnimePlayerSection = ({
   animeId,
   isLoading,
   episodeNum,
+  className,
 }: {
   getUrl: { episodeId: string; enabled: boolean };
   animeType: string;
@@ -42,6 +43,7 @@ const AnimePlayerSection = ({
   animeId: number;
   isLoading: boolean;
   episodeNum: number;
+  className?: string;
 }) => {
   const {
     data: videoData,
@@ -59,7 +61,9 @@ const AnimePlayerSection = ({
   if (isInitialLoading) return <AnimePlayerSectionSkeleton />;
   if (error) return <NotFound errCode="" errMessage={error.message} />;
   return (
-    <div className="flex w-full max-w-242.5 flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] py-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none">
+    <div
+      className={`flex w-full flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] pt-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none ${className}`}
+    >
       <Breadcrumb className="p-2 px-7">
         <BreadcrumbList className="text-slate-500 dark:text-white/55">
           <BreadcrumbItem>
@@ -104,7 +108,7 @@ const AnimePlayerSection = ({
         </>
       )}
 
-      <section className="p-2">
+      <section className="p-2 bg-[#efeefe] dark:bg-[#181d21] rounded-b-2xl">
         <Seasons animeId={animeId} />
       </section>
     </div>
