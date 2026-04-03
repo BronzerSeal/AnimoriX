@@ -6,6 +6,7 @@ import { getAnimeFullById } from "../api/anime-by-id";
 import { getAnimeEpisodes } from "../api/anime-episodes.api";
 import { getAnimeVideoById } from "../api/anime-video";
 import { getAnimeSeasons } from "../api/anime-seasons.api";
+import { getAnimeRecommendations } from "../api/anime-recommendations.api";
 
 export function useTopAnimes() {
   return useQuery({
@@ -61,6 +62,15 @@ export function useAnimeSeasons(animeId: number, enabled?: boolean) {
   return useQuery({
     queryKey: ["anime-seasons", animeId],
     queryFn: () => getAnimeSeasons(animeId),
+    enabled,
+  });
+}
+
+export function useAnimeRecommendations(animeId: number, enabled?: boolean) {
+  return useQuery({
+    queryKey: ["anime-recommendations", animeId],
+    queryFn: () => getAnimeRecommendations(animeId),
+    select: (data) => data.data,
     enabled,
   });
 }

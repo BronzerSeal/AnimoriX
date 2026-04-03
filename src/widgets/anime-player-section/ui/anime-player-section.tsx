@@ -97,7 +97,7 @@ const AnimePlayerSection = ({
       ) : (
         <>
           {videoData?.url && <VideoPlayer url={videoData.url} />}
-          <div className="flex justify-between p-2 text-[14px] text-slate-700 dark:text-white/80">
+          <div className="flex flex-1 justify-between p-2 text-[14px] text-slate-700 dark:text-white/80">
             <h1 className="font-medium text-slate-900 dark:text-white">
               You are watching Episode {episodeNum > 0 ? episodeNum + 1 : 1}
             </h1>

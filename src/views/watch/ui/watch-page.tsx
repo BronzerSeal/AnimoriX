@@ -7,6 +7,9 @@ import AnimeInfoSection, {
   AnimeInfoSectionSkeleton,
 } from "@/widgets/anime-info-section";
 import AnimePlayerSection from "@/widgets/anime-player-section";
+import AnimeRecommendation from "@/widgets/anime-recommendation";
+import AnimeRelations from "@/widgets/anime-relations";
+import ShareSite from "@/widgets/share-site";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -33,8 +36,8 @@ const WatchPage = () => {
 
   const globalIsLoading = isAnimeDataLoading || isAnimeEpisodesLoading;
   return (
-    <div className="w-full px-2 flex justify-center">
-      <div className="mt-25 grid w-full max-w-[1440px] grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">
+    <div className="w-full px-2 md:px-4 flex flex-col justify-center">
+      <div className="mt-25 grid w-full max-w-500 grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">
         <AnimePlayerSection
           className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1"
           episodeNum={episodeNum}
@@ -62,6 +65,19 @@ const WatchPage = () => {
             className="order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1"
           />
         )}
+      </div>
+      <div className="mt-10">
+        <ShareSite />
+      </div>
+      <div className="grid grid-cols-[4fr_1fr] mt-5">
+        <div className="w-full">wwwwwwww</div>
+        <div>
+          <AnimeRelations
+            relations={animeData?.relations}
+            isLoading={isAnimeDataLoading}
+          />
+          <AnimeRecommendation animeId={animeData?.mal_id} />
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ export type { HeroAnime } from "./model/types";
 export { AnimeBadges } from "./ui/anime-badges";
 export { AnimeItem } from "./ui/anime-item";
 export { AnimeItemSkeleton } from "./ui/anime-item-skeleton";
+export { AnimeCard } from "./ui/anime-card";
 
 export {
   useTopAnimes,
@@ -11,4 +12,5 @@ export {
   useAnimeEpisodes,
   useAnimeVideoById,
   useAnimeSeasons,
+  useAnimeRecommendations,
 } from "./queries/anime.queries";
