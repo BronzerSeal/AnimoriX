@@ -1,6 +1,5 @@
 import JoinGithubBunner from "@/widgets/join-github-banner";
 import LatestEpisodesSection from "@/widgets/latest-episodes-section";
-import MainHeader from "@/widgets/main-header";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
 import TopAnimesSidebar from "@/widgets/top-animes-sidebar";
@@ -9,10 +8,6 @@ const HomePage = () => {
   return (
     <main className="w-full">
       <div className="relative mx-auto w-full max-w-425">
-        <div className="absolute left-5 right-5 top-5 z-50">
-          <MainHeader />
-        </div>
-
         <TopAnimesHero />
         <main className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_1fr] lg:gap-0">
           <section className="relative flex flex-col">

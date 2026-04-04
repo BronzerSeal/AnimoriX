@@ -7,7 +7,7 @@ export const AnimeItem = ({ anime }: { anime: anime }) => {
   const router = useRouter();
   return (
     <article
-      onClick={() => router.push(`/anime/${anime.id}`)}
+      onClick={() => router.push(`/watch/${anime.id}`)}
       className="group basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-5rem)/6)]"
     >
       <div className="flex flex-col">

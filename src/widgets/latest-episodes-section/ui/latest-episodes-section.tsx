@@ -1,7 +1,6 @@
 "use client";
-import { AnimeItem, AnimeItemSkeleton } from "@/entities/anime";
+import { AnimeItem, AnimeItemSkeleton, useNowSeasons } from "@/entities/anime";
 import { mapAnime } from "@/entities/anime/model/anime.mapper";
-import { useNowSeasons } from "@/entities/anime/queries/anime.queries";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 

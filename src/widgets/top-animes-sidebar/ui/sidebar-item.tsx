@@ -5,7 +5,7 @@ const SidebarItem = ({ item, num }: { item: HeroAnime; num: number }) => {
   const router = useRouter();
   return (
     <div
-      onClick={() => router.push(`/anime/${item.id}`)}
+      onClick={() => router.push(`/watch/${item.id}`)}
       className="relative flex cursor-pointer items-center gap-3 p-3 rounded-xl overflow-hidden dark:bg-[#11161a] text-white group"
     >
       <div className="absolute inset-0">

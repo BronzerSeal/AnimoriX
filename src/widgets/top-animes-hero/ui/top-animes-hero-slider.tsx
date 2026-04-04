@@ -66,7 +66,7 @@ const TopAnimesHeroSlider = ({ items }: Props) => {
                             asChild
                             className="rounded-xl h-12 bg-orange-500 px-8 text-base font-semibold hover:bg-orange-400"
                           >
-                            <Link href={`/anime/${anime.id}`}>WATCH NOW</Link>
+                            <Link href={`/watch/${anime.id}`}>WATCH NOW</Link>
                           </Button>
 
                           <Button

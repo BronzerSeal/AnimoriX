@@ -45,3 +45,64 @@ export type SeasonNowResponse =
   paths["/seasons/now"]["get"]["responses"][200]["content"]["application/json"];
 
 export type SeasonNowItem = NonNullable<SeasonNowResponse["data"]>[number];
+
+//anime-by-id
+export type FullAnimeByIdResponse =
+  paths["/anime/{id}/full"]["get"]["responses"][200]["content"]["application/json"];
+
+export type FullAnimeByIdItem = NonNullable<FullAnimeByIdResponse["data"]>;
+
+//anime-seasons
+export type AnimeSeason = "WINTER" | "SPRING" | "SUMMER" | "FALL" | null;
+
+export type AnimeNode = {
+  id: number;
+  idMal: number | null;
+  title: {
+    romaji: string | null;
+    english?: string | null;
+  };
+  coverImage?: {
+    extraLarge?: string | null;
+    large?: string | null;
+    medium?: string | null;
+  } | null;
+  episodes: number | null;
+  format: string | null;
+  season: AnimeSeason;
+  seasonYear: number | null;
+};
+
+export type RelationEdge = {
+  relationType: "PREQUEL" | "SEQUEL" | string;
+  node: AnimeNode | null;
+};
+
+export type Anime = AnimeNode & {
+  relations: {
+    edges: RelationEdge[];
+  };
+};
+
+export type AnimeSeasonsResponse = {
+  data: {
+    Media: Anime | null;
+  };
+};
+
+//relations
+
+export type AnimeRelationByIdResponse =
+  paths["/anime/{id}/relations"]["get"]["responses"][200]["content"]["application/json"];
+
+export type AnimeRelationByIdItem = NonNullable<
+  AnimeRelationByIdResponse["data"]
+>;
+
+//recommendations
+export type AnimeRecommendationsByIdResponse =
+  paths["/anime/{id}/recommendations"]["get"]["responses"][200]["content"]["application/json"];
+
+//comments
+export type AnimeCommentsByIdResponse =
+  paths["/anime/{id}/reviews"]["get"]["responses"][200]["content"]["application/json"];
