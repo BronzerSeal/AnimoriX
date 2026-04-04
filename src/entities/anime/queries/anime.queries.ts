@@ -1,5 +1,9 @@
 "use client";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useInfiniteQuery,
+  useQuery,
+} from "@tanstack/react-query";
 import { getTopTenAnimes, getTopTenAnimesWithBanners } from "../api/anime.api";
 import { getSeasonNow } from "../api/season-now.api";
 import { getAnimeFullById } from "../api/anime-by-id";
@@ -7,6 +11,7 @@ import { getAnimeEpisodes } from "../api/anime-episodes.api";
 import { getAnimeVideoById } from "../api/anime-video";
 import { getAnimeSeasons } from "../api/anime-seasons.api";
 import { getAnimeRecommendations } from "../api/anime-recommendations.api";
+import { getAnimeCommentsById } from "../api/anime-comments.api";
 
 export function useTopAnimes() {
   return useQuery({
@@ -71,6 +76,19 @@ export function useAnimeRecommendations(animeId: number, enabled?: boolean) {
     queryKey: ["anime-recommendations", animeId],
     queryFn: () => getAnimeRecommendations(animeId),
     select: (data) => data.data,
+    enabled,
+  });
+}
+
+export function useAnimeComment(animeId: number, enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-comments", animeId],
+    queryFn: ({ pageParam = 1 }) => getAnimeCommentsById(animeId, pageParam),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
     enabled,
   });
 }

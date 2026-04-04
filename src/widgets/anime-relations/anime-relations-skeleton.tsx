@@ -11,7 +11,7 @@ const AnimeRelationsSkeleton = () => {
         {skeletonItems.map((item) => (
           <div
             key={item}
-            className="relative min-w-[250px] max-w-[450px] self-start overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_14px_30px_rgba(15,23,42,0.08)] md:w-[300px] md:min-w-[300px] md:max-w-[300px] 2xl:w-full 2xl:min-w-0 2xl:max-w-none 2xl:self-auto dark:border-white/8 dark:bg-[#0f1418] dark:shadow-none"
+            className="relative w-full min-w-0 self-auto overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_14px_30px_rgba(15,23,42,0.08)] xl:max-w-[450px] 2xl:max-w-none dark:border-white/8 dark:bg-[#0f1418] dark:shadow-none"
           >
             <div className="absolute inset-y-0 right-0 w-24 border-l border-slate-200/80 dark:border-white/8">
               <Skeleton className="h-full w-full rounded-none bg-slate-200 dark:bg-white/8" />

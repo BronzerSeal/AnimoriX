@@ -102,3 +102,7 @@ export type AnimeRelationByIdItem = NonNullable<
 //recommendations
 export type AnimeRecommendationsByIdResponse =
   paths["/anime/{id}/recommendations"]["get"]["responses"][200]["content"]["application/json"];
+
+//comments
+export type AnimeCommentsByIdResponse =
+  paths["/anime/{id}/reviews"]["get"]["responses"][200]["content"]["application/json"];

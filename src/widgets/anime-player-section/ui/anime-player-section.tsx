@@ -29,7 +29,7 @@ const EpisodePlayerSkeleton = () => {
 };
 
 const AnimePlayerSection = ({
-  getUrl,
+  episodeId,
   animeType,
   animeName,
   animeId,
@@ -37,7 +37,7 @@ const AnimePlayerSection = ({
   episodeNum,
   className,
 }: {
-  getUrl: { episodeId: string; enabled: boolean };
+  episodeId: string;
   animeType: string;
   animeName: string;
   animeId: number;
@@ -50,13 +50,13 @@ const AnimePlayerSection = ({
     error,
     isLoading: isVideoLoading,
     isFetching: isVideoFetching,
-  } = useAnimeVideoById(getUrl.episodeId, getUrl.enabled);
+  } = useAnimeVideoById(episodeId, !!episodeId);
 
   const isInitialLoading = isLoading || (isVideoLoading && !videoData);
   const isEpisodeSwitching =
-    !!getUrl.episodeId &&
+    !!episodeId &&
     (isVideoFetching || isVideoLoading) &&
-    videoData?.episodeId !== getUrl.episodeId;
+    videoData?.episodeId !== episodeId;
 
   if (isInitialLoading) return <AnimePlayerSectionSkeleton />;
   if (error) return <NotFound errCode="" errMessage={error.message} />;
