@@ -106,3 +106,7 @@ export type AnimeRecommendationsByIdResponse =
 //comments
 export type AnimeCommentsByIdResponse =
   paths["/anime/{id}/reviews"]["get"]["responses"][200]["content"]["application/json"];
+
+//search
+export type AnimeSearchByNameResponse =
+  paths["/anime"]["get"]["responses"][200]["content"]["application/json"];

@@ -1,38 +1,32 @@
 "use client";
-import { AnimeItem, AnimeItemSkeleton, useNowSeasons } from "@/entities/anime";
+import { AnimeItem, useNowSeasons } from "@/entities/anime";
 import { mapAnime } from "@/entities/anime/model/anime.mapper";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import LatestEpisodesSkeleton from "./latest-episodes-skeleton";
+import { uniqueById } from "../model/uniqueById";
+import { BannedAnimeItem } from "./banned-animes";
 
 const LatestEpisodesSection = () => {
+  const ANIMES_PER_PAGE = 12;
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching } = useNowSeasons(page);
 
-  const skeletonItems = Array.from({ length: 12 }, (_, index) => index);
-
   if (isLoading) {
-    return (
-      <div className="cursor-pointer">
-        <section className="flex justify-between items-center mb-3 ">
-          <h1 className="font-bold">LATEST UPDATES</h1>
-          <p>pagination+filters</p>
-        </section>
-        <section className="flex gap-4 flex-wrap">
-          {skeletonItems.map((item) => (
-            <AnimeItemSkeleton key={item} />
-          ))}
-        </section>
-      </div>
-    );
+    return <LatestEpisodesSkeleton />;
   }
 
   if (!data?.data?.length) {
     return null;
   }
 
-  const items = data.data.map(mapAnime);
+  const items = uniqueById(
+    data.data.filter((a) => a.rating !== "Rx - Hentai"),
+  ).map(mapAnime);
   const pagination = data.pagination;
 
+  const placeholdersCount = ANIMES_PER_PAGE - items.length;
+  const placeholders = Array.from({ length: placeholdersCount });
   return (
     <div className="cursor-pointer">
       <section className="flex justify-between items-center mb-3 ">
@@ -60,6 +54,9 @@ const LatestEpisodesSection = () => {
       <section className="flex gap-4 flex-wrap">
         {items.map((anime, idx) => (
           <AnimeItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
+        ))}
+        {placeholders.map((_, idx) => (
+          <BannedAnimeItem key={`ban-${idx}`} />
         ))}
       </section>
     </div>

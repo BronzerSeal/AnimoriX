@@ -1,10 +1,10 @@
 "use client";
-import { useAnimeComment } from "@/entities/anime/queries/anime.queries";
 import Comment from "@/entities/comments";
 import { mapComment } from "../model/map-comment";
 import { CommentSectionSkeleton } from "./comment-section-skeleton";
 import { useState } from "react";
 import { Button } from "@/shared/ui/button";
+import { useAnimeComment } from "@/entities/anime";
 
 const CommentSection = ({ animeId }: { animeId: number }) => {
   const [isOpen, setIsOpen] = useState(true);

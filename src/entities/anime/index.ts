@@ -13,4 +13,6 @@ export {
   useAnimeVideoById,
   useAnimeSeasons,
   useAnimeRecommendations,
+  useAnimeComment,
+  useSearchAnime,
 } from "./queries/anime.queries";

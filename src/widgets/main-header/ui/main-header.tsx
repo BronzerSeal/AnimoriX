@@ -9,8 +9,8 @@ import {
 import ToggleThemeBtn from "@/shared/ui/toggle-theme-btn";
 import { Shuffle, User, UsersRound } from "lucide-react";
 import LanguageSwitch from "./language-switch";
-import SearchInputSection from "./search-input-section";
 import LogoSection from "./logo-section";
+import SearchInput from "@/features/search-input";
 
 const MainHeader = () => {
   return (
@@ -32,7 +32,7 @@ const MainHeader = () => {
       >
         <NavigationMenuList className="gap-2 sm:gap-1">
           <div className="flex items-center gap-2 sm:hidden">
-            <SearchInputSection />
+            <SearchInput />
             <Avatar size="sm">
               <AvatarImage src="#" />
               <AvatarFallback>
@@ -42,7 +42,7 @@ const MainHeader = () => {
           </div>
 
           <div className="hidden sm:flex items-center">
-            <SearchInputSection />
+            <SearchInput />
 
             <HeaderAction href="/watch2gether">
               <UsersRound

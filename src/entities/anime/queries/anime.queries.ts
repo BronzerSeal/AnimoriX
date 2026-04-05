@@ -12,6 +12,7 @@ import { getAnimeVideoById } from "../api/anime-video";
 import { getAnimeSeasons } from "../api/anime-seasons.api";
 import { getAnimeRecommendations } from "../api/anime-recommendations.api";
 import { getAnimeCommentsById } from "../api/anime-comments.api";
+import { getAnimeByName } from "../api/search-anime-by-name";
 
 export function useTopAnimes() {
   return useQuery({
@@ -88,6 +89,21 @@ export function useAnimeComment(animeId: number, enabled?: boolean) {
   return useInfiniteQuery({
     queryKey: ["anime-comments", animeId],
     queryFn: ({ pageParam = 1 }) => getAnimeCommentsById(animeId, pageParam),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useSearchAnime(name: string, enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-search", name],
+    queryFn: ({ pageParam }) => getAnimeByName(name, pageParam),
+    // select: (data) => data.data,
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
     },
