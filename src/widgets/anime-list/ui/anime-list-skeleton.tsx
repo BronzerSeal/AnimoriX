@@ -1,6 +1,6 @@
 import { AnimeItemSkeleton } from "@/entities/anime";
 
-const BrowserPageSkeleton = ({ blockTitle }: { blockTitle: string }) => {
+const AnimeListSkeleton = ({ blockTitle }: { blockTitle: string }) => {
   const skeletonItems = Array.from({ length: 12 }, (_, index) => index);
 
   return (
@@ -20,4 +20,4 @@ const BrowserPageSkeleton = ({ blockTitle }: { blockTitle: string }) => {
   );
 };
 
-export default BrowserPageSkeleton;
+export default AnimeListSkeleton;

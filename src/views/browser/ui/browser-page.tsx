@@ -1,56 +1,34 @@
-import { AnimeItem } from "@/entities/anime";
+"use client";
+
+import { useSearchAnime } from "@/entities/anime";
+import { mapAnime } from "@/entities/anime/model/anime.mapper";
 import { anime } from "@/entities/anime/model/types";
-import NoAnime from "./no-anime";
-import BrowserPageSkeleton from "./browser-page-skeleton";
-import { Button } from "@/shared/ui/button";
+import AnimeList from "@/widgets/anime-list";
+import { useSearchParams } from "next/navigation";
 
-interface Props {
-  animes: anime[] | undefined;
-  blockTitle: string;
-  isLoading: boolean;
-  loadMore?: () => void;
-  disabledLoadMore?: boolean;
-  hasNextPage?: boolean;
-}
+const BrowserPage = () => {
+  const params = useSearchParams();
+  const keyword = params.get("keyword");
 
-const BrowserPage = ({
-  animes,
-  blockTitle,
-  isLoading,
-  loadMore,
-  disabledLoadMore,
-  hasNextPage,
-}: Props) => {
-  if (isLoading) {
-    return <BrowserPageSkeleton blockTitle={blockTitle} />;
-  }
+  const { data, isLoading, isFetching, hasNextPage, fetchNextPage } =
+    useSearchAnime(keyword!, !!keyword);
+
+  const items =
+    data
+      ?.flatMap((page) => page.data ?? [])
+      .filter((anime) => anime.rating !== "Rx - Hentai")
+      .map(mapAnime)
+      .filter((item): item is anime => item !== undefined) ?? [];
 
   return (
-    <main className="w-full">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.18),transparent_32%)]" />
-      <div className="absolute -left-12 top-1/2 size-36 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
-
-      <div className="mx-auto w-full max-w-425 mt-25 px-5">
-        <h1 className="text-xl font-bold mb-2">{blockTitle}</h1>
-        <section className="flex gap-4 flex-wrap">
-          {animes?.length === 0 && <NoAnime />}
-          {animes?.map((anime, idx) => (
-            <AnimeItem anime={anime} key={`${anime.id}-${idx}`} />
-          ))}
-        </section>
-        {animes?.length !== 0 && (
-          <Button
-            variant="outline"
-            size="lg"
-            className="mt-3 w-full"
-            onClick={loadMore}
-            disabled={disabledLoadMore}
-          >
-            {hasNextPage ? "Load More Animes" : "No More Animes"}
-          </Button>
-        )}
-      </div>
-    </main>
+    <AnimeList
+      animes={items}
+      blockTitle="Browser"
+      isLoading={isLoading}
+      hasNextPage={hasNextPage}
+      loadMore={fetchNextPage}
+      disabledLoadMore={isFetching || !hasNextPage}
+    />
   );
 };
 
