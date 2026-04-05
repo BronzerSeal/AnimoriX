@@ -49,6 +49,7 @@ export function useAnimeEpisodes(animeTitle: string, enabled?: boolean) {
     queryKey: ["anime-episodes", animeTitle],
     queryFn: () => getAnimeEpisodes(animeTitle),
     select: (data) => data.data,
+    staleTime: 1000 * 60 * 5,
     enabled,
   });
 }
@@ -59,6 +60,7 @@ export function useAnimeVideoById(animeId: string, enabled?: boolean) {
     queryFn: () => getAnimeVideoById(animeId),
     select: (data) => data.data,
     placeholderData: keepPreviousData,
+    retry: 1,
     enabled,
   });
 }
@@ -67,6 +69,7 @@ export function useAnimeSeasons(animeId: number, enabled?: boolean) {
   return useQuery({
     queryKey: ["anime-seasons", animeId],
     queryFn: () => getAnimeSeasons(animeId),
+    staleTime: 1000 * 60 * 5,
     enabled,
   });
 }
@@ -76,6 +79,7 @@ export function useAnimeRecommendations(animeId: number, enabled?: boolean) {
     queryKey: ["anime-recommendations", animeId],
     queryFn: () => getAnimeRecommendations(animeId),
     select: (data) => data.data,
+    staleTime: 1000 * 60 * 5,
     enabled,
   });
 }
@@ -89,6 +93,7 @@ export function useAnimeComment(animeId: number, enabled?: boolean) {
     },
     initialPageParam: 1,
     select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
     enabled,
   });
 }

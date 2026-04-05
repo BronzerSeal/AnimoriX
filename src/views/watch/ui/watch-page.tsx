@@ -47,6 +47,7 @@ const WatchPage = () => {
           animeName={animeData?.title!}
           animeId={animeData?.mal_id!}
           isLoading={globalIsLoading}
+          fallbackUrl={animeData?.trailer?.embed_url}
         />
         {globalIsLoading || !animeEpisodes?.episodes ? (
           <AnimeEpisodesSectionSkeleton className="order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1" />
