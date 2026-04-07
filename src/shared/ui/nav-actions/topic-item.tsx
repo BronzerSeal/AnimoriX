@@ -11,7 +11,6 @@ import Link from "next/link";
 
 export const TopicItem = ({ topic }: { topic: NavTopic }) => {
   const hasGenres = topic.type === "with-genres";
-
   return hasGenres ? (
     <NavigationMenuItem key={topic.title}>
       <NavigationMenuTrigger className="relative">

@@ -6,13 +6,17 @@ import {
 } from "@tanstack/react-query";
 import { getTopTenAnimes, getTopTenAnimesWithBanners } from "../api/anime.api";
 import { getSeasonNow } from "../api/season-now.api";
-import { getAnimeFullById } from "../api/anime-by-id";
 import { getAnimeEpisodes } from "../api/anime-episodes.api";
 import { getAnimeVideoById } from "../api/anime-video";
 import { getAnimeSeasons } from "../api/anime-seasons.api";
 import { getAnimeRecommendations } from "../api/anime-recommendations.api";
 import { getAnimeCommentsById } from "../api/anime-comments.api";
-import { getAnimeByName } from "../api/search-anime-by-name";
+import {
+  getAnimeByGenre,
+  getAnimeByName,
+  getAnimeByType,
+  getAnimeFullById,
+} from "../api/anime-search.api";
 
 export function useTopAnimes() {
   return useQuery({
@@ -103,6 +107,36 @@ export function useSearchAnime(name: string, enabled?: boolean) {
   return useInfiniteQuery({
     queryKey: ["anime-search", name],
     queryFn: ({ pageParam }) => getAnimeByName(name, pageParam),
+    // select: (data) => data.data,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeByType(type: string, enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-type", type],
+    queryFn: ({ pageParam }) => getAnimeByType(type, pageParam),
+    // select: (data) => data.data,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeByGenre(genre: string, enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-genre", genre],
+    queryFn: ({ pageParam }) => getAnimeByGenre(genre, pageParam),
     // select: (data) => data.data,
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;

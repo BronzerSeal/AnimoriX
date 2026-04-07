@@ -15,4 +15,6 @@ export {
   useAnimeRecommendations,
   useAnimeComment,
   useSearchAnime,
+  useAnimeByType,
+  useAnimeByGenre,
 } from "./queries/anime.queries";
