@@ -4,6 +4,7 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/shared/ui/navigation-menu";
+import Link from "next/link";
 
 const LogoSection = () => {
   return (
@@ -12,7 +13,9 @@ const LogoSection = () => {
         <div className="flex xl:hidden">
           <MultiDropdownBtn topics={navTopics} variant="navigation" />
         </div>
-        <h1 className="text-xl font-extrabold">AnimoriX</h1>
+        <Link href="/home">
+          <h1 className="text-xl font-extrabold cursor-pointer">AnimoriX</h1>
+        </Link>
       </NavigationMenuList>
     </NavigationMenu>
   );

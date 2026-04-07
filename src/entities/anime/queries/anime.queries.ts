@@ -11,12 +11,8 @@ import { getAnimeVideoById } from "../api/anime-video";
 import { getAnimeSeasons } from "../api/anime-seasons.api";
 import { getAnimeRecommendations } from "../api/anime-recommendations.api";
 import { getAnimeCommentsById } from "../api/anime-comments.api";
-import {
-  getAnimeByGenre,
-  getAnimeByName,
-  getAnimeByType,
-  getAnimeFullById,
-} from "../api/anime-search.api";
+import { getAnime, getAnimeFullById } from "../api/anime-search.api";
+import { getAnimeRandom } from "../api/anime-random.api";
 
 export function useTopAnimes() {
   return useQuery({
@@ -37,6 +33,19 @@ export function useNowSeasons(page = 1) {
     queryKey: ["season-now", page],
     queryFn: () => getSeasonNow(page),
     placeholderData: keepPreviousData,
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useInfinityNowSeasons() {
+  return useInfiniteQuery({
+    queryKey: ["season-now"],
+    queryFn: ({ pageParam = 1 }) => getSeasonNow(pageParam, 25),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
     staleTime: 1000 * 60 * 5,
   });
 }
@@ -106,7 +115,7 @@ export function useAnimeComment(animeId: number, enabled?: boolean) {
 export function useSearchAnime(name: string, enabled?: boolean) {
   return useInfiniteQuery({
     queryKey: ["anime-search", name],
-    queryFn: ({ pageParam }) => getAnimeByName(name, pageParam),
+    queryFn: ({ pageParam }) => getAnime({ q: name, page: pageParam }),
     // select: (data) => data.data,
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
@@ -121,8 +130,8 @@ export function useSearchAnime(name: string, enabled?: boolean) {
 export function useAnimeByType(type: string, enabled?: boolean) {
   return useInfiniteQuery({
     queryKey: ["anime-type", type],
-    queryFn: ({ pageParam }) => getAnimeByType(type, pageParam),
-    // select: (data) => data.data,
+    queryFn: ({ pageParam }) =>
+      getAnime({ type, page: pageParam, order_by: "popularity" }),
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
     },
@@ -136,8 +145,53 @@ export function useAnimeByType(type: string, enabled?: boolean) {
 export function useAnimeByGenre(genre: string, enabled?: boolean) {
   return useInfiniteQuery({
     queryKey: ["anime-genre", genre],
-    queryFn: ({ pageParam }) => getAnimeByGenre(genre, pageParam),
-    // select: (data) => data.data,
+    queryFn: ({ pageParam }) =>
+      getAnime({ genres: genre, page: pageParam, order_by: "popularity" }),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeUpdates(enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-updates"],
+    queryFn: ({ pageParam }) =>
+      getAnime({ page: pageParam, order_by: "popularity" }),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeOngoing(enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-ongoing"],
+    queryFn: ({ pageParam }) =>
+      getAnime({ status: "airing", page: pageParam, order_by: "popularity" }),
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
+    },
+    initialPageParam: 1,
+    select: (data) => data.pages,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeRecent(enabled?: boolean) {
+  return useInfiniteQuery({
+    queryKey: ["anime-recent"],
+    queryFn: ({ pageParam }) =>
+      getAnime({ page: pageParam, order_by: "favorites" }),
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination?.has_next_page ? pages.length + 1 : undefined;
     },

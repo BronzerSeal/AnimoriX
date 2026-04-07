@@ -8,7 +8,7 @@ import { Filter, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SearchInput = () => {
+export const SearchInput = () => {
   const [value, setValue] = useState("");
   const router = useRouter();
 
@@ -45,5 +45,3 @@ const SearchInput = () => {
     </div>
   );
 };
-
-export default SearchInput;

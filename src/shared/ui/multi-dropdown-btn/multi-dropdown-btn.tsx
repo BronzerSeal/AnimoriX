@@ -62,9 +62,9 @@ const MultiDropdownBtn = ({
                 </DropdownMenuPortal>
               </DropdownMenuSub>
             ) : (
-              <DropdownMenuItem key={topic.title}>
-                {topic.title}
-              </DropdownMenuItem>
+              <Link href={topic.href} key={topic.title}>
+                <DropdownMenuItem>{topic.title}</DropdownMenuItem>
+              </Link>
             );
           })}
         </DropdownMenuGroup>

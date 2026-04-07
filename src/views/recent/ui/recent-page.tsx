@@ -1,20 +1,18 @@
 "use client";
-import { prepareInfinityAnimeList, useAnimeByType } from "@/entities/anime";
+import { prepareInfinityAnimeList } from "@/entities/anime";
+import { useAnimeRecent } from "@/entities/anime/queries/anime.queries";
 import AnimeList from "@/widgets/anime-list";
-import { useParams } from "next/navigation";
 
-const TypesPage = () => {
-  const { type } = useParams() as { type: string };
-
+const RecentPage = () => {
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } =
-    useAnimeByType(type!, !!type);
+    useAnimeRecent();
 
   const items = prepareInfinityAnimeList(data);
 
   return (
     <AnimeList
       animes={items}
-      blockTitle={type.toUpperCase()}
+      blockTitle="RECENT"
       isLoading={isLoading}
       hasNextPage={hasNextPage}
       loadMore={fetchNextPage}
@@ -23,4 +21,4 @@ const TypesPage = () => {
   );
 };
 
-export default TypesPage;
+export default RecentPage;

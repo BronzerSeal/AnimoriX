@@ -110,3 +110,10 @@ export type AnimeCommentsByIdResponse =
 //search
 export type AnimeSearchResponse =
   paths["/anime"]["get"]["responses"][200]["content"]["application/json"];
+
+export type AnimeTopSearchResponse =
+  paths["/top/anime"]["get"]["responses"][200]["content"]["application/json"];
+
+//random
+export type AnimeRandomResponse =
+  paths["/random/anime"]["get"]["responses"][200]["content"]["application/json"];

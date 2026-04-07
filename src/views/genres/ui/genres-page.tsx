@@ -1,7 +1,5 @@
 "use client";
-import { useAnimeByGenre } from "@/entities/anime";
-import { mapAnime } from "@/entities/anime/model/anime.mapper";
-import { anime } from "@/entities/anime/model/types";
+import { prepareInfinityAnimeList, useAnimeByGenre } from "@/entities/anime";
 import AnimeList from "@/widgets/anime-list";
 import { useParams } from "next/navigation";
 import { getGenreIdByName } from "../model/getGenreIdByName";
@@ -14,12 +12,7 @@ const GenresPage = () => {
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } =
     useAnimeByGenre(genreId!, !!genreId);
 
-  const items =
-    data
-      ?.flatMap((page) => page.data ?? [])
-      .filter((anime) => anime.rating !== "Rx - Hentai")
-      .map(mapAnime)
-      .filter((item): item is anime => item !== undefined) ?? [];
+  const items = prepareInfinityAnimeList(data);
 
   return (
     <AnimeList

@@ -4,8 +4,9 @@ import { mapAnime } from "@/entities/anime/model/anime.mapper";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import LatestEpisodesSkeleton from "./latest-episodes-skeleton";
-import { uniqueById } from "../model/uniqueById";
 import { BannedAnimeItem } from "./banned-animes";
+import { uniqueById } from "@/shared/lib/uniqueById";
+import { filterSafeAnime } from "@/shared/lib/filterSafeAnime";
 
 const LatestEpisodesSection = () => {
   const ANIMES_PER_PAGE = 12;
@@ -20,9 +21,7 @@ const LatestEpisodesSection = () => {
     return null;
   }
 
-  const items = uniqueById(
-    data.data.filter((a) => a.rating !== "Rx - Hentai"),
-  ).map(mapAnime);
+  const items = uniqueById(filterSafeAnime(data.data)).map(mapAnime);
   const pagination = data.pagination;
 
   const placeholdersCount = ANIMES_PER_PAGE - items.length;

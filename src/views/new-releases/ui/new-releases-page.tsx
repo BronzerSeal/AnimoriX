@@ -1,20 +1,20 @@
 "use client";
-import { prepareInfinityAnimeList, useAnimeByType } from "@/entities/anime";
+import {
+  prepareInfinityAnimeList,
+  useInfinityNowSeasons,
+} from "@/entities/anime";
 import AnimeList from "@/widgets/anime-list";
-import { useParams } from "next/navigation";
 
-const TypesPage = () => {
-  const { type } = useParams() as { type: string };
-
+const NewReleasesPage = () => {
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } =
-    useAnimeByType(type!, !!type);
+    useInfinityNowSeasons();
 
   const items = prepareInfinityAnimeList(data);
 
   return (
     <AnimeList
       animes={items}
-      blockTitle={type.toUpperCase()}
+      blockTitle="NEW RELEASES"
       isLoading={isLoading}
       hasNextPage={hasNextPage}
       loadMore={fetchNextPage}
@@ -23,4 +23,4 @@ const TypesPage = () => {
   );
 };
 
-export default TypesPage;
+export default NewReleasesPage;

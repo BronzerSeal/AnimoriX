@@ -1,43 +1,28 @@
 import { animeApiHttp } from "@/shared/api/anime-http";
 import { AnimeSearchResponse, FullAnimeByIdResponse } from "../model/types";
 
+type AnimeSearchParams = {
+  q?: string;
+  type?: string;
+  genres?: string;
+  status?: string;
+  order_by?: string;
+  sort?: "asc" | "desc";
+  page?: number;
+  limit?: number;
+  sfw?: boolean;
+};
+
 export async function getAnimeFullById(
   id: string,
 ): Promise<FullAnimeByIdResponse> {
   return await animeApiHttp.get<FullAnimeByIdResponse>(`anime/${id}/full`);
 }
 
-export async function getAnimeByType(
-  type: string,
-  page = 1,
-): Promise<AnimeSearchResponse> {
-  return await animeApiHttp.get<AnimeSearchResponse>(`anime?type=${type}`, {
+export async function getAnime(params: AnimeSearchParams) {
+  return await animeApiHttp.get<AnimeSearchResponse>("anime", {
     params: {
-      page,
-      order_by: "popularity",
-    },
-  });
-}
-
-export async function getAnimeByName(
-  name: string,
-  page = 1,
-): Promise<AnimeSearchResponse> {
-  return await animeApiHttp.get<AnimeSearchResponse>(`anime`, {
-    params: {
-      q: name,
-      page,
-    },
-  });
-}
-
-export async function getAnimeByGenre(
-  genre: string,
-  page = 1,
-): Promise<AnimeSearchResponse> {
-  return await animeApiHttp.get<AnimeSearchResponse>(`anime?genres=${genre}`, {
-    params: {
-      page,
+      ...params,
     },
   });
 }

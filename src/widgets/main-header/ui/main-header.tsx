@@ -10,7 +10,7 @@ import ToggleThemeBtn from "@/shared/ui/toggle-theme-btn";
 import { Shuffle, User, UsersRound } from "lucide-react";
 import LanguageSwitch from "./language-switch";
 import LogoSection from "./logo-section";
-import SearchInput from "@/features/search-input";
+import { SearchInput } from "@/features/search-input";
 
 const MainHeader = () => {
   return (

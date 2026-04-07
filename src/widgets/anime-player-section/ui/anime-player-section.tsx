@@ -73,7 +73,7 @@ const AnimePlayerSection = ({
           <BreadcrumbSeparator className="text-slate-400 dark:text-white/35" />
           <BreadcrumbItem>
             <BreadcrumbLink
-              href={`/${animeType}`}
+              href={`/types/${animeType}`}
               className="hover:text-slate-900 dark:hover:text-white"
             >
               {animeType}
