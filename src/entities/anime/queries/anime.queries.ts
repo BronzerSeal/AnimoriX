@@ -201,3 +201,24 @@ export function useAnimeRecent(enabled?: boolean) {
     enabled,
   });
 }
+
+export function useAnimeUpcoming(enabled?: boolean) {
+  return useQuery({
+    queryKey: ["anime-upcoming"],
+    queryFn: () => getAnime({ status: "upcoming", order_by: "popularity" }),
+    select: (data) => data.data,
+    staleTime: 1000 * 60 * 5,
+    enabled,
+  });
+}
+
+export function useAnimeCompleted(enabled?: boolean) {
+  return useQuery({
+    queryKey: ["anime-completed"],
+    queryFn: () => getAnime({ status: "complete", order_by: "popularity" }),
+    select: (data) => data.data,
+    staleTime: 1000 * 60 * 5,
+    placeholderData: (prev) => prev,
+    enabled,
+  });
+}

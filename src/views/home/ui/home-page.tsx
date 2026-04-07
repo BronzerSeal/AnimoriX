@@ -3,6 +3,7 @@ import LatestEpisodesSection from "@/widgets/latest-episodes-section";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
 import TopAnimesSidebar from "@/widgets/top-animes-sidebar";
+import HomePageColumns from "../home-page-columns";
 
 const HomePage = () => {
   return (
@@ -20,7 +21,9 @@ const HomePage = () => {
             <div className="px-5 mt-3">
               <LatestEpisodesSection />
             </div>
-            <div className="mt-25">Here will be new releases</div>
+            <div className="mt-8 px-5">
+              <HomePageColumns />
+            </div>
           </section>
           <section className="relative w-full px-5 pt-1 lg:px-0 lg:pr-8">
             <div className="w-full lg:absolute lg:w-full lg:px-5 lg:pr-8 lg:-mt-5">

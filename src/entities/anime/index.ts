@@ -19,4 +19,6 @@ export {
   useSearchAnime,
   useAnimeByType,
   useAnimeByGenre,
+  useAnimeUpcoming,
+  useAnimeCompleted,
 } from "./queries/anime.queries";
