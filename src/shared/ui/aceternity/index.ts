@@ -1,1 +1,2 @@
-export { default as BackgroundRippleEffectDemo } from "./background-ripple-effect/background-ripple-effect-demo";
+export { BackgroundRippleEffect } from "./background-ripple-effect";
+export { CardContainer, CardBody, CardItem } from "./3d-card";

@@ -1,5 +1,5 @@
 "use client";
-import { AnimeItem, useNowSeasons } from "@/entities/anime";
+import { useNowSeasons } from "@/entities/anime";
 import { mapAnime } from "@/entities/anime/model/anime.mapper";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import LatestEpisodesSkeleton from "./latest-episodes-skeleton";
 import { BannedAnimeItem } from "./banned-animes";
 import { uniqueById } from "@/shared/lib/uniqueById";
 import { filterSafeAnime } from "@/shared/lib/filterSafeAnime";
+import AnimeThreeDItem from "@/entities/anime/ui/anime-3d-item";
 
 const LatestEpisodesSection = () => {
   const ANIMES_PER_PAGE = 12;
@@ -52,7 +53,7 @@ const LatestEpisodesSection = () => {
       </section>
       <section className="flex gap-4 flex-wrap">
         {items.map((anime, idx) => (
-          <AnimeItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
+          <AnimeThreeDItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
         ))}
         {placeholders.map((_, idx) => (
           <BannedAnimeItem key={`ban-${idx}`} />
