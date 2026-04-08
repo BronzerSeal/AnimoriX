@@ -104,14 +104,14 @@ const HomePageColumns = () => {
       </div>
 
       {showColumnNavigation ? (
-        <div className="mt-5 flex items-center justify-center gap-4 text-sm text-white/65">
+        <div className="mt-5 flex items-center justify-center gap-4 text-sm text-black/65 dark:text-white/65">
           <button
             type="button"
             onClick={() =>
               setPage((prev) => Math.max(0, Math.min(prev, maxPage) - 1))
             }
             disabled={currentPage === 0}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-white disabled:pointer-events-none disabled:opacity-35"
+            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-black dark:hover:text-white disabled:pointer-events-none disabled:opacity-35  "
           >
             <ChevronLeft className="size-4" />
             Prev
@@ -133,7 +133,7 @@ const HomePageColumns = () => {
                   className={`h-2.5 rounded-full transition-all ${
                     isActive
                       ? "w-8 bg-[#2db66d]"
-                      : "w-2.5 bg-white/20 hover:bg-white/35"
+                      : "w-2.5 bg-black/20 dark:bg-white/20 hover:bg-black/35 dark:hover:bg-white/35"
                   }`}
                 />
               );
@@ -143,12 +143,10 @@ const HomePageColumns = () => {
           <button
             type="button"
             onClick={() =>
-              setPage((prev) =>
-                Math.min(maxPage, Math.min(prev, maxPage) + 1),
-              )
+              setPage((prev) => Math.min(maxPage, Math.min(prev, maxPage) + 1))
             }
             disabled={currentPage >= maxPage}
-            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-white disabled:pointer-events-none disabled:opacity-35"
+            className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 transition hover:bg-white/5 hover:text-black dark:hover:text-white  disabled:pointer-events-none disabled:opacity-35"
           >
             Next
             <ChevronRight className="size-4" />

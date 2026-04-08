@@ -18,7 +18,7 @@ const SiteFooter = () => {
             {alphabet.map((letter) => (
               <Link
                 key={letter}
-                href="#"
+                href={`/browser?keyword=${letter}`}
                 className="rounded-md border border-white/8 bg-white dark:bg-zinc-900 px-2 py-1 text-[12px] font-bold text-black dark:text-zinc-100 transition hover:border-orange-400/40 hover:bg-zinc-800 hover:text-orange-300"
               >
                 {letter}
