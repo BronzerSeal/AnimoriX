@@ -1,5 +1,14 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Aceternity UI integration
+
+- `shadcn` remains the base UI layer; `Aceternity UI` is used only for animated and decorative components.
+- Store Aceternity-style components under `src/shared/ui/aceternity`.
+- Import them via `@/shared/ui/aceternity`.
+- Reuse `cn` from `src/lib/utils.ts` for all class composition.
+- Keep theme alignment in `src/app/globals.css`; do not add broad global overrides for one component.
+- Add `"use client"` only to components that actually depend on animation, browser APIs, or client hooks.
+
 ## Getting Started
 
 First, run the development server:

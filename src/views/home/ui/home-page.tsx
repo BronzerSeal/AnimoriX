@@ -3,7 +3,7 @@ import LatestEpisodesSection from "@/widgets/latest-episodes-section";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
 import TopAnimesSidebar from "@/widgets/top-animes-sidebar";
-import HomePageColumns from "../home-page-columns";
+import HomePageColumns from "./home-page-columns";
 
 const HomePage = () => {
   return (
