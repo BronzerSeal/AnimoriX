@@ -8,7 +8,7 @@ export const AnimeItem = ({ anime }: { anime: anime }) => {
   return (
     <article
       onClick={() => router.push(`/watch/${anime.id}`)}
-      className="group basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-5rem)/6)]"
+      className="group cursor-pointer basis-[calc((100%-1rem)/2)] md:basis-[calc((100%-3rem)/4)] xl:basis-[calc((100%-5rem)/6)] flex flex-col justify-between"
     >
       <div className="flex flex-col">
         <div className="relative w-full aspect-[3/4] overflow-hidden rounded-2xl">
@@ -20,10 +20,11 @@ export const AnimeItem = ({ anime }: { anime: anime }) => {
             sizes="(max-width: 639px) 50vw, (max-width: 767px) 190px, (max-width: 1023px) 220px, 250px"
           />
         </div>
-        <h2 className="mt-2 text-sm font-semibold leading-tight line-clamp-2 transition-transform duration-300 ease-out group-hover:-translate-y-1">
+        <h2 className="mt-2  text-sm font-semibold leading-tight line-clamp-2 transition-transform duration-300 ease-out group-hover:-translate-y-1">
           {anime.title}
         </h2>
       </div>
+
       <AnimeBadges
         rating={anime.rating}
         score={anime.score}

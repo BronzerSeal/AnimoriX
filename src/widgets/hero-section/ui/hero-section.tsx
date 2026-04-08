@@ -1,11 +1,6 @@
 "use client";
+import { LargeSearchInput } from "@/features/search-input";
 import { Button } from "@/shared/ui/button";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/shared/ui/input";
-import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
@@ -20,13 +15,7 @@ const HeroSection = () => {
 
       <div className="w-full flex flex-col items-center justify-center z-1">
         <h1 className="relative text-white text-5xl font-bold">AnimoriX</h1>
-        <InputGroup className="max-w-xl text-white">
-          <InputGroupInput placeholder="Search..." />
-          <InputGroupAddon>
-            <Search />
-          </InputGroupAddon>
-          <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
-        </InputGroup>
+        <LargeSearchInput />
 
         <Button
           className="w-60 h-15 mt-3 bg-amber-600 hover:bg-amber-600/90"

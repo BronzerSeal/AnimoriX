@@ -1,5 +1,14 @@
 // /app/api/anime/stream/route.ts
+
+//v2
+import { ANIME } from "@consumet/extensions";
 import { NextRequest, NextResponse } from "next/server";
+
+const providers = [
+  { name: "AnimeKai", instance: () => new ANIME.AnimeKai() },
+  { name: "Hianime", instance: () => new ANIME.Hianime() },
+  { name: "AnimePahe", instance: () => new ANIME.AnimePahe() },
+];
 
 type DiagnosticStep = {
   step: string;
@@ -11,7 +20,7 @@ function truncateValue(value: unknown, maxLength = 300) {
   if (value == null) return value;
 
   const text =
-    typeof value === "string" ? value : JSON.stringify(value, null, 2) ?? "";
+    typeof value === "string" ? value : (JSON.stringify(value, null, 2) ?? "");
 
   if (text.length <= maxLength) {
     return text;
@@ -21,19 +30,7 @@ function truncateValue(value: unknown, maxLength = 300) {
 }
 
 function getErrorDetails(error: unknown) {
-  const err = error as {
-    name?: string;
-    message?: string;
-    code?: string;
-    config?: { url?: string; method?: string };
-    response?: {
-      status?: number;
-      statusText?: string;
-      data?: unknown;
-      config?: { url?: string; method?: string };
-      request?: { res?: { responseUrl?: string } };
-    };
-  };
+  const err = error as any;
 
   return {
     name: err?.name ?? "UnknownError",
@@ -81,140 +78,92 @@ export async function GET(req: NextRequest) {
       diagnosticsEnabled,
     });
 
-    const { ANIME } = await import("@consumet/extensions");
-    const provider = new ANIME.AnimeKai();
+    let episode: any = null;
+    let usedProvider: string | null = null;
 
-    steps.push({
-      step: "provider_initialized",
-      ok: true,
-      details: { provider: "AnimeKai" },
-    });
+    // 🔥 ПРОБУЕМ ВСЕ ПРОВАЙДЕРЫ
+    for (const p of providers) {
+      try {
+        const instance = p.instance();
 
-    let episode;
+        steps.push({
+          step: `provider_initialized_${p.name}`,
+          ok: true,
+        });
 
-    try {
-      episode = await provider.fetchEpisodeSources(episodeId);
+        const res = await instance.fetchEpisodeSources(episodeId);
 
-      steps.push({
-        step: "fetch_episode_sources",
-        ok: true,
-        details: {
-          sourceCount: episode.sources?.length ?? 0,
-          download: episode.download ?? null,
-          headers: episode.headers ?? null,
-        },
-      });
-    } catch (error) {
-      const errorDetails = getErrorDetails(error);
-
-      steps.push({
-        step: "fetch_episode_sources",
-        ok: false,
-        details: errorDetails,
-      });
-
-      logStreamEvent("fetch_episode_sources_failed", episodeId, errorDetails);
-
-      if (diagnosticsEnabled) {
-        try {
-          const servers = await provider.fetchEpisodeServers(episodeId);
-          const firstServer = servers[0] ?? null;
+        if (res?.sources?.length) {
+          episode = res;
+          usedProvider = p.name;
 
           steps.push({
-            step: "fetch_episode_servers",
+            step: `fetch_episode_sources_${p.name}`,
             ok: true,
             details: {
-              serverCount: servers.length,
-              firstServerName: firstServer?.name ?? null,
-              firstServerUrl: firstServer?.url ?? null,
+              sourceCount: res.sources.length,
+              download: res.download ?? null,
             },
           });
 
-          if (firstServer?.url) {
-            try {
-              const directSources = await provider.fetchEpisodeSources(
-                firstServer.url,
-              );
-
-              steps.push({
-                step: "fetch_sources_from_server_url",
-                ok: true,
-                details: {
-                  sourceCount: directSources.sources?.length ?? 0,
-                  download: directSources.download ?? null,
-                  requestUrl: firstServer.url,
-                },
-              });
-            } catch (directError) {
-              const directErrorDetails = getErrorDetails(directError);
-
-              steps.push({
-                step: "fetch_sources_from_server_url",
-                ok: false,
-                details: {
-                  ...directErrorDetails,
-                  requestUrl: firstServer.url,
-                },
-              });
-
-              logStreamEvent(
-                "fetch_sources_from_server_url_failed",
-                episodeId,
-                {
-                  ...directErrorDetails,
-                  requestUrl: firstServer.url,
-                },
-              );
-            }
-          }
-        } catch (serversError) {
-          const serversErrorDetails = getErrorDetails(serversError);
-
+          break; // нашли — выходим
+        } else {
           steps.push({
-            step: "fetch_episode_servers",
+            step: `fetch_episode_sources_${p.name}`,
             ok: false,
-            details: serversErrorDetails,
+            details: { message: "No sources returned" },
           });
-
-          logStreamEvent(
-            "fetch_episode_servers_failed",
-            episodeId,
-            serversErrorDetails,
-          );
         }
+      } catch (error) {
+        const errorDetails = getErrorDetails(error);
+
+        steps.push({
+          step: `fetch_episode_sources_${p.name}`,
+          ok: false,
+          details: errorDetails,
+        });
+
+        logStreamEvent(
+          `fetch_episode_sources_failed_${p.name}`,
+          episodeId,
+          errorDetails,
+        );
       }
+    }
+
+    // ❌ если вообще ничего не нашли
+    if (!episode || !episode.sources?.length) {
+      logStreamEvent("no_video_sources_all_providers_failed", episodeId);
 
       return NextResponse.json(
         {
-          error: errorDetails.message || "Failed to fetch episode",
+          error: "No video sources found (all providers failed)",
           diagnostics: steps,
         },
-        { status: 500 },
-      );
-    }
-
-    if (!episode.sources || !episode.sources.length) {
-      logStreamEvent("no_video_sources", episodeId);
-
-      return NextResponse.json(
-        { error: "No video sources found", diagnostics: steps },
         { status: 404 },
       );
     }
 
-    const video = episode.sources.find((s) => s.url);
+    const video = episode.sources.find((s: any) => s.url);
+
     if (!video) {
       logStreamEvent("no_available_video_source", episodeId, {
+        provider: usedProvider,
         sourceCount: episode.sources.length,
       });
 
       return NextResponse.json(
-        { error: "No available video sources", diagnostics: steps },
+        {
+          error: "No available video sources",
+          provider: usedProvider,
+          diagnostics: steps,
+        },
         { status: 404 },
       );
     }
 
     logStreamEvent("request_succeeded", episodeId, {
+      provider: usedProvider,
       quality: video.quality ?? null,
       urlPreview: truncateValue(video.url, 180),
     });
@@ -223,6 +172,7 @@ export async function GET(req: NextRequest) {
       episodeId,
       quality: video.quality,
       url: video.url,
+      provider: usedProvider,
       diagnostics: diagnosticsEnabled ? steps : undefined,
     });
   } catch (error) {
@@ -239,3 +189,217 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
+//v3 -- для возможного улучшения, передаем название и ищем id серии по нему, так как некоторые провайдеры (например Hianime) не поддерживают прямой поиск серии по id, а только через поиск по названию и выбор серии из результатов
+// import { ANIME } from "@consumet/extensions";
+// import { NextRequest, NextResponse } from "next/server";
+
+// const providers = [
+//   { name: "AnimeKai", instance: () => new ANIME.AnimeKai() },
+//   { name: "Hianime", instance: () => new ANIME.Hianime() },
+//   { name: "AnimePahe", instance: () => new ANIME.AnimePahe() },
+// ];
+
+// type DiagnosticStep = {
+//   step: string;
+//   ok: boolean;
+//   details?: Record<string, unknown>;
+// };
+
+// function truncateValue(value: unknown, maxLength = 300) {
+//   if (value == null) return value;
+
+//   const text =
+//     typeof value === "string" ? value : (JSON.stringify(value, null, 2) ?? "");
+
+//   return text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`;
+// }
+
+// function getErrorDetails(error: unknown) {
+//   const err = error as any;
+
+//   return {
+//     name: err?.name ?? "UnknownError",
+//     message: err?.message ?? "Unknown error",
+//     responseStatus: err?.response?.status ?? null,
+//     responsePreview: truncateValue(err?.response?.data),
+//   };
+// }
+
+// function logStreamEvent(
+//   event: string,
+//   episodeId: string,
+//   details?: Record<string, unknown>,
+// ) {
+//   console.info("[anime-stream]", {
+//     event,
+//     episodeId,
+//     ...details,
+//   });
+// }
+
+// export async function GET(req: NextRequest) {
+//   const { searchParams } = new URL(req.url);
+
+//   const episodeId = searchParams.get("episodeId");
+//   const title = searchParams.get("title");
+
+//   const diagnosticsEnabled =
+//     searchParams.get("diagnostics") === "1" ||
+//     searchParams.get("debug") === "1";
+
+//   if (!episodeId) {
+//     return NextResponse.json(
+//       { error: "episodeId is required" },
+//       { status: 400 },
+//     );
+//   }
+
+//   if (!title) {
+//     return NextResponse.json(
+//       { error: "title is required for provider resolving" },
+//       { status: 400 },
+//     );
+//   }
+
+//   const steps: DiagnosticStep[] = [];
+
+//   try {
+//     logStreamEvent("request_started", episodeId, { title });
+
+//     let episode: any = null;
+//     let usedProvider: string | null = null;
+
+//     // 🔥 ПРОБЕГАЕМСЯ ПО ПРОВАЙДЕРАМ
+//     for (const p of providers) {
+//       try {
+//         const provider = p.instance();
+
+//         steps.push({
+//           step: `provider_init_${p.name}`,
+//           ok: true,
+//         });
+
+//         let resolvedEpisodeId = episodeId;
+
+//         // ✅ Для НЕ AnimeKai — ищем через search
+//         if (p.name !== "AnimeKai") {
+//           const searchResults = await provider.search(title);
+
+//           steps.push({
+//             step: `search_${p.name}`,
+//             ok: true,
+//             details: {
+//               results: searchResults?.results?.length ?? 0,
+//             },
+//           });
+
+//           const anime = searchResults?.results?.[0];
+//           if (!anime?.id) {
+//             throw new Error(`No anime found for ${p.name}`);
+//           }
+
+//           // получаем список эпизодов
+//           const animeInfo = await provider.fetchAnimeInfo(anime.id);
+
+//           const episodeMatch = animeInfo?.episodes?.find(
+//             (ep: any) => ep.id.includes(episodeId) || ep.number === episodeId,
+//           );
+
+//           if (!episodeMatch?.id) {
+//             throw new Error(`Episode not found in ${p.name}`);
+//           }
+
+//           resolvedEpisodeId = episodeMatch.id;
+
+//           steps.push({
+//             step: `resolve_episode_${p.name}`,
+//             ok: true,
+//             details: {
+//               resolvedEpisodeId,
+//             },
+//           });
+//         }
+
+//         // 🎬 получаем стрим
+//         const res = await provider.fetchEpisodeSources(resolvedEpisodeId);
+
+//         if (res?.sources?.length) {
+//           episode = res;
+//           usedProvider = p.name;
+
+//           steps.push({
+//             step: `fetch_sources_${p.name}`,
+//             ok: true,
+//             details: {
+//               sourceCount: res.sources.length,
+//             },
+//           });
+
+//           break;
+//         } else {
+//           throw new Error("No sources");
+//         }
+//       } catch (error) {
+//         const errorDetails = getErrorDetails(error);
+
+//         steps.push({
+//           step: `provider_failed_${p.name}`,
+//           ok: false,
+//           details: errorDetails,
+//         });
+
+//         logStreamEvent(`provider_failed_${p.name}`, episodeId, errorDetails);
+//       }
+//     }
+
+//     // ❌ ничего не нашли
+//     if (!episode || !episode.sources?.length) {
+//       return NextResponse.json(
+//         {
+//           error: "No video sources found across providers",
+//           diagnostics: steps,
+//         },
+//         { status: 404 },
+//       );
+//     }
+
+//     const video = episode.sources.find((s: any) => s.url);
+
+//     if (!video) {
+//       return NextResponse.json(
+//         {
+//           error: "No playable source found",
+//           provider: usedProvider,
+//           diagnostics: steps,
+//         },
+//         { status: 404 },
+//       );
+//     }
+
+//     logStreamEvent("success", episodeId, {
+//       provider: usedProvider,
+//       quality: video.quality,
+//     });
+
+//     return NextResponse.json({
+//       episodeId,
+//       provider: usedProvider,
+//       quality: video.quality,
+//       url: video.url,
+//       diagnostics: diagnosticsEnabled ? steps : undefined,
+//     });
+//   } catch (error) {
+//     const errorDetails = getErrorDetails(error);
+
+//     logStreamEvent("unexpected_failure", episodeId, errorDetails);
+
+//     return NextResponse.json(
+//       {
+//         error: errorDetails.message || "Failed to fetch episode",
+//         diagnostics: steps,
+//       },
+//       { status: 500 },
+//     );
+//   }
+// }

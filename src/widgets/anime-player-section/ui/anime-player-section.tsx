@@ -11,22 +11,7 @@ import Seasons from "./seasons";
 import AnimePlayerSectionSkeleton from "./anime-player-section-skeleton";
 import NotFound from "./not-found";
 import { useAnimeVideoById } from "@/entities/anime";
-import { Skeleton } from "@/shared/ui/skeleton";
-
-const EpisodePlayerSkeleton = () => {
-  return (
-    <>
-      <div className="px-2">
-        <Skeleton className="aspect-video w-full rounded-2xl bg-slate-200 dark:bg-white/8" />
-      </div>
-
-      <div className="flex justify-between gap-4 p-2 text-[14px]">
-        <Skeleton className="h-5 w-44 bg-slate-200 dark:bg-white/8" />
-        <Skeleton className="h-5 w-28 bg-slate-200 dark:bg-white/8" />
-      </div>
-    </>
-  );
-};
+import { EpisodePlayerSkeleton } from "./episode-player-skeleton";
 
 const AnimePlayerSection = ({
   episodeId,
@@ -36,6 +21,7 @@ const AnimePlayerSection = ({
   isLoading,
   episodeNum,
   className,
+  fallbackUrl = null,
 }: {
   episodeId: string;
   animeType: string;
@@ -44,6 +30,7 @@ const AnimePlayerSection = ({
   isLoading: boolean;
   episodeNum: number;
   className?: string;
+  fallbackUrl?: string | null;
 }) => {
   const {
     data: videoData,
@@ -51,7 +38,6 @@ const AnimePlayerSection = ({
     isLoading: isVideoLoading,
     isFetching: isVideoFetching,
   } = useAnimeVideoById(episodeId, !!episodeId);
-
   const isInitialLoading = isLoading || (isVideoLoading && !videoData);
   const isEpisodeSwitching =
     !!episodeId &&
@@ -59,7 +45,17 @@ const AnimePlayerSection = ({
     videoData?.episodeId !== episodeId;
 
   if (isInitialLoading) return <AnimePlayerSectionSkeleton />;
-  if (error) return <NotFound errCode="" errMessage={error.message} />;
+  if (!fallbackUrl) {
+    if (error) {
+      return (
+        <NotFound
+          errCode=""
+          errMessage={error?.message || "Episode not found"}
+        />
+      );
+    }
+  }
+
   return (
     <div
       className={`flex w-full flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] pt-2 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none ${className}`}
@@ -77,7 +73,7 @@ const AnimePlayerSection = ({
           <BreadcrumbSeparator className="text-slate-400 dark:text-white/35" />
           <BreadcrumbItem>
             <BreadcrumbLink
-              href={`/${animeType}`}
+              href={`/types/${animeType}`}
               className="hover:text-slate-900 dark:hover:text-white"
             >
               {animeType}
@@ -96,7 +92,11 @@ const AnimePlayerSection = ({
         <EpisodePlayerSkeleton />
       ) : (
         <>
-          {videoData?.url && <VideoPlayer url={videoData.url} />}
+          {videoData?.url ? (
+            <VideoPlayer url={videoData.url} />
+          ) : fallbackUrl ? (
+            <VideoPlayer url={fallbackUrl} isTrailer />
+          ) : null}
           <div className="flex flex-1 justify-between p-2 text-[14px] text-slate-700 dark:text-white/80">
             <h1 className="font-medium text-slate-900 dark:text-white">
               You are watching Episode {episodeNum > 0 ? episodeNum + 1 : 1}
