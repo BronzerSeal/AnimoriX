@@ -8,12 +8,7 @@ const LandingPage = () => {
   return (
     <div className="relative isolate min-h-screen overflow-hidden flex flex-col items-center">
       <div className="absolute inset-0 -z-10">
-        <BackgroundRippleEffect
-          rows={30}
-          cols={36}
-          cellSize={64}
-          interactive={true}
-        />
+        <BackgroundRippleEffect rows={30} cols={36} cellSize={64} />
       </div>
       {/* из-за отступов у footer */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-zinc-50/80 via-transparent to-zinc-50 dark:from-[#0b1215]/90 dark:via-transparent dark:to-[#0b1215]" />
