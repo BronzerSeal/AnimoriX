@@ -1,5 +1,5 @@
 "use client";
-import { useNowSeasons } from "@/entities/anime";
+import { AnimeItem, useNowSeasons } from "@/entities/anime";
 import { mapAnime } from "@/entities/anime/model/anime.mapper";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -51,9 +51,19 @@ const LatestEpisodesSection = () => {
           </div>
         </div>
       </section>
-      <section className="flex gap-4 flex-wrap">
+      {/* desktop */}
+      <section className="hidden md:flex gap-4 flex-wrap ">
         {items.map((anime, idx) => (
           <AnimeThreeDItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
+        ))}
+        {placeholders.map((_, idx) => (
+          <BannedAnimeItem key={`ban-${idx}`} />
+        ))}
+      </section>
+      {/* mobile */}
+      <section className="flex md:hidden gap-4 flex-wrap">
+        {items.map((anime, idx) => (
+          <AnimeItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
         ))}
         {placeholders.map((_, idx) => (
           <BannedAnimeItem key={`ban-${idx}`} />

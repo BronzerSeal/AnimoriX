@@ -11,6 +11,7 @@ import { Shuffle, User, UsersRound } from "lucide-react";
 import LanguageSwitch from "./language-switch";
 import LogoSection from "./logo-section";
 import { SearchInput } from "@/features/search-input";
+import PlaceholderVanishSearchInput from "@/features/search-input/ui/placeholder-vanish-search-input";
 
 const MainHeader = () => {
   return (
@@ -18,13 +19,15 @@ const MainHeader = () => {
       className="
     z-50 flex items-center justify-between rounded-xl
     bg-white/20 dark:bg-black/20
-    sm:bg-white sm:dark:bg-[#0c1115]
+    sm:bg-zinc-50 sm:dark:bg-[#0b1215]
     p-4 px-3 py-3 sm:px-2
     backdrop-blur-sm
     transition-colors
   "
     >
-      <LogoSection />
+      <div className="mr-2">
+        <LogoSection />
+      </div>
 
       <NavigationMenu
         viewport={false}
@@ -32,7 +35,7 @@ const MainHeader = () => {
       >
         <NavigationMenuList className="gap-2 sm:gap-1">
           <div className="flex items-center gap-2 sm:hidden">
-            <SearchInput />
+            <PlaceholderVanishSearchInput />
             <Avatar size="sm">
               <AvatarImage src="#" />
               <AvatarFallback>
@@ -42,7 +45,9 @@ const MainHeader = () => {
           </div>
 
           <div className="hidden sm:flex items-center">
-            <SearchInput />
+            {/* <SearchInput /> */}
+
+            <PlaceholderVanishSearchInput />
 
             <HeaderAction href="/watch2gether">
               <UsersRound

@@ -3,6 +3,7 @@ import NoAnime from "./no-anime";
 import { Button } from "@/shared/ui/button";
 import AnimeListSkeleton from "./anime-list-skeleton";
 import AnimeThreeDItem from "@/entities/anime/ui/anime-3d-item";
+import { AnimeItem } from "@/entities/anime";
 
 interface Props {
   animes: anime[] | undefined;
@@ -32,10 +33,18 @@ const AnimeList = ({
 
       <div className="mx-auto w-full max-w-425 mt-25 px-5">
         <h1 className="text-xl font-bold mb-2">{blockTitle}</h1>
-        <section className="flex gap-4 flex-wrap">
+        {/* desktop */}
+        <section className="hidden md:flex gap-4 flex-wrap">
           {animes?.length === 0 && <NoAnime />}
           {animes?.map((anime, idx) => (
             <AnimeThreeDItem anime={anime} key={`${anime.id}-${idx}`} />
+          ))}
+        </section>
+        {/* mobile */}
+        <section className="flex md:hidden gap-4 flex-wrap">
+          {animes?.length === 0 && <NoAnime />}
+          {animes?.map((anime, idx) => (
+            <AnimeItem anime={anime} key={`${anime.id}-${idx}`} />
           ))}
         </section>
         {animes?.length !== 0 && (
