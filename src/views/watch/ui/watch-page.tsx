@@ -1,5 +1,6 @@
 "use client";
 import { useAnimeEpisodes, useFullAnimeById } from "@/entities/anime";
+import { AuroraBackground } from "@/shared/ui/aceternity";
 import AnimeEpisodesSection, {
   AnimeEpisodesSectionSkeleton,
 } from "@/widgets/anime-episodes-section";
@@ -38,9 +39,10 @@ const WatchPage = () => {
   const globalIsLoading = isAnimeDataLoading || isAnimeEpisodesLoading;
   return (
     <div className="w-full px-2 md:px-4 flex flex-col justify-center items-center">
+      {/* <AuroraBackground className="w-full -z-10"> */}
       <div className="mt-25 grid w-full max-w-500 grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">
         <AnimePlayerSection
-          className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1"
+          className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1 z-10"
           episodeNum={episodeNum}
           episodeId={animeEpisodes?.episodes[episodeNum].id || ""}
           animeType={animeData?.type!}
@@ -50,24 +52,25 @@ const WatchPage = () => {
           fallbackUrl={animeData?.trailer?.embed_url}
         />
         {globalIsLoading || !animeEpisodes?.episodes ? (
-          <AnimeEpisodesSectionSkeleton className="order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1" />
+          <AnimeEpisodesSectionSkeleton className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1" />
         ) : (
           <AnimeEpisodesSection
-            className="order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1"
+            className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1"
             episodes={animeEpisodes.episodes}
             selected={episodeNum}
             onSelectEpisode={setEpisodeNum}
           />
         )}
         {isAnimeDataLoading ? (
-          <AnimeInfoSectionSkeleton className="order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1" />
+          <AnimeInfoSectionSkeleton className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1" />
         ) : (
           <AnimeInfoSection
             animeInfo={animeData!}
-            className="order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1"
+            className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1"
           />
         )}
       </div>
+      {/* </AuroraBackground> */}
       <div className="mt-10 w-full">
         <ShareSite />
       </div>

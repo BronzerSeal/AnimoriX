@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Search } from "lucide-react";
 
 type VanishPixel = {
   x: number;
@@ -254,7 +255,7 @@ export function PlaceholdersAndVanishInput({
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-3.5 w-3.5 text-gray-300"
+          className="h-3.5 w-3.5 text-gray-300 cursor-pointer"
         >
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <motion.path
