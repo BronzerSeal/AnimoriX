@@ -1,10 +1,11 @@
 "use client";
 
 import { PlaceholdersAndVanishInput } from "@/shared/ui/aceternity";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
+import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
-import MobileSearchInput from "./mobile-search-input";
 
-const PlaceholderVanishSearchInput = () => {
+const MobileSearchInput = () => {
   const router = useRouter();
 
   const placeholders = ["Search...", "Animeee...", ";)"];
@@ -15,20 +16,23 @@ const PlaceholderVanishSearchInput = () => {
     router.push(`/browser?keyword=${value}`);
   };
   return (
-    <>
-      <div className="max-w-57.5 hidden md:flex">
+    <Popover>
+      <PopoverTrigger asChild>
+        <Search
+          className="size-4 text-foreground md:hidden"
+          strokeWidth={2.2}
+        />
+      </PopoverTrigger>
+      <PopoverContent className="w-50 p-2" align="end">
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
           onChange={handleChange}
           onSubmit={handleSearch}
           className="max-w-xl"
         />
-      </div>
-      <div className="md:hidden">
-        <MobileSearchInput />
-      </div>
-    </>
+      </PopoverContent>
+    </Popover>
   );
 };
 
-export default PlaceholderVanishSearchInput;
+export default MobileSearchInput;
