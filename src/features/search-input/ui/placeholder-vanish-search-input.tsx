@@ -1,7 +1,6 @@
 "use client";
 
-import { GooeyInput, PlaceholdersAndVanishInput } from "@/shared/ui/aceternity";
-import { Search } from "lucide-react";
+import { PlaceholdersAndVanishInput } from "@/shared/ui/aceternity";
 import { useRouter } from "next/navigation";
 import MobileSearchInput from "./mobile-search-input";
 
@@ -17,7 +16,7 @@ const PlaceholderVanishSearchInput = () => {
   };
   return (
     <>
-      <div className="max-w-[230px] hidden md:flex">
+      <div className="max-w-57.5 hidden md:flex">
         <PlaceholdersAndVanishInput
           placeholders={placeholders}
           onChange={handleChange}
@@ -26,12 +25,7 @@ const PlaceholderVanishSearchInput = () => {
         />
       </div>
       <div className="md:hidden">
-        {/* <MobileSearchInput /> */}
-        {/* <Search
-          className="size-4 text-foreground md:hidden"
-          strokeWidth={2.2}
-        /> */}
-        {/* <GooeyInput placeholder="search" /> */}
+        <MobileSearchInput />
       </div>
     </>
   );

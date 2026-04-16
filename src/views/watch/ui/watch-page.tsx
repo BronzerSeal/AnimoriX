@@ -1,5 +1,9 @@
 "use client";
-import { useAnimeEpisodes, useFullAnimeById } from "@/entities/anime";
+import {
+  mapAnimeImage,
+  useAnimeEpisodes,
+  useFullAnimeById,
+} from "@/entities/anime";
 import { AuroraBackground } from "@/shared/ui/aceternity";
 import AnimeEpisodesSection, {
   AnimeEpisodesSectionSkeleton,
@@ -20,6 +24,7 @@ import CommentSection, {
 import ShareSite from "@/widgets/share-site";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+import { useVibrantColor } from "@/shared/hooks/use-vibrant-color";
 
 const WatchPage = () => {
   const params = useParams();
@@ -36,42 +41,51 @@ const WatchPage = () => {
   const { data: animeEpisodes, isLoading: isAnimeEpisodesLoading } =
     useAnimeEpisodes(animeData?.title || "", !!animeData?.title);
 
+  //цвет фона для плеера
+  const image = mapAnimeImage(animeData?.images);
+  const { colors: bgColors } = useVibrantColor(image);
+
   const globalIsLoading = isAnimeDataLoading || isAnimeEpisodesLoading;
   return (
+    // <AuroraBackground className="w-full ">
     <div className="w-full px-2 md:px-4 flex flex-col justify-center items-center">
-      {/* <AuroraBackground className="w-full -z-10"> */}
-      <div className="mt-25 grid w-full max-w-500 grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">
-        <AnimePlayerSection
-          className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1 z-10"
-          episodeNum={episodeNum}
-          episodeId={animeEpisodes?.episodes[episodeNum].id || ""}
-          animeType={animeData?.type!}
-          animeName={animeData?.title!}
-          animeId={animeData?.mal_id!}
-          isLoading={globalIsLoading}
-          fallbackUrl={animeData?.trailer?.embed_url}
-        />
-        {globalIsLoading || !animeEpisodes?.episodes ? (
-          <AnimeEpisodesSectionSkeleton className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1" />
-        ) : (
-          <AnimeEpisodesSection
-            className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1"
-            episodes={animeEpisodes.episodes}
-            selected={episodeNum}
-            onSelectEpisode={setEpisodeNum}
+      <AuroraBackground
+        bgColors={bgColors}
+        className="w-full min-w-screen px-2 md:px-0  pb-10"
+      >
+        <div className="mt-25 grid w-full max-w-500 px-2 md:px-4 grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">
+          <AnimePlayerSection
+            className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1 z-10"
+            episodeNum={episodeNum}
+            episodeId={animeEpisodes?.episodes[episodeNum].id || ""}
+            animeType={animeData?.type!}
+            animeName={animeData?.title!}
+            animeId={animeData?.mal_id!}
+            isLoading={globalIsLoading}
+            fallbackUrl={animeData?.trailer?.embed_url}
           />
-        )}
-        {isAnimeDataLoading ? (
-          <AnimeInfoSectionSkeleton className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1" />
-        ) : (
-          <AnimeInfoSection
-            animeInfo={animeData!}
-            className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1"
-          />
-        )}
-      </div>
-      {/* </AuroraBackground> */}
-      <div className="mt-10 w-full">
+          {globalIsLoading || !animeEpisodes?.episodes ? (
+            <AnimeEpisodesSectionSkeleton className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1" />
+          ) : (
+            <AnimeEpisodesSection
+              className="z-10 order-2 lg:order-2 lg:col-start-2 lg:row-start-1 xl:order-3 xl:col-start-3 xl:row-start-1"
+              episodes={animeEpisodes.episodes}
+              selected={episodeNum}
+              onSelectEpisode={setEpisodeNum}
+            />
+          )}
+          {isAnimeDataLoading ? (
+            <AnimeInfoSectionSkeleton className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1" />
+          ) : (
+            <AnimeInfoSection
+              animeInfo={animeData!}
+              className="z-10 order-3 lg:order-3 lg:col-span-2 xl:order-1 xl:col-span-1 xl:col-start-1 xl:row-start-1"
+            />
+          )}
+        </div>
+      </AuroraBackground>
+
+      <div className="w-full">
         <ShareSite />
       </div>
       <div className="mt-5 grid w-full max-w-500 grid-cols-1 xl:grid-cols-[10fr_1fr]">
@@ -97,6 +111,7 @@ const WatchPage = () => {
         </div>
       </div>
     </div>
+    // </AuroraBackground>
   );
 };
 

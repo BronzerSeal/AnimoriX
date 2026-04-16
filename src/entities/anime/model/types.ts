@@ -117,3 +117,6 @@ export type AnimeTopSearchResponse =
 //random
 export type AnimeRandomResponse =
   paths["/random/anime"]["get"]["responses"][200]["content"]["application/json"];
+
+//anime image
+export type AnimeImage = FullAnimeByIdItem["images"] | null;
