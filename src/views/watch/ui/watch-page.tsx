@@ -47,7 +47,6 @@ const WatchPage = () => {
 
   const globalIsLoading = isAnimeDataLoading || isAnimeEpisodesLoading;
   return (
-    // <AuroraBackground className="w-full ">
     <div className="w-full px-2 md:px-4 flex flex-col justify-center items-center">
       <AuroraBackground
         bgColors={bgColors}
@@ -111,7 +110,6 @@ const WatchPage = () => {
         </div>
       </div>
     </div>
-    // </AuroraBackground>
   );
 };
 
