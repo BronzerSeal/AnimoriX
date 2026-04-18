@@ -42,11 +42,7 @@ export default function VideoPlayer({ url, isTrailer }: Props) {
   if (isYouTube) {
     return (
       <div className="w-full">
-        <iframe
-          src={url}
-          className="w-full aspect-video rounded-2xl"
-          allowFullScreen
-        />
+        <iframe src={url} className="w-full aspect-video " allowFullScreen />
         {isTrailer && (
           <div className="mt-2 text-sm text-yellow-500 px-1">
             Episode unavailable, showing trailer
@@ -57,11 +53,5 @@ export default function VideoPlayer({ url, isTrailer }: Props) {
   }
 
   // 🎬 HLS video
-  return (
-    <video
-      ref={videoRef}
-      controls
-      className="w-full aspect-video rounded-2xl"
-    />
-  );
+  return <video ref={videoRef} controls className="w-full aspect-video " />;
 }

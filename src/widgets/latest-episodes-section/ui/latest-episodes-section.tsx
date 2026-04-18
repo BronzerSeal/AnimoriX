@@ -7,6 +7,7 @@ import LatestEpisodesSkeleton from "./latest-episodes-skeleton";
 import { BannedAnimeItem } from "./banned-animes";
 import { uniqueById } from "@/shared/lib/uniqueById";
 import { filterSafeAnime } from "@/shared/lib/filterSafeAnime";
+import AnimeThreeDItem from "@/entities/anime/ui/anime-3d-item";
 
 const LatestEpisodesSection = () => {
   const ANIMES_PER_PAGE = 12;
@@ -50,7 +51,17 @@ const LatestEpisodesSection = () => {
           </div>
         </div>
       </section>
-      <section className="flex gap-4 flex-wrap">
+      {/* desktop */}
+      <section className="hidden md:flex gap-4 flex-wrap ">
+        {items.map((anime, idx) => (
+          <AnimeThreeDItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
+        ))}
+        {placeholders.map((_, idx) => (
+          <BannedAnimeItem key={`ban-${idx}`} />
+        ))}
+      </section>
+      {/* mobile */}
+      <section className="flex md:hidden gap-4 flex-wrap">
         {items.map((anime, idx) => (
           <AnimeItem anime={anime} key={`${anime.id}-${page}-${idx}`} />
         ))}

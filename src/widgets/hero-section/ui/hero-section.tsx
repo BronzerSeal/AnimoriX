@@ -2,9 +2,14 @@
 import { LargeSearchInput } from "@/features/search-input";
 import { Button } from "@/shared/ui/button";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 const HeroSection = () => {
   const router = useRouter();
+  const EncryptedText = dynamic(
+    () => import("@shared/ui/aceternity").then((m) => m.EncryptedText),
+    { ssr: false },
+  );
   return (
     <div
       style={{ backgroundImage: "url(/images/main-poster-bg.png)" }}
@@ -14,7 +19,11 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/30 rounded-2xl"></div>
 
       <div className="w-full flex flex-col items-center justify-center z-1">
-        <h1 className="relative text-white text-5xl font-bold">AnimoriX</h1>
+        <EncryptedText
+          encryptedClassName="relative text-white text-5xl font-bold"
+          revealedClassName="relative text-white text-5xl font-bold"
+          text="AnimoriX!"
+        />
         <LargeSearchInput />
 
         <Button

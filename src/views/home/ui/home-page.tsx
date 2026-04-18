@@ -2,8 +2,9 @@ import JoinGithubBunner from "@/widgets/join-github-banner";
 import LatestEpisodesSection from "@/widgets/latest-episodes-section";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
+import HomePageColumns from "./home-page-columns";
+import { ExpandableTopAnimeSidebar } from "@/widgets/top-animes-sidebar/ui/expandable-top-anime-sidebar";
 import TopAnimesSidebar from "@/widgets/top-animes-sidebar";
-import HomePageColumns from "../home-page-columns";
 
 const HomePage = () => {
   return (
@@ -27,7 +28,14 @@ const HomePage = () => {
           </section>
           <section className="relative w-full px-5 pt-1 lg:px-0 lg:pr-8">
             <div className="w-full lg:absolute lg:w-full lg:px-5 lg:pr-8 lg:-mt-5">
-              <TopAnimesSidebar />
+              {/* mobile */}
+              <div className="sm:hidden">
+                <TopAnimesSidebar />
+              </div>
+              {/* desktop */}
+              <div className="hidden sm:flex">
+                <ExpandableTopAnimeSidebar />
+              </div>
             </div>
           </section>
         </main>
