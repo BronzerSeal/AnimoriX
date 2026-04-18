@@ -1,4 +1,18 @@
-import { PrismaClient } from "@/../generated/prisma/client";
+// import { PrismaClient } from "@/generated/prisma/client";
+// import { withAccelerate } from "@prisma/extension-accelerate";
+
+// const prisma = new PrismaClient({
+//   accelerateUrl: process.env.DATABASE_URL!,
+// }).$extends(withAccelerate());
+
+// export default prisma;
+//------------------------------------------------------
+// const prisma = new PrismaClient({
+//   accelerateUrl: process.env.DATABASE_URL!,
+// }).$extends(withAccelerate());
+//------------------------------------------------------
+
+import { PrismaClient } from "@/generated/prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { PrismaPg } from "@prisma/adapter-pg";
 
