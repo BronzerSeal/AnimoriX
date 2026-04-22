@@ -1,25 +1,26 @@
 "use client";
-import { mapAnimeToHero } from "@/entities/anime/model/animeToHero.mapper";
 import SidebarItem from "./sidebar-item";
-import TopAnimesSidebarSkeleton from "./top-animes-sidebar-skeleton";
-import { useTopAnimesWithBanners } from "@/entities/anime";
+import AnimesSidebarSkeleton from "./animes-sidebar-skeleton";
+import NoAnimes from "./no-animes";
 
-const TopAnimesSidebar = () => {
-  const { data, isLoading } = useTopAnimesWithBanners();
+type Props = {
+  items: any[];
+  title?: string;
+  isLoading?: boolean;
+};
+
+const AnimesSidebar = ({ items, title = "Top Trending", isLoading }: Props) => {
   if (isLoading) {
-    return <TopAnimesSidebarSkeleton />;
+    return <AnimesSidebarSkeleton />;
   }
 
-  if (!data?.data?.length) {
-    return null;
-  }
+  if (!items?.length) return <NoAnimes title={title} />;
 
-  const items = data.data.map(mapAnimeToHero);
   return (
     <div className="w-full bg-[#EEEEFF] dark:bg-[#11161a] p-4 rounded-md shadow-md">
       <header className="mb-4">
         <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-          Top Trending
+          {title}
         </h2>
       </header>
       <div className="flex flex-col gap-3">
@@ -31,4 +32,4 @@ const TopAnimesSidebar = () => {
   );
 };
 
-export default TopAnimesSidebar;
+export default AnimesSidebar;

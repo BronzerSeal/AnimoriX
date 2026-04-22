@@ -1,3 +1,4 @@
+"use client";
 import { navTopics } from "@/shared/constants/navigation";
 import { HeaderAction, TopicItem } from "@/shared/ui/nav-actions";
 import {
@@ -11,8 +12,11 @@ import LanguageSwitch from "./language-switch";
 import LogoSection from "./logo-section";
 import PlaceholderVanishSearchInput from "@/features/search-input/ui/placeholder-vanish-search-input";
 import AuthModal from "@/widgets/auth-modal";
+import { useSession } from "next-auth/react";
+import UserMenu from "@/widgets/user-menu";
 
 const MainHeader = () => {
+  const { data: session } = useSession();
   return (
     <header
       className="
@@ -35,7 +39,7 @@ const MainHeader = () => {
         <NavigationMenuList className="gap-2 sm:gap-1">
           <div className="flex items-center gap-2 sm:hidden">
             <PlaceholderVanishSearchInput />
-            <AuthModal />
+            {session ? <UserMenu /> : <AuthModal />}
           </div>
 
           <div className="hidden sm:flex items-center">
@@ -63,7 +67,7 @@ const MainHeader = () => {
 
             <LanguageSwitch />
 
-            <AuthModal />
+            {session ? <UserMenu /> : <AuthModal />}
           </div>
         </NavigationMenuList>
       </NavigationMenu>

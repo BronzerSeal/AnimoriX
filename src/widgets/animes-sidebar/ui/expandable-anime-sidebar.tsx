@@ -1,20 +1,25 @@
 "use client";
 
-import React, { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import {
-  AnimeBadges,
-  HeroAnime,
-  useTopAnimesWithBanners,
-} from "@/entities/anime";
-import TopAnimesSidebarSkeleton from "./top-animes-sidebar-skeleton";
-import { mapAnimeToHero } from "@/entities/anime/model/animeToHero.mapper";
+import { AnimeBadges, HeroAnime } from "@/entities/anime";
 import { useOutsideClick } from "@/shared/hooks";
+import AnimesSidebarSkeleton from "./animes-sidebar-skeleton";
+import NoAnimes from "./no-animes";
 
-export function ExpandableTopAnimeSidebar() {
+type Props = {
+  items: any[];
+  title?: string;
+  isLoading?: boolean;
+};
+
+export function ExpandableAnimeSidebar({
+  items,
+  title = "Top Trending",
+  isLoading,
+}: Props) {
   const router = useRouter();
-  const { data, isLoading } = useTopAnimesWithBanners();
   const [active, setActive] = useState<HeroAnime | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -38,14 +43,10 @@ export function ExpandableTopAnimeSidebar() {
   useOutsideClick(ref, () => setActive(null));
 
   if (isLoading) {
-    return <TopAnimesSidebarSkeleton />;
+    return <AnimesSidebarSkeleton />;
   }
 
-  if (!data?.data?.length) {
-    return null;
-  }
-
-  const items = data.data.map(mapAnimeToHero);
+  if (!items?.length) return <NoAnimes title={title} />;
 
   return (
     <>
@@ -155,7 +156,7 @@ export function ExpandableTopAnimeSidebar() {
       <div className="w-full rounded-md bg-[#EEEEFF] p-4 shadow-md dark:bg-[#11161a]">
         <header className="mb-4">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-            Top Trending
+            {title}
           </h2>
         </header>
 

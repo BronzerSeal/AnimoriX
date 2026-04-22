@@ -1,6 +1,6 @@
 import { Skeleton } from "@/shared/ui/skeleton";
 
-const TopAnimesSidebarSkeleton = () => {
+const AnimesSidebarSkeleton = () => {
   return (
     <div className="w-full rounded-md bg-[#EEEEFF] p-4 shadow-md dark:bg-[#11161a]">
       <header className="mb-4">
@@ -35,4 +35,4 @@ const TopAnimesSidebarSkeleton = () => {
   );
 };
 
-export default TopAnimesSidebarSkeleton;
+export default AnimesSidebarSkeleton;

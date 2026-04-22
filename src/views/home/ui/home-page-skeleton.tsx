@@ -2,7 +2,7 @@ import { Skeleton } from "@/shared/ui/skeleton";
 import { JoinGithubBannerSkeleton } from "@/widgets/join-github-banner";
 import { ShareSiteSkeleton } from "@/widgets/share-site";
 import { TopAnimesHeroSkeleton } from "@/widgets/top-animes-hero";
-import { TopAnimesSidebarSkeleton } from "@/widgets/top-animes-sidebar";
+import { AnimesSidebarSkeleton } from "@/widgets/animes-sidebar";
 
 const HomePageSkeleton = () => {
   return (
@@ -24,7 +24,7 @@ const HomePageSkeleton = () => {
           </section>
           <section className="relative w-full px-5 pt-1 lg:px-0 lg:pr-8">
             <div className="w-full lg:absolute lg:w-full lg:px-5 lg:pr-8 lg:-mt-5">
-              <TopAnimesSidebarSkeleton />
+              <AnimesSidebarSkeleton />
             </div>
           </section>
         </main>

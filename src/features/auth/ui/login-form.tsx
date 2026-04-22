@@ -7,9 +7,10 @@ import { toast } from "sonner";
 
 type Props = {
   onSwitch: () => void;
+  closeModal: () => void;
 };
 
-export const LoginForm = ({ onSwitch }: Props) => {
+export const LoginForm = ({ onSwitch, closeModal }: Props) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,6 +43,7 @@ export const LoginForm = ({ onSwitch }: Props) => {
       }
     } else {
       toast.success("Login successful!");
+      closeModal();
     }
   };
 
