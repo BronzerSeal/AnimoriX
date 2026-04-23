@@ -6,7 +6,12 @@ export const UseUserInfoById = (userId: string, enabled?: boolean) => {
   return useQuery({
     queryKey: ["user-info-by-id", userId],
     queryFn: () => GetUserInfoById(userId),
-    select: (data) => data.user,
+    select: (data) => {
+      if (data.status === "error") {
+        throw new Error(data.message);
+      }
+      return data.user;
+    },
     enabled,
   });
 };

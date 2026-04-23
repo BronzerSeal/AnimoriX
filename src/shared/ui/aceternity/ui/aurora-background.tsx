@@ -7,6 +7,7 @@ interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   showRadialGradient?: boolean;
   bgColors?: string[];
   loading?: boolean;
+  enabled?: boolean;
 }
 
 export const AuroraBackground = ({
@@ -14,10 +15,15 @@ export const AuroraBackground = ({
   bgColors,
   children,
   showRadialGradient = true,
+  enabled = true,
   ...props
 }: AuroraBackgroundProps) => {
   const fallback = ["#3b82f6", "#a5b4fc", "#93c5fd", "#ddd6fe", "#60a5fa"];
   const [c1, c2, c3, c4, c5] = bgColors || fallback;
+
+  if (!enabled) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <main>
