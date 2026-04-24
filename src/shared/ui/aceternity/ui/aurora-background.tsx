@@ -29,7 +29,7 @@ export const AuroraBackground = ({
     <main>
       <div
         className={cn(
-          "transition-bg relative flex flex-col items-center justify-center bg-zinc-50 text-slate-950 dark:bg-zinc-900",
+          "hidden transition-bg relative md:flex flex-col items-center justify-center bg-zinc-50 text-slate-950 dark:bg-zinc-900",
           className,
         )}
         {...props}
@@ -68,6 +68,7 @@ export const AuroraBackground = ({
         </div>
         {children}
       </div>
+      <div className={cn("md:hidden", className)}>{children}</div>
     </main>
   );
 };

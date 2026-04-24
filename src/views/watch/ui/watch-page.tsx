@@ -28,7 +28,6 @@ import { useVibrantColor } from "@/shared/hooks/use-vibrant-color";
 
 const WatchPage = () => {
   const params = useParams();
-  const isMobile = window.innerWidth < 768;
   const animeId = params.id as string;
   //какой эпизод сейчас сморим
   const [episodeNum, setEpisodeNum] = useState(0);
@@ -52,7 +51,6 @@ const WatchPage = () => {
       <AuroraBackground
         bgColors={bgColors}
         className="w-full min-w-screen px-2 md:px-0  pb-10"
-        enabled={!isMobile}
       >
         <div>
           <div className="mt-25 grid w-full max-w-500 px-2 md:px-4 grid-cols-1 gap-4 xl:gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,1fr)] xl:grid-cols-[minmax(320px,1.15fr)_minmax(0,3.2fr)_minmax(360px,1.15fr)]">

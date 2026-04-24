@@ -77,7 +77,7 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
         onChange={handleChange}
         placeholder="Email or username"
         autoComplete="username"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
       <Input
         type="password"
@@ -86,7 +86,7 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
         onChange={handleChange}
         placeholder="Password"
         autoComplete="current-password"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
     </AuthFormShell>
   );

@@ -1,6 +1,6 @@
 "use server";
 import prisma from "@/utils/prisma";
-import { UserFromDB } from "@/shared/types/user";
+import { UserFromDB } from "@/shared/types/DataBase";
 
 type GetUserSuccess = {
   status: "success";

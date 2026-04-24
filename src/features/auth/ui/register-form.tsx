@@ -65,7 +65,7 @@ export const RegisterForm = ({ setView }: Props) => {
         onChange={handleChange}
         placeholder="Name"
         autoComplete="Name"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
       <Input
         type="email"
@@ -74,7 +74,7 @@ export const RegisterForm = ({ setView }: Props) => {
         onChange={handleChange}
         placeholder="Email"
         autoComplete="email"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
       <Input
         type="password"
@@ -83,7 +83,7 @@ export const RegisterForm = ({ setView }: Props) => {
         onChange={handleChange}
         placeholder="Password"
         autoComplete="new-password"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
       <Input
         type="password"
@@ -92,7 +92,7 @@ export const RegisterForm = ({ setView }: Props) => {
         onChange={handleChange}
         placeholder="Confirm password"
         autoComplete="new-password"
-        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
+        className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
     </AuthFormShell>

@@ -7,3 +7,11 @@ export interface UserFromDB {
   provider: "credentials" | "google";
   createdAt: Date;
 }
+
+export interface bookmark {
+  id: string;
+  userId: string;
+  animeId: number;
+  animeName: string;
+  createdAt: Date;
+}

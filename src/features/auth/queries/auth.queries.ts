@@ -4,7 +4,7 @@ import { GetUserInfoById } from "../model/actions/get-user-info-by-id";
 
 export const UseUserInfoById = (userId: string, enabled?: boolean) => {
   return useQuery({
-    queryKey: ["user-info-by-id", userId],
+    queryKey: ["user-info", userId],
     queryFn: () => GetUserInfoById(userId),
     select: (data) => {
       if (data.status === "error") {

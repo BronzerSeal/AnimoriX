@@ -4,11 +4,12 @@ import { useParams } from "next/navigation";
 import UserSidebar from "./user-sidebar";
 import Activities from "./activities";
 import UserSection from "./user-section";
+import { useBookmarks } from "@/entities/user/queries/queries";
 
 const ProfilePage = () => {
   const { userId } = useParams() as { userId: string };
   const { data: user, isLoading } = UseUserInfoById(userId, !!userId);
-  // console.log(user);
+  const { data: bookmarks } = useBookmarks(user?.id!, !!user?.id);
 
   if (isLoading) return <p>Loading</p>;
 
@@ -22,8 +23,8 @@ const ProfilePage = () => {
       <div className="mx-auto w-full max-w-[900px] max-w-425 mt-25 px-5">
         <UserSection user={user} />
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] pt-5">
-          <Activities />
-          <UserSidebar />
+          <Activities bookmarks={bookmarks} username={user.name} />
+          <UserSidebar bookmarks={bookmarks} />
         </div>
       </div>
     </main>

@@ -5,6 +5,7 @@ export { AnimeItemSkeleton } from "./ui/anime-item-skeleton";
 export { AnimeCard } from "./ui/anime-card";
 export { prepareInfinityAnimeList } from "./model/prepareInfinityAnimeList";
 export { mapAnimeImage } from "./model/animeImage";
+export { getAnimeFullById } from "./api/anime-search.api";
 
 export {
   useTopAnimes,

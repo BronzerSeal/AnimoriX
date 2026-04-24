@@ -6,13 +6,13 @@ import Autoplay from "embla-carousel-autoplay";
 
 import { Button } from "@/shared/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/shared/ui/carousel";
-import { Bookmark } from "lucide-react";
 import AnimeRatingGenre from "./anime-rating-genre";
 import AnimeDescription from "./anime-description";
 import SliderChevrons from "./slider-chevrons";
 import type { HeroAnime } from "@/entities/anime";
 import useHeroSlider from "../model/use-hero-slider";
 import HeroOverlays from "./hero-overlays";
+import BookmarkAnimeBtn from "@/features/bookmark-anime-btn";
 
 type Props = {
   items: HeroAnime[];
@@ -69,13 +69,10 @@ const TopAnimesHeroSlider = ({ items }: Props) => {
                             <Link href={`/watch/${anime.id}`}>WATCH NOW</Link>
                           </Button>
 
-                          <Button
-                            size="icon"
-                            variant="outline"
-                            className="h-12 w-12 rounded-xl border-white/20 dark:bg-white/5 text-black dark:text-white "
-                          >
-                            <Bookmark className="h-5 w-5" />
-                          </Button>
+                          <BookmarkAnimeBtn
+                            animeId={anime.id}
+                            animeName={anime.title}
+                          />
                         </div>
                       </div>
                     </div>

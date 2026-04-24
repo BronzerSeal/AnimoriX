@@ -54,6 +54,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   resetTokens   ResetToken[]
+  bookmarks     Bookmarks[]
   createdAt     DateTime        @default(now())
 
   @@map("users")
@@ -78,4 +79,15 @@ model ResetToken {
 
   @@index([token])
   @@index([expiresAt])
+}
+
+model Bookmarks {
+  id        String   @id @default(cuid())
+  animeId   Int
+  userId    String
+  animeName String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  @@unique([userId, animeId])
 }
