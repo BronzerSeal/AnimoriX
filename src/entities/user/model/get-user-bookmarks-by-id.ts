@@ -23,6 +23,9 @@ export const GetUserBookmarksById = async (
       where: {
         userId,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return { code: 200, status: "success", bookmarks };

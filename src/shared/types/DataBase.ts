@@ -1,3 +1,5 @@
+import { paths } from "./jikan";
+
 export interface UserFromDB {
   id: string;
   email: string;
@@ -7,6 +9,9 @@ export interface UserFromDB {
   provider: "credentials" | "google";
   createdAt: Date;
 }
+
+export type userFromJikan =
+  paths["/users/{username}/full"]["get"]["responses"][200]["content"]["application/json"];
 
 export interface bookmark {
   id: string;

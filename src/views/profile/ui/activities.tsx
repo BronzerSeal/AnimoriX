@@ -22,7 +22,7 @@ const Activities: FC<Props> = ({ bookmarks, username }) => {
             >
               <MessageCirclePlus size={16} color="#8eeec4" />
 
-              <span className="text-[#8eeec4]">
+              <span className="text-[#8eeec4] shrink-0">
                 {formatTimeAgo(bookmark.createdAt)}
               </span>
 

@@ -7,9 +7,11 @@ import { useBookmarks } from "@/entities/user/queries/queries";
 const BookmarkAnimeBtn = ({
   animeId,
   animeName,
+  size = 12,
 }: {
   animeId: number;
   animeName: string;
+  size?: number;
 }) => {
   const { data: session } = useSession();
   const { mutate } = UseToggleBookmark();
@@ -27,12 +29,12 @@ const BookmarkAnimeBtn = ({
       size="icon"
       variant="outline"
       onClick={() => mutate({ userId: session?.user.id!, animeId, animeName })}
-      className="h-12 w-12 rounded-xl border-white/20 dark:bg-white/5 text-black dark:text-white "
+      className={`h-${size} w-${size} rounded-xl border-white/20 dark:bg-white/5 text-black dark:text-white `}
     >
       {isAlreadyAdded ? (
-        <BookmarkCheck className="h-5 w-5" />
+        <BookmarkCheck size={size} className="h-5 w-5" />
       ) : (
-        <Bookmark className="h-5 w-5" />
+        <Bookmark size={size} className="h-5 w-5" />
       )}
     </Button>
   );
