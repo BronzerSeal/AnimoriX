@@ -1,127 +1,220 @@
 # AnimoriX
 
-AnimoriX is a Next.js 16 anime discovery and watch platform built with the App Router, React 19, and TypeScript. It combines public anime metadata, banner art, and streaming source resolution into a single responsive interface for browsing titles, opening detail pages, and playing episodes.
+AnimoriX is a Next.js 16 anime discovery and streaming interface built with the App Router, React 19, and TypeScript. It brings together public anime metadata, artwork enrichment, episode source resolution, authentication, and lightweight user features such as profiles and bookmarks in a single responsive app.
 
-## Features
+The project is already usable as an anime browsing and watch experience, while some product areas are still evolving. This README is meant to work both as a public project overview and as the main onboarding guide for running the app locally.
 
-- Landing page with a dedicated hero, about section, and social sharing entry points
-- Home hub with top anime hero content, expandable sidebar, latest episodes, curated columns, and share widgets
-- Search flow via the header input plus alphabetical browsing through `/browser?keyword=`
-- Genre and type browsing for catalog exploration
-- Dedicated pages for new releases, updates, ongoing series, and recent titles
-- Random anime redirect flow through `/random`
-- Watch page with episode player, episode list, sequel/prequel season navigation, synopsis, relations, recommendations, comments, and share UI
-- Theme switching and responsive layouts for desktop and mobile screens
+## Highlights
+
+- Discovery-focused landing and home experience with hero content, sidebars, curated columns, and latest episode sections
+- Search and browse flows through `/browser`, genre pages, type pages, and category-style listing routes
+- Watch page with episode playback, season navigation, synopsis, related anime, recommendations, comments, and sharing tools
+- Authentication with credentials plus Google provider support through NextAuth
+- User profiles, profile editing, and bookmark persistence backed by Prisma and PostgreSQL
+- Theme switching and responsive layouts across desktop and mobile
+- Internal API routes for stream resolution, media proxying, and app-specific user lookup
+- `watch2gether` route already exists in the app shell, but is currently a placeholder for future work
 
 ## Tech Stack
 
-| Layer | Tools | Purpose |
-| --- | --- | --- |
-| App framework | Next.js 16, React 19 | App Router application shell, routing, API routes, rendering |
-| Language | TypeScript | Static typing across UI, data mapping, and API integration |
-| Styling | Tailwind CSS v4 | Utility-first styling and layout |
-| UI primitives | shadcn/ui, Radix UI, Base UI | Reusable UI building blocks |
-| Visual effects | Aceternity UI, Motion | Decorative backgrounds, animated inputs, and motion-heavy sections |
-| Data fetching | TanStack Query, Axios | Client-side queries, caching, pagination, and HTTP requests |
-| Persistence prep | Prisma, PostgreSQL | Prepared database layer and generated Prisma client |
-| Anime metadata | Jikan REST API | Catalog, search, full anime info, reviews, seasonal and top-anime data |
-| Enrichment | AniList GraphQL | Banner images and sequel/prequel season graph traversal |
-| Streaming providers | Consumet | Episode lookup and playable source resolution |
+| Layer              | Tools                        | Purpose                                                        |
+| ------------------ | ---------------------------- | -------------------------------------------------------------- |
+| App framework      | Next.js 16, React 19         | App Router pages, layouts, API routes, rendering               |
+| Language           | TypeScript                   | Typed UI, data mappers, route handlers, and shared models      |
+| Styling            | Tailwind CSS v4              | Utility-first styling and layout                               |
+| UI primitives      | shadcn/ui, Radix UI, Base UI | Shared building blocks for forms, dialogs, menus, and controls |
+| Motion and visuals | Motion, Aceternity UI        | Animated sections, effects, and richer presentation components |
+| Data fetching      | TanStack Query, Axios        | Client-side queries, mutations, caching, and API access        |
+| Auth               | NextAuth v5 beta, bcryptjs   | Credentials auth, Google sign-in, and session handling         |
+| Database           | Prisma, PostgreSQL           | Users, sessions, accounts, reset tokens, and bookmarks         |
+| Anime metadata     | Jikan REST API               | Catalog, details, search, seasonal data, and recommendations   |
+| Enrichment         | AniList GraphQL              | Banner images and relation-based season traversal              |
+| Streaming          | Consumet, HLS.js             | Episode lookup, stream source resolution, and playback         |
+
+## What the App Includes Today
+
+### Discovery and catalog
+
+- Landing page with branded intro sections and entry points into the app
+- Home page with top anime hero content, latest episodes, featured columns, and sidebar browsing
+- Search and keyword browsing through `/browser`
+- Dedicated listing routes for:
+  - `/new-releases`
+  - `/updates`
+  - `/ongoing`
+  - `/recent`
+  - `/genres/[genre]`
+  - `/types/[type]`
+- Random anime redirect flow through `/random`
+
+### Watch experience
+
+- Detail and watch page at `/watch/[id]`
+- Episode player with stream source resolution
+- Episode and season navigation
+- Synopsis, recommendations, relations, comments, and share UI
+- Image and media proxy routes to support external assets and stream playback
+
+### User features
+
+- Credentials-based sign up and sign in
+- Google-based sign in through NextAuth provider support
+- Current-user profile page at `/user/profile`
+- Public-ish profile route at `/user/[userId]/profile`
+- Edit-profile flow wired into database-backed user data
+- Bookmark create/remove behavior with optimistic UI updates
 
 ## Project Structure
 
-| Path | Role |
-| --- | --- |
-| `src/app` | App Router pages, layouts, global styles, and internal API route handlers |
-| `src/views` | Route-level page composition for landing, home, watch, browser, and listing pages |
-| `src/widgets` | Large UI sections such as headers, hero blocks, sidebars, players, and content sections |
-| `src/features` | Focused product features like search and social sharing |
-| `src/entities` | Domain-level anime models, queries, API clients, mappers, and reusable entity UI |
-| `src/shared` | Shared config, hooks, UI primitives, constants, and utility helpers |
-| `prisma` | Prisma schema and migration configuration |
-| `generated` | Generated Prisma client output |
+| Path                   | Role                                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------------- |
+| `src/app`              | App Router routes, layouts, loading states, global styles, and internal API handlers           |
+| `src/views`            | Route-level page composition for landing, home, browser, profile, watch, and listing pages     |
+| `src/widgets`          | Large UI sections such as headers, sidebars, hero blocks, players, comments, and content bands |
+| `src/features`         | Focused product functionality such as auth, bookmarks, search, and sharing                     |
+| `src/entities`         | Domain-level anime and user APIs, queries, mappers, and reusable entity UI                     |
+| `src/shared`           | Shared UI primitives, providers, config, hooks, helpers, constants, and types                  |
+| `prisma`               | Prisma schema and database modeling                                                            |
+| `src/generated/prisma` | Generated Prisma client output                                                                 |
+| `public`               | Static assets such as images and icons                                                         |
 
 ## Routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Landing page |
-| `/home` | Main discovery hub with hero, latest episodes, and side content |
-| `/browser?keyword=` | Search results and alphabetical browsing |
-| `/watch/[id]` | Anime detail and episode watch page |
-| `/genres/[genre]` | Browse anime by genre slug |
-| `/types/[type]` | Browse anime by type such as `tv`, `movie`, or `ova` |
-| `/new-releases` | Newly released anime listing |
-| `/updates` | Recently updated anime listing |
-| `/ongoing` | Ongoing anime listing |
-| `/recent` | Recently added or surfaced anime listing |
-| `/random` | Redirects to a random anime watch page |
+| Route                    | Status      | Purpose                                                           |
+| ------------------------ | ----------- | ----------------------------------------------------------------- |
+| `/`                      | Active      | Landing page                                                      |
+| `/home`                  | Active      | Main discovery hub                                                |
+| `/browser?keyword=`      | Active      | Search results and keyword browsing                               |
+| `/watch/[id]`            | Active      | Anime detail and episode watch page                               |
+| `/genres/[genre]`        | Active      | Browse anime by genre                                             |
+| `/types/[type]`          | Active      | Browse anime by type such as `tv`, `movie`, or `ova`              |
+| `/new-releases`          | Active      | Newly released anime listing                                      |
+| `/updates`               | Active      | Recently updated anime listing                                    |
+| `/ongoing`               | Active      | Ongoing anime listing                                             |
+| `/recent`                | Active      | Recently surfaced anime listing                                   |
+| `/random`                | Active      | Redirect flow to a random anime                                   |
+| `/user/profile`          | Active      | Current signed-in user profile/edit entry point                   |
+| `/user/[userId]/profile` | Active      | Profile page resolved from database user data with Jikan fallback |
+| `/watch2gether`          | Placeholder | Present in routing, but not implemented yet                       |
 
-## Data Flow
+## Data and Request Flow
 
-- Jikan is the primary catalog source for top anime, search results, full anime details, recommendations, reviews, seasonal data, and list pages.
-- AniList GraphQL is used to enrich top anime cards with banner art and to resolve sequel/prequel relationships into a season navigation list.
-- Internal Next.js API routes document the app-specific backend surface:
-  - `/api/anime/search` resolves provider-specific episode lists from a title search.
-  - `/api/anime/stream` resolves playable episode sources across multiple streaming providers.
-  - `/api/proxy` proxies HLS playlists and media requests, rewrites playlist references, and helps with CORS-sensitive playback.
-  - `/api/image-proxy` proxies remote images with caching headers.
-- Prisma and PostgreSQL are prepared in the repository as infrastructure for future or adjacent workflows, but they are not the center of the current user-facing feature set.
+- Jikan is the primary source for anime catalog data, details, seasonal content, search results, and recommendations.
+- AniList is used to enrich parts of the viewing experience with banner imagery and relation-based season data.
+- Consumet is used for provider-specific episode lookup and stream source resolution.
+- Prisma and PostgreSQL power the app's user-facing persistence layer:
+  - users
+  - OAuth accounts
+  - sessions
+  - reset tokens
+  - bookmarks
+- TanStack Query is used on the client for caching, async state, and optimistic updates.
+
+### Internal API routes
+
+| Route                     | Purpose                                                                  |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `/api/anime/search`       | Resolve provider-specific anime and episode search results               |
+| `/api/anime/stream`       | Resolve playable episode sources from supported providers                |
+| `/api/proxy`              | Proxy HLS playlists and related media requests for playback support      |
+| `/api/image-proxy`        | Proxy remote images with app-controlled response handling                |
+| `/api/users`              | Resolve profile data from the app database, with Jikan username fallback |
+| `/api/auth/[...nextauth]` | NextAuth route handlers                                                  |
 
 ## Getting Started
 
-1. Install dependencies:
+### 1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-2. Create a `.env.local` file for the public runtime variables:
+### 2. Create your environment file
 
-   ```bash
-   NEXT_PUBLIC_API_BASE_URL=https://api.jikan.moe/v4/
-   NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000/
-   ```
+The repo already uses `.env` for Prisma-related configuration. For local development, make sure the variables below are present in your environment file.
 
-3. Start the development server:
+Minimal browsing setup:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+NEXT_PUBLIC_API_BASE_URL=https://api.jikan.moe/v4/
+NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000/
+```
 
-4. Open `http://127.0.0.1:3000` in your browser.
+To enable database-backed user features as well:
+
+```bash
+DATABASE_URL=postgresql://...
+NEXTAUTH_SECRET=your-secret
+```
+
+To enable Google sign-in in addition to credentials auth, also provide the Google OAuth environment variables expected by your NextAuth provider configuration. In a typical setup, these are:
+
+```bash
+AUTH_GOOGLE_ID=...
+AUTH_GOOGLE_SECRET=...
+```
+
+### 3. Start the development server
+
+```bash
+npm run dev
+```
+
+### 4. Open the app
+
+Visit `http://127.0.0.1:3000`.
 
 ## Environment Variables
 
-| Variable | Required | Purpose |
-| --- | --- | --- |
-| `NEXT_PUBLIC_API_BASE_URL` | Yes | Base URL for Jikan REST requests used by the client data layer |
-| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical site URL used by share-related UI |
-| `DATABASE_URL` | Optional | PostgreSQL connection string used mainly for Prisma workflows and prepared database infrastructure |
+| Variable                   | Required                                              | Purpose                                                        |
+| -------------------------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| `NEXT_PUBLIC_API_BASE_URL` | Yes                                                   | Base URL for Jikan REST requests used by the client data layer |
+| `NEXT_PUBLIC_SITE_URL`     | Yes                                                   | Canonical/public site URL used by share-related UI             |
+| `DATABASE_URL`             | Required for auth, bookmarks, and profile persistence | PostgreSQL connection string used by Prisma                    |
+| `AUTH_SECRET`              | Required for auth                                     | Secret used by NextAuth session/token handling                 |
+| `AUTH_GOOGLE_ID`           | Optional                                              | Google OAuth client ID for Google sign-in                      |
+| `AUTH_GOOGLE_SECRET`       | Optional                                              | Google OAuth client secret for Google sign-in                  |
 
-Prisma CLI reads variables from `.env` through `prisma.config.ts`, so if you plan to run Prisma commands you can mirror `DATABASE_URL` there even when the app itself uses `.env.local` for public variables.
+### Setup notes
+
+- Core anime browsing is mostly driven by public upstream APIs.
+- Database-backed features such as credentials auth, sessions, profile editing, and bookmarks require a working PostgreSQL connection.
+- Prisma client generation runs automatically on `postinstall`.
+- The current Prisma setup uses the generated client from `src/generated/prisma`.
 
 ## Scripts
 
-| Script | What it does |
-| --- | --- |
-| `npm run dev` | Starts the Next.js development server |
-| `npm run build` | Builds the production bundle |
-| `npm run start` | Starts the production server after a build |
-| `npm run lint` | Runs ESLint |
+| Script                   | What it does                                                            |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `npm run dev`            | Starts the Next.js development server                                   |
+| `npm run build`          | Builds the production bundle                                            |
+| `npm run start`          | Starts the production server after a build                              |
+| `npm run lint`           | Runs ESLint                                                             |
 | `npm run generate:types` | Regenerates Jikan API TypeScript types from the upstream OpenAPI schema |
-| `postinstall` | Runs `prisma generate` automatically after install |
+| `postinstall`            | Runs `prisma generate` automatically after install                      |
 
-## Limitations
+## Current Limitations
 
-- Streaming depends on third-party providers exposed through Consumet, so episode source availability and playback stability can change without notice.
-- Public upstream services such as Jikan and AniList may rate-limit requests or experience downtime, which can affect browsing, enrichment, or watch flows.
-- The repository currently does not include an automated test suite, so validation is primarily based on static checks and manual runtime verification.
+- Streaming depends on third-party providers exposed through Consumet, so source availability and playback stability can change without notice.
+- Public upstream services such as Jikan and AniList may rate-limit requests or be temporarily unavailable.
+- `/watch2gether` is still a placeholder route and should be treated as planned work, not a completed feature.
+- Some app metadata is still using default values in the root layout, so repository branding is ahead of the shipped runtime metadata.
+- The repository currently does not include an automated test suite, so verification is mainly static checking plus manual runtime testing.
+
+## Notes for Contributors
+
+- This codebase follows a layered structure: routes compose views, views compose widgets, widgets consume features/entities/shared primitives.
+- If you add or change routes, env requirements, or public-facing features, update this README so it remains the source of truth.
+- When documenting features, prefer the current shipped behavior over planned behavior.
 
 ## Credits
 
 - [Jikan](https://jikan.moe/) for public anime metadata
 - [AniList GraphQL API](https://anilist.gitbook.io/anilist-apiv2-docs/) for banner and relation enrichment
 - [Consumet](https://github.com/consumet/consumet.ts) for anime provider integrations
-- [Next.js](https://nextjs.org/), [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), [TanStack Query](https://tanstack.com/query/latest), and [Prisma](https://www.prisma.io/)
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [Prisma](https://www.prisma.io/)
 - Repository origin: [BronzerSeal/AnimoraX](https://github.com/BronzerSeal/AnimoraX.git)

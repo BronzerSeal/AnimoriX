@@ -30,7 +30,6 @@ export const RegisterForm = ({ setView }: Props) => {
 
     const result = await registerUser(formData);
 
-    console.log("result: ", result);
     if ("error" in result) {
       setError(result.error);
     } else {
