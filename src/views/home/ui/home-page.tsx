@@ -3,8 +3,8 @@ import LatestEpisodesSection from "@/widgets/latest-episodes-section";
 import ShareSite from "@/widgets/share-site";
 import TopAnimesHero from "@/widgets/top-animes-hero";
 import HomePageColumns from "./home-page-columns";
-import { ExpandableTopAnimeSidebar } from "@/widgets/top-animes-sidebar/ui/expandable-top-anime-sidebar";
-import TopAnimesSidebar from "@/widgets/top-animes-sidebar";
+import TopAnimesSidebar from "./expandable-top-anime-sidebar";
+import ExpandableTopAnimesSidebar from "./expandable-top-anime-sidebar";
 
 const HomePage = () => {
   return (
@@ -34,7 +34,7 @@ const HomePage = () => {
               </div>
               {/* desktop */}
               <div className="hidden sm:flex">
-                <ExpandableTopAnimeSidebar />
+                <ExpandableTopAnimesSidebar />
               </div>
             </div>
           </section>

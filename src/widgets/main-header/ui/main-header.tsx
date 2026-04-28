@@ -1,5 +1,5 @@
+"use client";
 import { navTopics } from "@/shared/constants/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { HeaderAction, TopicItem } from "@/shared/ui/nav-actions";
 import {
   NavigationMenu,
@@ -7,13 +7,16 @@ import {
   NavigationMenuList,
 } from "@/shared/ui/navigation-menu";
 import ToggleThemeBtn from "@/shared/ui/toggle-theme-btn";
-import { Shuffle, User, UsersRound } from "lucide-react";
+import { Shuffle, UsersRound } from "lucide-react";
 import LanguageSwitch from "./language-switch";
 import LogoSection from "./logo-section";
-import { SearchInput } from "@/features/search-input";
 import PlaceholderVanishSearchInput from "@/features/search-input/ui/placeholder-vanish-search-input";
+import AuthModal from "@/widgets/auth-modal";
+import { useSession } from "next-auth/react";
+import UserMenu from "@/widgets/user-menu";
 
 const MainHeader = () => {
+  const { data: session } = useSession();
   return (
     <header
       className="
@@ -36,12 +39,7 @@ const MainHeader = () => {
         <NavigationMenuList className="gap-2 sm:gap-1">
           <div className="flex items-center gap-2 sm:hidden">
             <PlaceholderVanishSearchInput />
-            <Avatar size="sm">
-              <AvatarImage src="#" />
-              <AvatarFallback>
-                <User className="text-foreground size-3.5" strokeWidth={1.6} />
-              </AvatarFallback>
-            </Avatar>
+            {session ? <UserMenu /> : <AuthModal />}
           </div>
 
           <div className="hidden sm:flex items-center">
@@ -68,12 +66,8 @@ const MainHeader = () => {
             </NavigationMenuItem>
 
             <LanguageSwitch />
-            <Avatar size="sm" className=" ml-2">
-              <AvatarImage src="#" />
-              <AvatarFallback>
-                <User className="text-foreground" strokeWidth={1.5} />
-              </AvatarFallback>
-            </Avatar>
+
+            {session ? <UserMenu /> : <AuthModal />}
           </div>
         </NavigationMenuList>
       </NavigationMenu>

@@ -12,6 +12,7 @@ import AnimePlayerSectionSkeleton from "./anime-player-section-skeleton";
 import NotFound from "./not-found";
 import { useAnimeVideoById } from "@/entities/anime";
 import { EpisodePlayerSkeleton } from "./episode-player-skeleton";
+import BookmarkAnimeBtn from "@/features/bookmark-anime-btn";
 
 const AnimePlayerSection = ({
   episodeId,
@@ -102,7 +103,11 @@ const AnimePlayerSection = ({
               You are watching Episode {episodeNum > 0 ? episodeNum + 1 : 1}
             </h1>
             <p className="text-slate-500 dark:text-white/55">
-              here will be dub btns
+              <BookmarkAnimeBtn
+                animeId={animeId}
+                animeName={animeName}
+                size={6}
+              />
             </p>
           </div>
         </>

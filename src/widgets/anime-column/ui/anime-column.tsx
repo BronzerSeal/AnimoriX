@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimeColumnSkeleton } from "./anime-column-skeleton";
@@ -19,7 +19,20 @@ const AnimeColumn = ({ title, items, isLoading, href = "/recent" }: Props) => {
   }
 
   if (!items?.length) {
-    return null;
+    return (
+      <aside className="h-full w-full min-w-0 rounded-[28px] border border-slate-200/80 bg-slate-50 p-3 text-slate-950 shadow-[0_18px_60px_rgba(15,23,42,0.08)] sm:p-4 dark:border-white/8 dark:bg-[#0f141a] dark:text-white dark:shadow-[0_18px_60px_rgba(0,0,0,0.24)]">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-xl font-semibold tracking-[-0.03em] text-slate-950 dark:text-white">
+            {title}
+          </h2>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-100/80 dark:border-white/6 dark:from-white/[0.06] dark:to-white/[0.02]">
+          <p>Cube</p>
+          <p>There is no anime</p>
+        </div>
+      </aside>
+    );
   }
 
   return (
