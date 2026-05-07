@@ -6,7 +6,7 @@ export const getGenreIdByName = (name: string): string | undefined => {
       (t): t is Extract<typeof t, { type: "with-genres" }> =>
         t.type === "with-genres",
     )
-    .find((t) => t.title === "GENRES")?.genres;
+    .find((t) => t.title.toLowerCase() === "genres")?.genres;
 
   return genres?.find((g) => {
     const hrefSlug = g.href.split("/").pop();

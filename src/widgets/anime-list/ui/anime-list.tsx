@@ -5,6 +5,7 @@ import AnimeListSkeleton from "./anime-list-skeleton";
 import AnimeThreeDItem from "@/entities/anime/ui/anime-3d-item";
 import { AnimeItem } from "@/entities/anime";
 import SplashCursor from "@/shared/ui/SplashCursor";
+import { useTranslations } from "next-intl";
 
 interface Props {
   animes: anime[] | undefined;
@@ -23,6 +24,7 @@ const AnimeList = ({
   disabledLoadMore,
   hasNextPage,
 }: Props) => {
+  const t = useTranslations("components");
   if (isLoading) {
     return <AnimeListSkeleton blockTitle={blockTitle} />;
   }
@@ -67,7 +69,7 @@ const AnimeList = ({
             onClick={loadMore}
             disabled={disabledLoadMore}
           >
-            {hasNextPage ? "Load More Animes" : "No More Animes"}
+            {hasNextPage ? t("load-more") : t("no-more")}
           </Button>
         )}
       </div>

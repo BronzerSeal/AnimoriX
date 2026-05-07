@@ -1,7 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import SocialMediaShareSection from "@/features/social-media-share";
+import { useTranslations } from "next-intl";
 
 const ShareSite = () => {
+  const t = useTranslations("components.share-site");
+
   return (
     <div className="w-full p-5 bg-[#EEEEFF] dark:bg-[#11161a] flex justify-between items-center rounded-md flex-col gap-2 md:gap-0 md:flex-row">
       <div className="flex gap-2 items-center justify-center">
@@ -11,11 +14,9 @@ const ShareSite = () => {
         </Avatar>
         <div>
           <h1 className="text-black dark:text-green-300 text-xl">
-            Love this site?
+            {t("title")}
           </h1>
-          <p className="text-gray-500 text-[13px]">
-            Share it and let others know!
-          </p>
+          <p className="text-gray-500 text-[13px]">{t("subtitle")}</p>
         </div>
       </div>
 

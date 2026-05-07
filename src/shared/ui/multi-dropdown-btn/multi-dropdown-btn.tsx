@@ -17,6 +17,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/shared/ui/navigation-menu";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const MultiDropdownBtn = ({
@@ -26,6 +27,7 @@ const MultiDropdownBtn = ({
   variant?: "button" | "navigation";
   topics: NavTopic[];
 }) => {
+  const t = useTranslations("components.header");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -48,13 +50,15 @@ const MultiDropdownBtn = ({
 
             return hasDopTopics ? (
               <DropdownMenuSub key={topic.title}>
-                <DropdownMenuSubTrigger>{topic.title}</DropdownMenuSubTrigger>
+                <DropdownMenuSubTrigger>
+                  {t(topic.title)}
+                </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent className="w-[90vw] max-w-[320px] max-h-[70vh] overflow-y-auto grid grid-cols-1 sm:grid-cols-2">
                     {topic.genres.map((genre) => (
                       <DropdownMenuItem key={genre.title}>
                         <Link className="w-full" href={genre.href}>
-                          {genre.title}
+                          {t(`items.${genre.title}`)}
                         </Link>
                       </DropdownMenuItem>
                     ))}
@@ -63,7 +67,7 @@ const MultiDropdownBtn = ({
               </DropdownMenuSub>
             ) : (
               <Link href={topic.href} key={topic.title}>
-                <DropdownMenuItem>{topic.title}</DropdownMenuItem>
+                <DropdownMenuItem>{t(topic.title)}</DropdownMenuItem>
               </Link>
             );
           })}

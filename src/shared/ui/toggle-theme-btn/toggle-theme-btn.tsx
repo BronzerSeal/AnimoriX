@@ -12,6 +12,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "../navigation-menu";
+import { useTranslations } from "next-intl";
 
 const ToggleThemeBtn = ({
   variant = "button",
@@ -19,6 +20,7 @@ const ToggleThemeBtn = ({
   variant?: "button" | "navigation";
 }) => {
   const { setTheme } = useTheme();
+  const t = useTranslations("components.theme");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,7 +28,7 @@ const ToggleThemeBtn = ({
           <Button variant="outline" size="icon">
             <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t("toggle")}</span>
           </Button>
         ) : (
           <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -40,19 +42,19 @@ const ToggleThemeBtn = ({
                 strokeWidth={2.2}
               />
             </div>
-            <span className="sr-only">Toggle theme</span>
+            <span className="sr-only">{t("toggle")}</span>
           </NavigationMenuLink>
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          {t("light")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          {t("dark")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+          {t("system")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

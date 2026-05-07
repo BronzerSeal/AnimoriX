@@ -13,6 +13,7 @@ import type { HeroAnime } from "@/entities/anime";
 import useHeroSlider from "../model/use-hero-slider";
 import HeroOverlays from "./hero-overlays";
 import BookmarkAnimeBtn from "@/features/bookmark-anime-btn";
+import { useTranslations } from "next-intl";
 
 type Props = {
   items: HeroAnime[];
@@ -20,6 +21,7 @@ type Props = {
 
 const TopAnimesHeroSlider = ({ items }: Props) => {
   const { api, setApi, current } = useHeroSlider();
+  const t = useTranslations("components");
 
   if (!items.length) return null;
   return (
@@ -66,7 +68,9 @@ const TopAnimesHeroSlider = ({ items }: Props) => {
                             asChild
                             className="rounded-xl h-12 bg-orange-500 px-8 text-base font-semibold hover:bg-orange-400"
                           >
-                            <Link href={`/watch/${anime.id}`}>WATCH NOW</Link>
+                            <Link href={`/watch/${anime.id}`}>
+                              {t("watch-now")}
+                            </Link>
                           </Button>
 
                           <BookmarkAnimeBtn

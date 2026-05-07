@@ -9,6 +9,7 @@ import {
 } from "@/shared/ui/select";
 import { Episode } from "../model/types";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const AnimeEpisodesSection = ({
   episodes,
@@ -24,6 +25,7 @@ const AnimeEpisodesSection = ({
   if (!episodes) return null;
   const EPISODES_PER_PAGE = 100;
 
+  const t = useTranslations("watch-page");
   const [page, setPage] = useState(
     Math.floor(selected / EPISODES_PER_PAGE) + 1,
   );
@@ -52,7 +54,7 @@ const AnimeEpisodesSection = ({
     >
       <div className="mb-4 flex items-center justify-between gap-3">
         <h1 className="text-lg font-semibold text-slate-900 dark:text-white">
-          Episodes
+          {t("episodes")}
         </h1>
         <Select
           value={String(page)}

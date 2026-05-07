@@ -1,9 +1,22 @@
-import { texts } from "../consts/texts";
+import { useTranslations } from "next-intl";
+
+type Paragraph = {
+  type: "text" | "feature" | "end";
+  text: string;
+  title?: string;
+};
+
+type TextSection = {
+  title?: string;
+  paragraphs: Paragraph[];
+};
 
 const AboutSections = () => {
+  const t = useTranslations("landing-page");
+  const about = t.raw("about") as TextSection[];
   return (
     <div className="flex flex-col gap-3">
-      {texts.map((section, i) => (
+      {about.map((section, i) => (
         <section className="flex flex-col gap-3" key={i}>
           {section.title && (
             <h2 className="text-orange-500">{section.title}</h2>

@@ -4,8 +4,10 @@ import {
   useInfinityNowSeasons,
 } from "@/entities/anime";
 import AnimeList from "@/widgets/anime-list";
+import { useTranslations } from "next-intl";
 
 const NewReleasesPage = () => {
+  const t = useTranslations("pages");
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } =
     useInfinityNowSeasons();
 
@@ -14,7 +16,7 @@ const NewReleasesPage = () => {
   return (
     <AnimeList
       animes={items}
-      blockTitle="NEW RELEASES"
+      blockTitle={t("new-releases")}
       isLoading={isLoading}
       hasNextPage={hasNextPage}
       loadMore={fetchNextPage}

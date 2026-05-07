@@ -1,7 +1,7 @@
 import { Pencil } from "lucide-react";
 
 export const menuItems = [
-  { label: "Edit Profile", icon: Pencil, href: "/user/profile" },
+  { label: "edit-profile", icon: Pencil, href: "/user/profile" },
   //возможные улушения
   // { label: "Continue Watching", icon: History, href: "/user/watching" },
   // { label: "Bookmarks", icon: Heart, href: "/user/bookmarks" },

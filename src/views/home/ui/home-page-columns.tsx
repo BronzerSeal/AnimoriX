@@ -6,6 +6,7 @@ import {
 } from "@/features/get-animes-column";
 import AnimeColumn from "@/widgets/anime-column";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 
 const MOBILE_BREAKPOINT = 768;
@@ -24,6 +25,7 @@ const getVisibleColumns = (width: number) => {
 };
 
 const HomePageColumns = () => {
+  const t = useTranslations("home-page");
   const { items: nowReleaseItems, isLoading: nowReleasesLoading } =
     useNowReleasesColumn();
   const { items: upcomingItems, isLoading: upcomingLoading } =
@@ -48,21 +50,21 @@ const HomePageColumns = () => {
     () => [
       {
         key: "new-releases",
-        title: "New Releases",
+        title: t("newReleases"),
         href: "/recent",
         items: nowReleaseItems,
         isLoading: nowReleasesLoading,
       },
       {
         key: "upcoming",
-        title: "Upcoming",
+        title: t("upcoming"),
         href: "/upcoming",
         items: upcomingItems,
         isLoading: upcomingLoading,
       },
       {
         key: "completed",
-        title: "Completed",
+        title: t("completed"),
         href: "/completed",
         items: completedItems,
         isLoading: completedLoading,
