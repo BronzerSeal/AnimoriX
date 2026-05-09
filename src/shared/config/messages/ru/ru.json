@@ -144,66 +144,53 @@
       "updates": "ОБНОВЛЕНИЯ",
       "ongoing": "ОНГОИНГИ",
       "recent": "НЕДАВНИЕ",
-
       "items": {
         "action": "Экшен",
         "adventure": "Приключения",
         "avant-garde": "Авангард",
         "boys-love": "Сёнэн-ай",
-
         "comedy": "Комедия",
         "educational": "Обучающее",
         "drama": "Драма",
         "ecchi": "Этти",
-
         "fantasy": "Фэнтези",
         "girls-love": "Сёдзё-ай",
         "gourmet": "Гурман",
         "harem": "Гарем",
-
         "horror": "Ужасы",
         "isekai": "Исекай",
         "iyashikei": "Иясикэй",
         "josei": "Дзёсей",
-
         "kids": "Детское",
         "racing": "Гонки",
         "mahou-shoujo": "Махо-сёдзё",
         "martial-arts": "Боевые искусства",
-
         "mecha": "Меха",
         "military": "Военное",
         "music": "Музыка",
         "mystery": "Мистика",
-
         "parody": "Пародия",
         "psychological": "Психология",
         "reverse-harem": "Реверс-гарем",
         "romance": "Романтика",
-
         "school": "Школа",
         "sci-fi": "Sci-Fi",
         "seinen": "Сэйнэн",
         "shoujo": "Сёдзё",
-
         "shounen": "Сёнэн",
         "slice-of-life": "Повседневность",
         "space": "Космос",
         "sports": "Спорт",
-
         "super-power": "Суперсила",
         "supernatural": "Сверхъестественное",
         "suspense": "Саспенс",
         "samurai": "Самураи",
-
         "vampire": "Вампиры",
-
         "movies": "Фильмы",
         "tv-series": "Сериалы",
         "ovas": "OVA",
         "onas": "ONA",
         "specials": "Спешлы",
-
         "movie": "Фильмы",
         "tv": "Сериалы",
         "ova": "OVA",
@@ -285,6 +272,12 @@
     "email": "Адрес электронной почты",
     "username": "Имя пользователя",
     "save": "Сохранить",
-    "successUpdate": "Данные успешно сохранены"
+    "successUpdate": "Данные успешно сохранены",
+    "not-found": "Пользователь не найден",
+    "join": "Присоединился",
+    "activity": "АКТИВНОСТЬ",
+    "watch-list": "Смотрит",
+    "bookmark": "добавил {anime} в закладки",
+    "watch": "Смотрит"
   }
 }

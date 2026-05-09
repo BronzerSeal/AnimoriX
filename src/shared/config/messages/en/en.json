@@ -282,9 +282,15 @@
   "user": {
     "edit-profile": "Edit Profile",
     "profile-page": "Profile Page",
+    "not-found": "No user found",
     "email": "Email address.",
     "username": "Username",
     "save": "Save",
-    "successUpdate": "Data saved successfully"
+    "successUpdate": "Data saved successfully",
+    "join": "Joined",
+    "activity": "ACTIVITIES",
+    "watch-list": "Watch List",
+    "bookmark": "add {anime} to bookmark",
+    "watch": "Watching"
   }
 }
