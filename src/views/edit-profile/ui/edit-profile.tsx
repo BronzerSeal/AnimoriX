@@ -6,9 +6,11 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { UseUpdateUserInfo } from "../queries/queries";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const EditProfilePage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
+  const t = useTranslations("user");
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -54,7 +56,7 @@ const EditProfilePage = () => {
     });
 
     if (!updateError) {
-      toast.success("Data save completly");
+      toast.success(t("successUpdate"));
     }
   };
 
@@ -69,7 +71,7 @@ const EditProfilePage = () => {
           <p>Loading</p>
         ) : (
           <div>
-            <h1 className="text-xl font-bold mb-2">Edit profile</h1>
+            <h1 className="text-xl font-bold mb-2">{t("edit-profile")}</h1>
 
             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
               <div>
@@ -89,7 +91,9 @@ const EditProfilePage = () => {
                   onChange={handleChange}
                   placeholder="Username"
                 />
-                <label className="text-gray-400 text-[13px]">Username</label>
+                <label className="text-gray-400 text-[13px]">
+                  {t("username")}
+                </label>
               </div>
               <div>
                 <Input
@@ -101,11 +105,11 @@ const EditProfilePage = () => {
                   required
                 />
                 <label className="text-gray-400 text-[13px]">
-                  Email address.
+                  {t("email")}
                 </label>
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit">Save</Button>
+              <Button type="submit">{t("save")}</Button>
             </form>
           </div>
         )}

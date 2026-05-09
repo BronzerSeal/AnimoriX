@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { alphabet, quickLinks } from "../consts/consts";
 import AllRightsReserved from "./all-rights-reserved";
+import { useTranslations } from "next-intl";
 
 const SiteFooter = () => {
+  const t = useTranslations("components.footer");
   return (
     <footer className="mt-10 border-t border-black/10 dark:border-white/10 bg-[#EEEEFF] dark:bg-[#11161a] text-black dark:text-white">
       <div className="mx-auto flex w-full max-w-425 flex-col gap-8 px-5 py-8 lg:px-8">
         <section className="space-y-5">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
-            <h2 className="text-xl font-extrabold tracking-tight">A-Z List</h2>
-            <p className="text-sm text-zinc-500">
-              Searching anime order by alphabet name A to Z.
-            </p>
+            <h2 className="text-xl font-extrabold tracking-tight">
+              {t("a-z-list")}
+            </h2>
+            <p className="text-sm text-zinc-500">{t("list-description")}</p>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -33,7 +35,7 @@ const SiteFooter = () => {
                 href={link.href}
                 className="text-[12px] font-extrabold text-black dark:text-white transition hover:text-orange-300"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </div>

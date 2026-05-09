@@ -3,6 +3,7 @@ import { LargeSearchInput } from "@/features/search-input";
 import { Button } from "@/shared/ui/button";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const HeroSection = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const HeroSection = () => {
     () => import("@shared/ui/aceternity").then((m) => m.EncryptedText),
     { ssr: false },
   );
+  const t = useTranslations("landing-page");
   return (
     <div
       style={{ backgroundImage: "url(/images/main-poster-bg.png)" }}
@@ -31,7 +33,7 @@ const HeroSection = () => {
           size={"lg"}
           onClick={() => router.push("/home")}
         >
-          WATCH NOW
+          {t("watchBtn")}
         </Button>
       </div>
     </div>

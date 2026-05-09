@@ -2,6 +2,7 @@ import { bookmark } from "@/shared/types/DataBase";
 import { MessageCirclePlus } from "lucide-react";
 import { FC } from "react";
 import { formatTimeAgo } from "../model/format-time-ago";
+import { useTranslations } from "next-intl";
 
 interface Props {
   bookmarks: bookmark[] | undefined;
@@ -9,9 +10,10 @@ interface Props {
 }
 
 const Activities: FC<Props> = ({ bookmarks, username }) => {
+  const t = useTranslations("user");
   return (
     <section className="rounded-2xl">
-      <h2 className="px-4 text-xl font-black sm:px-5">ACTIVITIES</h2>
+      <h2 className="px-4 text-xl font-black sm:px-5">{t("activity")}</h2>
 
       <div className="space-y-4 px-4 pb-5 pt-6 sm:px-5">
         {bookmarks && bookmarks.length > 0 ? (
@@ -29,7 +31,7 @@ const Activities: FC<Props> = ({ bookmarks, username }) => {
               <span className="font-bold">{username}</span>
 
               <span className="dark:text-[#a7bfd4] text-gray-500">
-                add {bookmark.animeName} to bookmark
+                {t("bookmark", { anime: bookmark.animeName })}
               </span>
             </div>
           ))

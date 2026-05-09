@@ -3,9 +3,11 @@ import { FileText, LogOut } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { menuItems } from "../constants/menu-items";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const MenuContent = () => {
   const { data: session } = useSession();
+  const t = useTranslations("user");
 
   const displayName =
     session?.user?.name?.trim() ||
@@ -46,7 +48,7 @@ const MenuContent = () => {
             className="h-10 w-full justify-start rounded-xl border-0 px-3.5 text-[15px] font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-[#7a818a] dark:hover:bg-white/5 dark:hover:text-[#d8dde4]"
           >
             <FileText className="mr-2.5 size-[17px]" strokeWidth={2.1} />
-            <span className="truncate">Profile Page</span>
+            <span className="truncate">{t("profile-page")}</span>
           </Button>
         </Link>
 
@@ -59,7 +61,7 @@ const MenuContent = () => {
               className="h-10 w-full justify-start rounded-xl border-0 px-3.5 text-[15px] font-medium text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-[#7a818a] dark:hover:bg-white/5 dark:hover:text-[#d8dde4]"
             >
               <Icon className="mr-2.5 size-[17px]" strokeWidth={2.1} />
-              <span className="truncate">{label}</span>
+              <span className="truncate">{t(label)}</span>
             </Button>
           </Link>
         ))}

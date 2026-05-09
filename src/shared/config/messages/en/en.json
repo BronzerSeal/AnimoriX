@@ -1,0 +1,296 @@
+{
+  "landing-page": {
+    "subtitle": "THE BEST SITE TO WATCH ANIME ONLINE FOR FREE",
+    "watchBtn": "WATCH NOW",
+    "about": [
+      {
+        "paragraphs": [
+          {
+            "type": "text",
+            "text": "Anime is not just about stories drawn with pen strokes; it’s a gateway to worlds full of emotions and creativity. From intense battles to unforgettable romantic moments, anime has become an essential part of entertainment for millions of people. With its growing popularity, the number of free anime streaming platforms continues to rise."
+          },
+          {
+            "type": "text",
+            "text": "However, not every site can truly satisfy fans. Some stand out as guiding lights in the vast ocean. That’s why AnimoriX.to was created — a global home for anime enthusiasts, with the mission to become one of the top free anime streaming sites! 🌟"
+          }
+        ]
+      },
+      {
+        "title": "1. What is AnimoriX.to?",
+        "paragraphs": [
+          {
+            "type": "text",
+            "text": "AnimoriX.to is a free anime streaming site where you can watch anime in HD quality with both subbed and dubbed options, all without the hassle of registration or payment. And the best part? There are absolutely no ads! We’re dedicated to making it the safest and most enjoyable place for anime lovers to watch anime for free."
+          }
+        ]
+      },
+      {
+        "title": "2. What make AnimoriX.to the best site to watch anime free online?",
+        "paragraphs": [
+          {
+            "type": "text",
+            "text": "Before creating AnimoriX.to, we thoroughly explored numerous other free anime sites and learned from their strengths and weaknesses. We kept only the best features and eliminated all the drawbacks, combining them into our AnimoriX platform. That’s why we’re so confident in claiming to be the best site for anime streaming. Experience it yourself and see the difference!"
+          },
+          {
+            "type": "feature",
+            "title": "Safety",
+            "text": "No ads, no redirects, and absolutely no viruses. Your safety and enjoyment are our top priorities."
+          },
+          {
+            "type": "feature",
+            "title": "Content Library",
+            "text": "We offer an extensive collection of anime, spanning from 1980s classics to the latest releases. Each title includes English subtitles, with many also available in dubbed versions for your convenience."
+          },
+          {
+            "type": "feature",
+            "title": "Quality / Resolution",
+            "text": "All anime on AnimoriX.to is available in the best possible resolution. With our quality setting feature, you can adjust the resolution to match your Internet speed."
+          },
+          {
+            "type": "feature",
+            "title": "Streaming experience",
+            "text": "Faster loading speeds and a completely buffer-free experience compared to many other sites."
+          },
+          {
+            "type": "feature",
+            "title": "Updates",
+            "text": "Our library is updated daily, even hourly, to ensure the latest episodes are available."
+          },
+          {
+            "type": "feature",
+            "title": "User Interface",
+            "text": "A clean and user-friendly UI/UX that makes navigation simple for everyone."
+          },
+          {
+            "type": "feature",
+            "title": "Device Compatibility",
+            "text": "AnimoriX.to works seamlessly on both mobile and desktop devices."
+          }
+        ]
+      },
+      {
+        "title": "3. How does AnimeKAI compare to 9Anime, Aniwave, HiAnime, and GogoAnime?",
+        "paragraphs": [
+          {
+            "type": "text",
+            "text": "We are a new website, so our library can't match Aniwave yet, but we have a larger library than HiAnime and Gogo, and we are still adding new titles daily."
+          },
+          {
+            "type": "text",
+            "text": "With access to multiple private trackers, we are confident that we will surpass Aniwave's library and even KissAnime in the future."
+          },
+          {
+            "type": "text",
+            "text": "At the moment, we have 10k titles, Aniwave had around 12k before it closed, HiAnime has about 7k and Gogo has around 9k."
+          },
+          {
+            "type": "text",
+            "text": "We have a more modern layout and better UI/UX than Gogo and 9Anime, making navigation on our site easy and convenient."
+          },
+          {
+            "type": "text",
+            "text": "Additionally, we offer many advanced features such as bookmark saving, watch history, synchronization with AniList, auto-next episode, autoplay, and notifications."
+          },
+          {
+            "type": "text",
+            "text": "If you're searching for a reliable and safe site for anime streaming, give AnimeKAI.to a try."
+          },
+          {
+            "type": "end",
+            "title": "Thank you",
+            "text": "Thank you"
+          }
+        ]
+      }
+    ]
+  },
+  "home-page": {
+    "watchBtn": "WATCH NOW",
+    "github": "Please give the site a star on GitHub if you like it.",
+    "topTrending": "Top Trending",
+    "newReleases": "New Releases",
+    "upcoming": "Upcoming",
+    "completed": "Completed"
+  },
+  "components": {
+    "github-share": "Please give the site a star on <GitHub>GitHub</GitHub> if you like it.",
+    "share-site": {
+      "title": "Love this site?",
+      "subtitle": "Share it and let others know!"
+    },
+    "watch-now": "WATCH NOW",
+    "load-more": "Load More Animes",
+    "no-more": "No More Animes",
+    "theme": {
+      "toggle": "Toggle Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "footer": {
+      "a-z-list": "A-Z List",
+      "list-description": "Searching anime order by alphabet name A to Z.",
+      "request": "REQUEST",
+      "contact-us": "CONTACT US",
+      "copyright": "Copyright <Animorix>@AnimoriX.</Animorix> All Rights Reserved",
+      "files": "This site does not store any files on its server. All contents are provided by non-affiliated third parties.",
+      "social": "Socials:",
+      "links": "Links:"
+    },
+    "header": {
+      "genres": "GENRES",
+      "types": "TYPES",
+      "new-releases": "NEW RELEASES",
+      "updates": "UPDATES",
+      "ongoing": "ONGOING",
+      "recent": "RECENT",
+
+      "items": {
+        "action": "Action",
+        "adventure": "Adventure",
+        "avant-garde": "Avant Garde",
+        "boys-love": "Boys Love",
+
+        "comedy": "Comedy",
+        "educational": "Educational",
+        "drama": "Drama",
+        "ecchi": "Ecchi",
+
+        "fantasy": "Fantasy",
+        "girls-love": "Girls Love",
+        "gourmet": "Gourmet",
+        "harem": "Harem",
+
+        "horror": "Horror",
+        "isekai": "Isekai",
+        "iyashikei": "Iyashikei",
+        "josei": "Josei",
+
+        "kids": "Kids",
+        "racing": "Racing",
+        "mahou-shoujo": "Mahou Shoujo",
+        "martial-arts": "Martial Arts",
+
+        "mecha": "Mecha",
+        "military": "Military",
+        "music": "Music",
+        "mystery": "Mystery",
+
+        "parody": "Parody",
+        "psychological": "Psychological",
+        "reverse-harem": "Reverse Harem",
+        "romance": "Romance",
+
+        "school": "School",
+        "sci-fi": "Sci-Fi",
+        "seinen": "Seinen",
+        "shoujo": "Shoujo",
+
+        "shounen": "Shounen",
+        "slice-of-life": "Slice of Life",
+        "space": "Space",
+        "sports": "Sports",
+
+        "super-power": "Super Power",
+        "supernatural": "Supernatural",
+        "suspense": "Suspense",
+        "samurai": "Samurai",
+
+        "vampire": "Vampire",
+
+        "movies": "Movies",
+        "tv-series": "TV Series",
+        "ovas": "OVAs",
+        "onas": "ONAs",
+        "specials": "Specials",
+
+        "movie": "Movies",
+        "tv": "TV Series",
+        "ova": "OVAs",
+        "ona": "ONAs",
+        "special": "Specials"
+      }
+    }
+  },
+  "pages": {
+    "browser": "Browser",
+    "updates": "Updates",
+    "new-releases": "New Releases",
+    "ongoing": "Ongoing",
+    "recent": "Recent",
+    "genre-anime": "{genre} Anime"
+  },
+  "watch-page": {
+    "episodes": "Episodes",
+    "relations": "Relations",
+    "recommendations": "Recommendations",
+    "comments": "COMMENTS",
+    "on": "ON",
+    "off": "OFF",
+    "load-more": "Load More Comments",
+    "no-more": "No More Comments",
+    "not-yet": "No comments yet."
+  },
+  "sign-in": {
+    "login": {
+      "title": "Sign into your account",
+      "status-title": "Ready to sign in",
+      "status-description": "Use your email or username and password to continue.",
+      "submit": "Sign In",
+      "fields": {
+        "email-or-username": "Email or username",
+        "password": "Password"
+      },
+      "footer": {
+        "no-account": "Don't have an account?",
+        "sign-up": "Sign up",
+        "forgot-password": "Forgot Password?"
+      },
+      "toast": {
+        "invalid-credentials": "Incorrect login or password",
+        "google-account": "This email is registered with Google. Please use Google Sign-In.",
+        "authorization-error": "Authorization error: {error}",
+        "success": "Login successful!"
+      }
+    },
+    "register": {
+      "title": "Create your account",
+      "status-title": "Almost there",
+      "status-description": "Pick your username, email, and a strong password.",
+      "submit": "Sign Up",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirm-password": "Confirm password"
+      },
+      "footer": {
+        "has-account": "Already have an account?",
+        "sign-in": "Sign in"
+      },
+      "toast": {
+        "success": "User is registered successfully!"
+      },
+      "errors": {
+        "password-mismatch": "The passwords don't match",
+        "password-too-short": "The password must be at least 6 characters long.",
+        "email-exists": "A user with this email already exists.",
+        "generic": "Registration error"
+      }
+    }
+  },
+  "user": {
+    "edit-profile": "Edit Profile",
+    "profile-page": "Profile Page",
+    "not-found": "No user found",
+    "email": "Email address.",
+    "username": "Username",
+    "save": "Save",
+    "successUpdate": "Data saved successfully",
+    "join": "Joined",
+    "activity": "ACTIVITIES",
+    "watch-list": "Watch List",
+    "bookmark": "add {anime} to bookmark",
+    "watch": "Watching"
+  }
+}

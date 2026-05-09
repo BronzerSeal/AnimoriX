@@ -8,8 +8,10 @@ import { useBookmarks } from "@/entities/user/queries/queries";
 import { mapJikanUser } from "../model/jikan-user-mapper";
 import ProfilePageSkeleton from "./profile-page-skeleton";
 import { mapJikanUserBookmarks } from "../model/jikan-bookmarks-mapper";
+import { useTranslations } from "next-intl";
 
 const ProfilePage = () => {
+  const t = useTranslations("user");
   const { userId } = useParams() as { userId: string };
   const username = useSearchParams().get("username") ?? "no Id";
   const { data: userFromReq, isLoading } = UseUserInfo(
@@ -30,7 +32,7 @@ const ProfilePage = () => {
 
   if (isLoading) return <ProfilePageSkeleton />;
 
-  if (!user) return <p>No user found</p>;
+  if (!user) return <p>{t("not-found")}</p>;
   return (
     <main className="w-full">
       <div className="absolute inset-0 dark:bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.18),transparent_32%)] bg-[radial-gradient(circle_at_top_right,rgba(154,132,238,0.18),transparent_32%)]" />

@@ -4,6 +4,7 @@ import { AuthFormShell } from "./auth-form-shell";
 import { useState } from "react";
 import { signInWithCredentials } from "../model/actions/sign-in-with-credentials";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 type Props = {
   onSwitch: () => void;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const LoginForm = ({ onSwitch, closeModal }: Props) => {
+  const t = useTranslations("sign-in");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,16 +35,18 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
 
     if (result && result.error) {
       if (result.error === "CredentialsSignin") {
-        toast.error("Incorrect login or password");
+        toast.error(t("login.toast.invalid-credentials"));
       } else if (result.error === "GOOGLE_ACCOUNT") {
-        toast.error(
-          "This email is registered with Google. Please use Google Sign-In.",
-        );
+        toast.error(t("login.toast.google-account"));
       } else {
-        toast.error(`Authorization error: ${result.error}`);
+        toast.error(
+          t("login.toast.authorization-error", {
+            error: String(result.error),
+          }),
+        );
       }
     } else {
-      toast.success("Login successful!");
+      toast.success(t("login.toast.success"));
       closeModal();
     }
   };
@@ -50,23 +54,23 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
   return (
     <AuthFormShell
       onSubmit={handleSubmit}
-      title="Sign into your account"
-      statusTitle="Ready to sign in"
-      statusDescription="Use your email or username and password to continue."
-      submitLabel="Sign In"
+      title={t("login.title")}
+      statusTitle={t("login.status-title")}
+      statusDescription={t("login.status-description")}
+      submitLabel={t("login.submit")}
       footer={
         <>
           <p className="text-black dark:text-white">
-            Don&apos;t have an account?{" "}
+            {t("login.footer.no-account")}{" "}
             <button
               type="button"
               onClick={onSwitch}
               className="font-semibold text-[#39cc66] transition hover:text-[#5ce286]"
             >
-              Sign up
+              {t("login.footer.sign-up")}
             </button>
           </p>
-          <p className="text-[#39cc66]">Forgot Password?</p>
+          <p className="text-[#39cc66]">{t("login.footer.forgot-password")}</p>
         </>
       }
     >
@@ -75,7 +79,7 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
         name="email"
         value={formData.email}
         onChange={handleChange}
-        placeholder="Email or username"
+        placeholder={t("login.fields.email-or-username")}
         autoComplete="username"
         className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />
@@ -84,7 +88,7 @@ export const LoginForm = ({ onSwitch, closeModal }: Props) => {
         name="password"
         value={formData.password}
         onChange={handleChange}
-        placeholder="Password"
+        placeholder={t("login.fields.password")}
         autoComplete="current-password"
         className="h-12 rounded-2xl border-slate-200 dark:border-slate-400 bg-white px-4 text-[15px] text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:border-[#39cc66]/70 focus-visible:ring-[#39cc66]/15"
       />

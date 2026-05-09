@@ -8,13 +8,15 @@ import {
 } from "@/shared/ui/navigation-menu";
 import { ListItem } from "./list-item";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const TopicItem = ({ topic }: { topic: NavTopic }) => {
+  const t = useTranslations("components.header");
   const hasGenres = topic.type === "with-genres";
   return hasGenres ? (
     <NavigationMenuItem key={topic.title}>
       <NavigationMenuTrigger className="relative">
-        {topic.title}
+        {t(topic.title)}
       </NavigationMenuTrigger>
       {topic.type === "with-genres" && (
         <NavigationMenuContent className="left-0">
@@ -39,7 +41,7 @@ export const TopicItem = ({ topic }: { topic: NavTopic }) => {
   ) : (
     <NavigationMenuItem key={topic.title}>
       <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-        <Link href={topic.href}>{topic.title}</Link>
+        <Link href={topic.href}>{t(topic.title)}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );

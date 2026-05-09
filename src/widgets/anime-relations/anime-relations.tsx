@@ -1,6 +1,7 @@
 import { AnimeCard } from "@/entities/anime";
 import { relations } from "./model/types";
 import AnimeRelationsSkeleton from "./anime-relations-skeleton";
+import { useTranslations } from "next-intl";
 
 const AnimeRelations = ({
   relations,
@@ -11,6 +12,7 @@ const AnimeRelations = ({
 }) => {
   if (isLoading) return <AnimeRelationsSkeleton />;
   if (!relations?.length) return null;
+  const t = useTranslations("watch-page");
   const mutRelations = relations
     .filter((r) => r.entry?.length)
     .map((relation) => ({
@@ -22,7 +24,7 @@ const AnimeRelations = ({
     <div
       className={`flex w-full flex-col rounded-2xl border border-slate-200/80 bg-[#f6f7ff] p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-white/8 dark:bg-[#11161a] dark:shadow-none`}
     >
-      <h1 className="font-bold text-xl">Relations</h1>
+      <h1 className="font-bold text-xl">{t("relations")}</h1>
       <div className="flex flex-col gap-2">
         {mutRelations.map((relation) => (
           <AnimeCard animeInfo={relation} key={relation.mal_id} />

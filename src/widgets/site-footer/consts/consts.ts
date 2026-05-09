@@ -5,8 +5,8 @@ export const alphabet = [
 ];
 
 export const quickLinks = [
-  { label: "REQUEST", href: "#" },
-  { label: "CONTACT US", href: "#" },
+  { label: "request", href: "#" },
+  { label: "contact-us", href: "#" },
 ];
 
 export const socialLinks = [

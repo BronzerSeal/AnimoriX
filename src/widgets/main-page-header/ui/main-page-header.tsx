@@ -8,6 +8,7 @@ import { Shuffle, UsersRound } from "lucide-react";
 import ToggleThemeBtn from "@/shared/ui/toggle-theme-btn";
 import MultiDropdownBtn from "@/shared/ui/multi-dropdown-btn";
 import { HeaderAction, TopicItem } from "@/shared/ui/nav-actions";
+import LanguageSwitch from "@/widgets/main-header/ui/language-switch";
 
 const MainPageHeader = () => {
   return (
@@ -30,6 +31,9 @@ const MainPageHeader = () => {
           </div>
           <NavigationMenuItem>
             <ToggleThemeBtn variant="navigation" />
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <LanguageSwitch />
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

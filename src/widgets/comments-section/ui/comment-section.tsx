@@ -5,26 +5,28 @@ import { CommentSectionSkeleton } from "./comment-section-skeleton";
 import { useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { useAnimeComment } from "@/entities/anime";
+import { useTranslations } from "next-intl";
 
 const CommentSection = ({ animeId }: { animeId: number }) => {
+  const t = useTranslations("watch-page");
   const [isOpen, setIsOpen] = useState(true);
 
   const { data, isLoading, fetchNextPage, isFetching, hasNextPage } =
     useAnimeComment(animeId, !!animeId);
   if (isLoading) return <CommentSectionSkeleton />;
 
-  if (data?.[0]?.data?.length === 0) return <p>No comments yet.</p>;
+  if (data?.[0]?.data?.length === 0) return <p>{t("not-yet")}</p>;
   const comments = data?.flatMap((page) => page.data) ?? [];
   return (
     <section className="w-full">
       <div className="flex gap-2">
-        <h1 className="text-xl font-bold mb-2">COMMENTS</h1>
+        <h1 className="text-xl font-bold mb-2">{t("comments")}</h1>
         <Button
           variant="outline"
           size="sm"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          {isOpen ? "ON" : "OFF"}
+          {isOpen ? t("on") : t("off")}
         </Button>
       </div>
       {isOpen &&
@@ -39,7 +41,7 @@ const CommentSection = ({ animeId }: { animeId: number }) => {
           onClick={() => fetchNextPage()}
           disabled={isFetching}
         >
-          {hasNextPage ? "Load More Comments" : "No More Comments"}
+          {hasNextPage ? t("load-more") : t("no-more")}
         </Button>
       )}
     </section>

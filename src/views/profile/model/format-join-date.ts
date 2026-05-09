@@ -18,5 +18,5 @@ export const formatJoinedDate = (dateInput: string | Date): string => {
   else if (diffDays === 1) label = "1 day old";
   else label = `${diffDays} days old`;
 
-  return `Joined: ${formattedDate} (${label})`;
+  return `${formattedDate} (${label})`;
 };
