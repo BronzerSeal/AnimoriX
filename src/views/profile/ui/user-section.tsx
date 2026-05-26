@@ -15,11 +15,7 @@ const UserSection = ({
     <section className="overflow-hidden rounded-xl bg-[#efeefe] dark:bg-[#11161a] dark:shadow-[0_20px_60px_rgba(0,0,0,0.45)] shadow-[0_20px_60px_white] backdrop-blur-sm">
       <div className="flex min-h-[80px] items-center gap-4 px-5 sm:gap-5 sm:px-6">
         <Avatar size="lg">
-          <AvatarImage
-            src={user?.image || undefined}
-            alt="user avatar"
-            className="grayscale"
-          />
+          <AvatarImage src={user?.image || undefined} alt="user avatar" />
           <AvatarFallback>{user.email.slice(0, 1)}</AvatarFallback>
         </Avatar>
         <div className="min-w-0">

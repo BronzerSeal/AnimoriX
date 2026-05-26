@@ -229,7 +229,8 @@
     "off": "OFF",
     "load-more": "Load More Comments",
     "no-more": "No More Comments",
-    "not-yet": "No comments yet."
+    "not-yet": "No comments yet.",
+    "comment-error": "Unable to retrieve comments. Please try again later."
   },
   "sign-in": {
     "login": {
