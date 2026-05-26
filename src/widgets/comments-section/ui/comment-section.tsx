@@ -15,6 +15,9 @@ const CommentSection = ({ animeId }: { animeId: number }) => {
     useAnimeComment(animeId, !!animeId);
   if (isLoading) return <CommentSectionSkeleton />;
 
+  // @ts-ignore
+  const isError = data?.[0]?.status === 500;
+
   if (data?.[0]?.data?.length === 0) return <p>{t("not-yet")}</p>;
   const comments = data?.flatMap((page) => page.data) ?? [];
   return (
@@ -30,10 +33,12 @@ const CommentSection = ({ animeId }: { animeId: number }) => {
         </Button>
       </div>
       {isOpen &&
+        !isError &&
         comments.map((comment) => (
           <Comment key={comment?.mal_id} comment={mapComment(comment)} />
         ))}
-      {isOpen && (
+      {isError && <p className="text-xl mb-2">{t("comment-error")}</p>}
+      {isOpen && !isError && (
         <Button
           variant="outline"
           size="lg"

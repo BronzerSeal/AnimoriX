@@ -1,8 +1,18 @@
 import axios from "axios";
 
-export async function getAnimeVideoById(animeId: string) {
+export async function getAnimeVideoById(
+  animeId: string,
+  animeTitle: string,
+  episodeNumber: number,
+) {
   try {
-    return await axios.get(`/api/anime/stream?episodeId=${animeId}`);
+    const params = new URLSearchParams({
+      episodeId: animeId,
+      title: animeTitle,
+      episodeNumber: String(episodeNumber),
+    });
+
+    return await axios.get(`/api/anime/stream?${params.toString()}`);
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       // console.error(

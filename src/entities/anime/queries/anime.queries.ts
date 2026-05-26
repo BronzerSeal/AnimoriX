@@ -68,10 +68,15 @@ export function useAnimeEpisodes(animeTitle: string, enabled?: boolean) {
   });
 }
 
-export function useAnimeVideoById(animeId: string, enabled?: boolean) {
+export function useAnimeVideoById(
+  animeId: string,
+  animeTitle: string,
+  episodeNumber: number,
+  enabled?: boolean,
+) {
   return useQuery({
-    queryKey: ["anime-video", animeId],
-    queryFn: () => getAnimeVideoById(animeId),
+    queryKey: ["anime-video", animeId, animeTitle, episodeNumber],
+    queryFn: () => getAnimeVideoById(animeId, animeTitle, episodeNumber),
     select: (data) => data.data,
     placeholderData: keepPreviousData,
     retry: 1,

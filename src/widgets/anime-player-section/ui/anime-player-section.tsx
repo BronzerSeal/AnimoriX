@@ -19,6 +19,7 @@ const AnimePlayerSection = ({
   animeType,
   animeName,
   animeId,
+  episodeNumber,
   isLoading,
   episodeNum,
   className,
@@ -28,18 +29,28 @@ const AnimePlayerSection = ({
   animeType: string;
   animeName: string;
   animeId: number;
+  episodeNumber: number;
   isLoading: boolean;
   episodeNum: number;
   className?: string;
   fallbackUrl?: string | null;
 }) => {
+  const isProd = process.env.NODE_ENV === "production";
   const {
     data: videoData,
     error,
     isLoading: isVideoLoading,
     isFetching: isVideoFetching,
-  } = useAnimeVideoById(episodeId, !!episodeId);
-  const isInitialLoading = isLoading || (isVideoLoading && !videoData);
+  } = useAnimeVideoById(
+    episodeId,
+    animeName,
+    episodeNumber,
+    !isProd && !!episodeId,
+  );
+
+  const isInitialLoading = isProd
+    ? isLoading
+    : isLoading || (isVideoLoading && !videoData);
   const isEpisodeSwitching =
     !!episodeId &&
     (isVideoFetching || isVideoLoading) &&
