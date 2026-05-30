@@ -12,11 +12,12 @@ const TypesPage = () => {
     useAnimeByType(type!, !!type);
 
   const items = prepareInfinityAnimeList(data);
+  const decodedType = decodeURIComponent(type);
 
   return (
     <AnimeList
       animes={items}
-      blockTitle={t(type)}
+      blockTitle={t(decodedType)}
       isLoading={isLoading}
       hasNextPage={hasNextPage}
       loadMore={fetchNextPage}

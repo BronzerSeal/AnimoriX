@@ -69,7 +69,7 @@ export function ExpandableAnimeSidebar({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/70 bg-white/90 text-slate-700 shadow-lg lg:hidden dark:border-white/20 dark:bg-[#11161a]/90 dark:text-white"
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-slate-300/70 bg-white/90 text-slate-700 shadow-lg lg:hidden dark:border-white/20 dark:bg-[#11161a]/90 dark:text-white z-20"
               onClick={() => setActive(null)}
             >
               <CloseIcon />

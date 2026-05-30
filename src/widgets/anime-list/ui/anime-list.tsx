@@ -31,8 +31,8 @@ const AnimeList = ({
 
   return (
     <main className="w-full">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.18),transparent_32%)]" />
-      <div className="absolute -left-12 top-1/2 size-36 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(251,146,60,0.18),transparent_32%)] pointer-events-none" />
+      <div className="absolute -left-12 top-1/2 size-36 -translate-y-1/2 rounded-full bg-white/5 blur-3xl pointer-events-none" />
       <SplashCursor
         DENSITY_DISSIPATION={7}
         VELOCITY_DISSIPATION={5}
