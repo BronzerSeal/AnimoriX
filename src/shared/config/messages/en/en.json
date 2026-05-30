@@ -208,7 +208,15 @@
         "tv": "TV Series",
         "ova": "OVAs",
         "ona": "ONAs",
-        "special": "Specials"
+        "special": "Specials",
+
+        "TV": "TV",
+        "OVA": "OVA",
+        "Movie": "Movie",
+        "Special": "Special",
+        "ONA": "ONA",
+        "Music": "Music",
+        "TV Special": "TV Special"
       }
     }
   },

@@ -195,7 +195,14 @@
         "tv": "Сериалы",
         "ova": "OVA",
         "ona": "ONA",
-        "special": "Спешлы"
+        "special": "Спешлы",
+        "TV": "ТВ",
+        "OVA": "OVA",
+        "Movie": "Фильмы",
+        "Special": "Спешлы",
+        "ONA": "ONA",
+        "Music": "Музыкальные",
+        "TV Special": "TV спешлы"
       }
     }
   },
