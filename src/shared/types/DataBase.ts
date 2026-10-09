@@ -1,4 +1,4 @@
-import { paths } from "./jikan";
+import { paths } from "./jikan-old";
 
 export interface UserFromDB {
   id: string;

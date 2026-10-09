@@ -1,6 +1,6 @@
 import { UserFromDB } from "@/shared/types/DataBase";
 import axios from "axios";
-import { paths } from "@/shared/types/jikan";
+import { paths } from "@/shared/types/jikan-old";
 
 type JikanUser =
   paths["/users/{username}/full"]["get"]["responses"][200]["content"]["application/json"];

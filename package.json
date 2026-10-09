@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
-    "generate:types": "openapi-typescript https://raw.githubusercontent.com/jikan-me/jikan-rest/master/storage/api-docs/api-docs.json -o src/shared/types/jikan.ts"
+    "generate:types": "openapi-typescript ./public/openapi/tenrai-api.json -o src/shared/types/tenrai.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",

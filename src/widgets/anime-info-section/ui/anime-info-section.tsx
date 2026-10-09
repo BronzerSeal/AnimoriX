@@ -10,7 +10,6 @@ type Props = {
 
 const AnimeInfoSection: React.FC<Props> = ({ className, animeInfo }) => {
   if (!animeInfo) return <AnimeInfoSectionSkeleton className={className} />;
-
   return (
     <>
       <Dekstop className={className} animeInfo={animeInfo} />

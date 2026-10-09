@@ -1,4 +1,4 @@
-import { paths } from "@/shared/types/jikan";
+import { paths } from "@/shared/types/jikan-old";
 import { animeApiHttp } from "@/shared/api/anime-http";
 
 type getJikanUserByNameResponse =

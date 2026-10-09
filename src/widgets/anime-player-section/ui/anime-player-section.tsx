@@ -35,7 +35,8 @@ const AnimePlayerSection = ({
   className?: string;
   fallbackUrl?: string | null;
 }) => {
-  const isProd = process.env.NODE_ENV === "production";
+  // const isProd = process.env.NODE_ENV === "production";
+  const isProd = true;
   const {
     data: videoData,
     error,

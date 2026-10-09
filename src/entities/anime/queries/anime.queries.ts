@@ -58,10 +58,10 @@ export function useFullAnimeById(animeId: string) {
   });
 }
 
-export function useAnimeEpisodes(animeTitle: string, enabled?: boolean) {
+export function useAnimeEpisodes(animeId: string, enabled?: boolean) {
   return useQuery({
-    queryKey: ["anime-episodes", animeTitle],
-    queryFn: () => getAnimeEpisodes(animeTitle),
+    queryKey: ["anime-episodes", animeId],
+    queryFn: () => getAnimeEpisodes(animeId),
     select: (data) => data.data,
     staleTime: 1000 * 60 * 5,
     enabled,

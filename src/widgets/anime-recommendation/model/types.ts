@@ -1,4 +1,4 @@
-import { paths } from "@/shared/types/jikan";
+import { paths } from "@/shared/types/tenrai";
 
 type AnimeRecommendationsByIdResponse =
   paths["/anime/{id}/recommendations"]["get"]["responses"][200]["content"]["application/json"];
