@@ -17,15 +17,20 @@ interface CommentProps {
 const Comment: FC<CommentProps> = ({ comment }) => {
   return (
     <div className="mb-4 flex w-full items-start space-x-4">
-      <Link href={`/user/jikanUser/profile?username=${comment.userName}`}>
+      {/* <Link href={`/user/jikanUser/profile?username=${comment.userName}`}>
         <img
           src={comment.userImage}
           alt={comment.userName}
           className="w-10 h-10 rounded-full shrink-0"
         />
-      </Link>
+      </Link> */}
       <div className="min-w-0 flex-1">
-        <Link href={`/user/jikanUser/profile?username=${comment.userName}`}>
+        <Link
+          href={`/user/jikanUser/profile?username=${comment.userName}`}
+          onClick={(e) => {
+            e.preventDefault(); // отменяет переход
+          }}
+        >
           <h3 className="font-bold">{comment.userName}</h3>
           <p className="text-sm text-gray-500">{formatTimeAgo(comment.time)}</p>
         </Link>

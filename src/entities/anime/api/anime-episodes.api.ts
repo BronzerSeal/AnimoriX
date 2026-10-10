@@ -1,5 +1,9 @@
 import axios from "axios";
 
-export async function getAnimeEpisodes(animeTitle: string) {
-  return await axios.get(`/api/anime/search?title=${animeTitle}`);
+export async function getAnimeEpisodes(animeId: string) {
+  return await axios.get(`/api/anime/episodes`, {
+    params: {
+      id: animeId,
+    },
+  });
 }

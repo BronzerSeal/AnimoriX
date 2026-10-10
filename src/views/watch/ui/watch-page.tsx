@@ -39,7 +39,7 @@ const WatchPage = () => {
 
   //все эпизоды сезона + берем отсюда id
   const { data: animeEpisodes, isLoading: isAnimeEpisodesLoading } =
-    useAnimeEpisodes(animeData?.title || "", !!animeData?.title);
+    useAnimeEpisodes(animeData?.mal_id?.toString() || "", !!animeData?.mal_id);
 
   //цвет фона для плеера
   const image = mapAnimeImage(animeData?.images);
@@ -100,6 +100,7 @@ const WatchPage = () => {
             <CommentSection animeId={animeData?.mal_id!} />
           )}
         </div>
+
         <div className="flex w-full flex-col gap-3">
           {!animeData ? (
             <>

@@ -10,7 +10,6 @@ import { AnimeBadges } from "./anime-badges";
 
 const AnimeThreeDItem = ({ anime }: { anime: anime }) => {
   const router = useRouter();
-
   return (
     <article
       onClick={() => router.push(`/watch/${anime.id}`)}

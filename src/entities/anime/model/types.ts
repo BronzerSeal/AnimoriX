@@ -1,4 +1,4 @@
-import { paths } from "@/shared/types/jikan";
+import { paths } from "@/shared/types/tenrai";
 
 export type BannerMap = Record<number, string | null>;
 

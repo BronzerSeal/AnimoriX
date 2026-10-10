@@ -13,6 +13,7 @@ const LatestEpisodesSection = () => {
   const ANIMES_PER_PAGE = 12;
   const [page, setPage] = useState(1);
   const { data, isLoading, isFetching } = useNowSeasons(page);
+  console.log(data);
 
   if (isLoading) {
     return <LatestEpisodesSkeleton />;
