@@ -57,9 +57,9 @@ const WatchPage = () => {
             <AnimePlayerSection
               className="order-1 xl:order-2 xl:col-start-2 xl:row-start-1 z-10"
               episodeNum={episodeNum}
-              episodeId={animeEpisodes?.episodes[episodeNum].id || ""}
+              episodeId={animeEpisodes?.episodes[episodeNum]?.id || ""}
               episodeNumber={
-                Number(animeEpisodes?.episodes[episodeNum].number) || 1
+                Number(animeEpisodes?.episodes[episodeNum]?.number) || 1
               }
               animeType={animeData?.type!}
               animeName={animeData?.title!}
