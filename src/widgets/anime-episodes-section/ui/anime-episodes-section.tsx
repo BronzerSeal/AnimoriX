@@ -22,7 +22,6 @@ const AnimeEpisodesSection = ({
   onSelectEpisode: (episodeIndex: number) => void;
   className?: string;
 }) => {
-  if (!episodes) return null;
   const EPISODES_PER_PAGE = 100;
 
   const t = useTranslations("watch-page");
@@ -34,6 +33,8 @@ const AnimeEpisodesSection = ({
   useEffect(() => {
     setPage(Math.floor(selected / EPISODES_PER_PAGE) + 1);
   }, [selected]);
+
+  if (!episodes) return null;
 
   const startIndex = (page - 1) * EPISODES_PER_PAGE;
   const endIndex = page * EPISODES_PER_PAGE;

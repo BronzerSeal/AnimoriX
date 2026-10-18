@@ -15,7 +15,7 @@ const CommentSection = ({ animeId }: { animeId: number }) => {
     useAnimeComment(animeId, !!animeId);
   if (isLoading) return <CommentSectionSkeleton />;
 
-  // @ts-ignore
+  // @ts-expect-error - no status
   const isError = data?.[0]?.status === 500;
 
   if (data?.[0]?.data?.length === 0) return <p>{t("not-yet")}</p>;

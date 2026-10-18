@@ -1,7 +1,7 @@
 import { bookmark, userFromJikan } from "@/shared/types/DataBase";
 
 export function mapJikanUserBookmarks(user: userFromJikan): bookmark[] {
-  // @ts-ignore
+  // @ts-expect-error - problem with favourites
   const animeList = user.data?.favorites?.anime ?? [];
 
   return animeList.map((anime: any) => ({

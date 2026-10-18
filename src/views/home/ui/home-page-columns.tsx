@@ -46,39 +46,29 @@ const HomePageColumns = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const columns = useMemo(
-    () => [
-      {
-        key: "new-releases",
-        title: t("newReleases"),
-        href: "/recent",
-        items: nowReleaseItems,
-        isLoading: nowReleasesLoading,
-      },
-      {
-        key: "upcoming",
-        title: t("upcoming"),
-        href: "/upcoming",
-        items: upcomingItems,
-        isLoading: upcomingLoading,
-      },
-      {
-        key: "completed",
-        title: t("completed"),
-        href: "/completed",
-        items: completedItems,
-        isLoading: completedLoading,
-      },
-    ],
-    [
-      completedItems,
-      completedLoading,
-      nowReleaseItems,
-      nowReleasesLoading,
-      upcomingItems,
-      upcomingLoading,
-    ],
-  );
+  const columns = [
+    {
+      key: "new-releases",
+      title: t("newReleases"),
+      href: "/recent",
+      items: nowReleaseItems,
+      isLoading: nowReleasesLoading,
+    },
+    {
+      key: "upcoming",
+      title: t("upcoming"),
+      href: "/upcoming",
+      items: upcomingItems,
+      isLoading: upcomingLoading,
+    },
+    {
+      key: "completed",
+      title: t("completed"),
+      href: "/completed",
+      items: completedItems,
+      isLoading: completedLoading,
+    },
+  ];
 
   const maxPage = Math.max(0, columns.length - visibleColumns);
   const currentPage = Math.min(page, maxPage);

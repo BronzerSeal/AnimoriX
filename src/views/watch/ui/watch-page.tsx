@@ -61,9 +61,9 @@ const WatchPage = () => {
               episodeNumber={
                 Number(animeEpisodes?.episodes[episodeNum]?.number) || 1
               }
-              animeType={animeData?.type!}
-              animeName={animeData?.title!}
-              animeId={animeData?.mal_id!}
+              animeType={animeData?.type || ""}
+              animeName={animeData?.title || ""}
+              animeId={animeData?.mal_id || 0}
               isLoading={globalIsLoading}
               fallbackUrl={animeData?.trailer?.embed_url}
             />
@@ -97,7 +97,7 @@ const WatchPage = () => {
           {!animeData ? (
             <CommentSectionSkeleton />
           ) : (
-            <CommentSection animeId={animeData?.mal_id!} />
+            <CommentSection animeId={animeData?.mal_id || 0} />
           )}
         </div>
 

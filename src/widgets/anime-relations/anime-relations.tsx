@@ -10,9 +10,11 @@ const AnimeRelations = ({
   relations: relations;
   isLoading?: boolean;
 }) => {
+  const t = useTranslations("watch-page");
+
   if (isLoading) return <AnimeRelationsSkeleton />;
   if (!relations?.length) return null;
-  const t = useTranslations("watch-page");
+
   const mutRelations = relations
     .filter((r) => r.entry?.length)
     .map((relation) => ({

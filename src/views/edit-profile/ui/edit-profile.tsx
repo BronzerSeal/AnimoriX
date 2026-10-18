@@ -22,7 +22,7 @@ const EditProfilePage = () => {
     session?.user.id ?? "",
   );
   const { data: user, isLoading } = UseUserInfoById(
-    session?.user.id!,
+    session?.user.id || "",
     !!session?.user.id,
   );
 

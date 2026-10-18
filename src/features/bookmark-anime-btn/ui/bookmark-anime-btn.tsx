@@ -18,7 +18,7 @@ const BookmarkAnimeBtn = ({
   const { mutate } = UseToggleBookmark();
 
   const { data: bookmarks } = useBookmarks(
-    session?.user.id!,
+    session?.user.id || "",
     !!session?.user.id,
   );
 
@@ -32,7 +32,7 @@ const BookmarkAnimeBtn = ({
       return;
     }
 
-    mutate({ userId: session?.user.id!, animeId, animeName });
+    mutate({ userId: session?.user.id || "", animeId, animeName });
   };
 
   return (
