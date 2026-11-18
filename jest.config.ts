@@ -13,15 +13,13 @@ const createJestConfig = nextJest({
 
 const config: Config = {
   clearMocks: true,
-
   collectCoverage: true,
-
   coverageDirectory: "coverage",
-
   coverageProvider: "v8",
-
   testEnvironment: "jsdom",
-
+  setupFiles: ["<rootDir>/jest.setup-polyfills.ts"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts", "<rootDir>/singleton.ts"],
+  transformIgnorePatterns: ["/node_modules/(?!(next-auth|@auth/core)/)"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
@@ -30,6 +28,7 @@ const config: Config = {
     "^@widgets/(.*)$": "<rootDir>/src/widgets/$1",
     "^@pages/(.*)$": "<rootDir>/src/pages/$1",
   },
+  testPathIgnorePatterns: ["/node_modules/"],
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
